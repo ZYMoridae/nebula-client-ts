@@ -7,11 +7,15 @@ import { Theme, createStyles } from "@material-ui/core";
 
 const styles = (theme: Theme) => createStyles({
   warningText: {
-    color: '#a9a9a9'
+    color: '#a9a9a9',
+    marginLeft: theme.spacing(1)
+  },
+  warningIcon: {
+    verticalAlign: 'middle'
   }
 });
 
-type MyState = { 
+type MyState = {
   expanded: boolean
 };
 
@@ -24,7 +28,7 @@ type MyProps = {
   paddingBottom?: number
 };
 
-class ContentNotFound extends React.Component<MyProps, MyState> { 
+class ContentNotFound extends React.Component<MyProps, MyState> {
   render() {
     const { theme, warningText, classes, paddingTop, paddingBottom } = this.props;
 
@@ -41,22 +45,24 @@ class ContentNotFound extends React.Component<MyProps, MyState> {
       }
     };
 
-    if(paddingTop != undefined) {
+    if (paddingTop != undefined) {
       defaultStyle.emptyCartCaptionContainer.paddingTop = paddingTop;
     }
 
-    if(paddingBottom != undefined) {
+    if (paddingBottom != undefined) {
       defaultStyle.emptyCartCaptionContainer.paddingBottom = paddingBottom;
     }
 
     console.log(defaultStyle.emptyCartCaptionContainer);
 
-    return(
+    return (
       <Paper style={defaultStyle.emptyCartCaptionContainer}>
-        <WarningIcon fontSize="large" color="primary" />
+        <WarningIcon fontSize="large" color="primary" className={classes.warningIcon} />
+
         <Typography variant="caption" gutterBottom className={classes.warningText}>
           {warningText && warningText != '' ? warningText : 'Content was not found!'}
         </Typography>
+
       </Paper>
     )
   }

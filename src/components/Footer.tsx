@@ -8,12 +8,17 @@ const styles = (theme: Theme) => createStyles({
 	container: {
 		backgroundColor: '#401500',
 		paddingTop: theme.spacing(2),
-		paddingBottom: theme.spacing(2)
+		paddingBottom: theme.spacing(2),
+		marginTop: theme.spacing(8),
+		textAlign: 'center'
 	},
 	footerText: {
 		color: 'white',
 		paddingLeft: theme.spacing(2),
 		paddingRight: theme.spacing(2)
+	},
+	footerTextContainer: {
+		marginBottom: theme.spacing(1)
 	},
 	linkContainer: {
 		textAlign: 'center',
@@ -50,17 +55,19 @@ class Footer extends React.Component<MyProps, MyState> {
 
 		return (
 			<div className={classes.container}>
-				<Typography variant="caption" gutterBottom align="center" className={classes.footerText}>
-					<a href='/' className={classes.linkItem}>
-						Condition of Use
-					</a>
-					<a href='/' className={classes.linkItem}>
-						Privacy Notice
-					</a>
-					<a href='/' className={classes.linkItem}>
-						Cookies
-					</a>
-        </Typography>
+				<div className={classes.footerTextContainer}>
+					<Typography variant="caption" gutterBottom align="center" className={classes.footerText}>
+						<a href='/' className={classes.linkItem}>
+							Condition of Use
+						</a>
+						<a href='/' className={classes.linkItem}>
+							Privacy Notice
+						</a>
+						<a href='/' className={classes.linkItem}>
+							Cookies
+						</a>
+					</Typography>
+				</div>
 				<Typography variant="caption" gutterBottom align="center" className={classes.footerText}>
 					© 2019, Max Studio
 				</Typography>

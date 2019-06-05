@@ -87,7 +87,7 @@ const Products = () => {
   )
 }
 
-const ProductInfo = ({ match } : {match : any}) => {
+const ProductInfo = ({ match }: { match: any }) => {
   return (
     <div>
       <ProductInfoContainer productId={match.params.id}></ProductInfoContainer>
@@ -105,7 +105,7 @@ const CartInfo = () => {
 
 type TParams = { id: number };
 
-const PaymentComponent = ({ match } : {match: any}) => {
+const PaymentComponent = ({ match }: { match: any }) => {
   return (
     <div>
       <PaymentContainer orderId={match.params.orderId}></PaymentContainer>
@@ -121,14 +121,14 @@ class App extends React.Component {
         <MuiThemeProvider theme={nebulaTheme}>
           <div>
             {location.pathname !== Routes.USER.LOGIN && <HeaderBarContainer></HeaderBarContainer>}
-            
+
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/products" component={Products} /> */}
               <Route exact path="/products/:id" component={ProductInfo} />
               <PrivateRoute exact path="/cart" component={CartInfo} />
               <PrivateRoute exact path="/payment/:orderId" component={PaymentComponent} />
-        
+
               <Route path="/user/login" component={Login} />
               <Redirect to="/" />
             </Switch>

@@ -28,6 +28,7 @@ import 'slick-carousel/slick/slick.css';
 const styles = (theme: Theme) => createStyles({
   root: {
     width: '100%',
+    marginTop: theme.spacing(3)
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -187,10 +188,11 @@ class Home extends React.Component<MyProps, MyState> {
       <div className={classes.root}>
         <Fade in={true} timeout={1000}>
           <Grid container spacing={0}>
-            <Grid item xs={1} md={2} xl={3}>
+            <Grid item xs={1} md={2} xl={2}>
 
             </Grid>
-            <Grid item xs={10} md={8} xl={6}>
+            <Grid item xs={10} md={8} xl={8}>
+            <div>
             <Slider {...settings}>
               {info.map((promotion: any, index: number) =>
                 <div key={index}>
@@ -209,6 +211,7 @@ class Home extends React.Component<MyProps, MyState> {
                 </div>
               )}
             </Slider>
+            </div>
             {/* <Slider autoplay={3000} previousButton={<ChevronLeft fontSize='large' className={classes.nav} />} nextButton={<ChevronRight fontSize='large' className={classes.nav} />}>
                 {info.map((promotion, index) =>
                   <div key={index} style={{ background: `url('${promotion.imageUrl}') no-repeat center center` }}>
@@ -241,7 +244,7 @@ class Home extends React.Component<MyProps, MyState> {
 
             </Grid>
 
-            <Grid item xs={1} md={2} xl={3}>
+            <Grid item xs={1} md={2} xl={2}>
 
             </Grid>
           </Grid>

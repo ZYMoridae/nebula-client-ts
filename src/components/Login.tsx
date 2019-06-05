@@ -24,7 +24,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HeaderBarContainer from '../containers/HeaderBarContainer';
 
 import Footer from './Footer';
-import {isMobile} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
 import { Theme, createStyles } from "@material-ui/core";
 
@@ -105,9 +105,9 @@ const styles = (theme: Theme) => createStyles({
   }
 });
 
-type MyState = { 
+type MyState = {
   username: string,
-  password: string 
+  password: string
 };
 
 
@@ -160,7 +160,7 @@ class Login extends React.Component<MyProps, MyState> {
 
       <div className={classes.containerBg}>
         <Fade in={true} timeout={400}>
-          <img className={classes.backgroundImage} src="https://thewallpaper.co//wp-content/uploads/2016/02/cat-piano-hd-cat-wallpapers-kittens-widescreen-pussycats-high-resolution-pet-photos-baby-cat-desktop-images-cat-wallpapers-for-mac-windows-wallpapers-of-cats-1805x1015.jpg"/>
+          <img className={classes.backgroundImage} src="https://thewallpaper.co//wp-content/uploads/2016/02/cat-piano-hd-cat-wallpapers-kittens-widescreen-pussycats-high-resolution-pet-photos-baby-cat-desktop-images-cat-wallpapers-for-mac-windows-wallpapers-of-cats-1805x1015.jpg" />
         </Fade>
         <HeaderBarContainer />
         <Snackbar
@@ -186,7 +186,7 @@ class Login extends React.Component<MyProps, MyState> {
               <Paper className={classes.loginContainer}>
                 <Grid item xs={12}>
                   <Typography variant="h5" gutterBottom className={classes.signInCaption}>
-                    <AccountCircleIcon fontSize="large" className={classes.accountIcon}/>
+                    <AccountCircleIcon fontSize="large" className={classes.accountIcon} />
                     Sign In
                   </Typography>
                 </Grid>
@@ -221,16 +221,18 @@ class Login extends React.Component<MyProps, MyState> {
                   </Button>
                 </Grid>
                 <Grid>
-                  <Typography variant="caption" gutterBottom className={classes.newUserButton}>
-                    No account? <a href='/'>Create one!</a>
-                  </Typography>
+                  <div className={classes.newUserButton}>
+                    <Typography variant="caption" gutterBottom>
+                      No account? <a href='/'>Create one!</a>
+                    </Typography>
+                  </div>
                 </Grid>
               </Paper>
             </Grid>
 
           </form>
         </Fade>
-        
+
         <div className={classes.footerContainer}>
           <Footer />
         </div>

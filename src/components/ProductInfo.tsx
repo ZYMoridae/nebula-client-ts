@@ -40,6 +40,8 @@ import { isValid } from 'ipaddr.js';
 
 import { Theme, createStyles } from "@material-ui/core";
 
+import ErrorIcon from '@material-ui/icons/ErrorRounded';
+
 const styles = (theme: Theme) => createStyles({
   container: {
     paddingTop: theme.spacing(5),
@@ -55,7 +57,7 @@ const styles = (theme: Theme) => createStyles({
   button: {
     backgroundColor: '#00B3A0',
     transition: 'all 0.3s',
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(2),
     maringRight: theme.spacing(1),
     marginBottom: theme.spacing(1),
     paddingTop: theme.spacing(1),
@@ -81,6 +83,24 @@ const styles = (theme: Theme) => createStyles({
   divider: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1)
+  },
+  warningText: {
+    color: '#a9a9a9',
+    marginLeft: theme.spacing(1)
+  },
+  warningIcon: {
+    verticalAlign: 'middle'
+  },
+  warningContainer: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+  },
+  productName: {
+    fontFamily: "'Oswald', sans-serif"
+  },
+  productMetasContainer: {
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(5)
   }
 });
 
@@ -91,6 +111,12 @@ const renderProductNotFoundBlock = () => {
   )
 }
 
+/**
+ * 
+ * @param productMetas 
+ * @param theme 
+ * @param classes 
+ */
 const renderProductMetas = (productMetas: any, theme: any, classes: any) => {
   let block: any = ''
   let isDataValid = true;
@@ -116,7 +142,7 @@ const renderProductMetas = (productMetas: any, theme: any, classes: any) => {
   }
 
   return (
-    <Grid item xs={12} sm={isDataValid ? 6 : 12}>
+    <Grid item xs={12} sm={isDataValid ? 6 : 12} className={classes.productMetasContainer}>
       <Typography variant="h6" gutterBottom>
         Product Information
     </Typography>
@@ -125,15 +151,20 @@ const renderProductMetas = (productMetas: any, theme: any, classes: any) => {
   );
 }
 
+/**
+ * 
+ * @param productComments 
+ * @param theme 
+ * @param classes 
+ */
 const renderCustomerReviews = (productComments: any, theme: any, classes: any) => {
-  // return '123';
   console.log(productComments)
   let block: any = '';
   let isDataValid = true;
 
-  if (productComments == undefined 
-      || !Array.isArray(productComments)
-      || (Array.isArray(productComments) && productComments.length === 0)) {
+  if (productComments == undefined
+    || !Array.isArray(productComments)
+    || (Array.isArray(productComments) && productComments.length === 0)) {
     isDataValid = false;
     block = <ContentNotFound warningText="No customer reviews!" paddingTop={theme.spacing(5)} paddingBottom={theme.spacing(5)} />
   } else {
@@ -154,7 +185,7 @@ const renderCustomerReviews = (productComments: any, theme: any, classes: any) =
   );
 }
 
-type MyState = { 
+type MyState = {
   age: string,
   name: string,
   labelWidth: number,
@@ -179,7 +210,7 @@ type MyProps = {
 };
 
 class ProductInfo extends React.Component<MyProps, MyState> {
-  private InputLabelRef: ReactInstance; 
+  private InputLabelRef: ReactInstance;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -190,7 +221,7 @@ class ProductInfo extends React.Component<MyProps, MyState> {
     };
     // this.InputLabelRef = React.createRef();
   }
-  
+
 
   componentDidMount() {
     const { fetchProductInfo, productId, fetchProductComments } = this.props;
@@ -205,10 +236,23 @@ class ProductInfo extends React.Component<MyProps, MyState> {
   render() {
     const { theme, classes, info, addCartItem, isShowSuccessToast, hideSuccessToast, productComments, isAddingCartItem, fetchProductInfoError } = this.props;
 
-    let maxQuantity = 20;
+    let maxQuantity = 20,
+      quantityArray = [0];
 
     if (info.unitsInStock != undefined && info.unitsInStock > 0 && info.unitsInStock < 20) {
       maxQuantity = info.unitsInStock;
+    }
+
+    if (info.unitsInStock != undefined) {
+      if (info.unitsInStock > 0 && info.unitsInStock < 20) {
+        maxQuantity = info.unitsInStock;
+      } else if (info.unitsInStock === 0) {
+        maxQuantity = 0;
+      }
+
+      if (maxQuantity > 0) {
+        quantityArray = [...Array(maxQuantity).keys()].map(item => ++item);
+      }
     }
 
     const addCartButtonClickHandler = () => {
@@ -252,8 +296,6 @@ class ProductInfo extends React.Component<MyProps, MyState> {
       }
     ]
 
-    let quantityArray = [...Array(maxQuantity).keys()].map(item => ++item);
-
     let productInfoBlock: any = '';
 
     if (fetchProductInfoError != undefined) {
@@ -267,12 +309,13 @@ class ProductInfo extends React.Component<MyProps, MyState> {
           </Grid>
           <Grid item xs={12} sm={6}>
             <div className={classes.metaContainer}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h4" gutterBottom className={classes.productName}>
                 {_.capitalize(info.name)}
               </Typography>
-              {info.vendor && <Typography variant="caption" gutterBottom>
+              
+              {/* {info.vendor && <Typography variant="caption" gutterBottom>
                 by {_.capitalize(info.vendor.username)}
-              </Typography>}
+              </Typography>} */}
 
               <Typography variant="subtitle1" gutterBottom>
                 Price:
@@ -281,33 +324,44 @@ class ProductInfo extends React.Component<MyProps, MyState> {
                 </span>
               </Typography>
               <div>
-                <FormControl variant="outlined" className={classes.formControl}>
-                  <InputLabel
-                    ref={(ref: any) => {
-                      this.InputLabelRef = ref;
-                    }}
-                    htmlFor="outlined-age-simple"
-                  >
-                    Quantity
+                {info.unitsInStock === 0 ?
+                  <div className={classes.warningContainer}>
+                    <ErrorIcon fontSize="small" color="primary" className={classes.warningIcon} />
+
+                    <Typography variant="caption" gutterBottom className={classes.warningText}>
+                      {'Product not available now.'}
+                    </Typography>
+                  </div> :
+                  <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel
+                      ref={(ref: any) => {
+                        this.InputLabelRef = ref;
+                      }}
+                      htmlFor="outlined-age-simple"
+                    >
+                      Quantity
                   </InputLabel>
-                  <Select
-                    value={this.state.quantity}
-                    onChange={itemQuantityChangeHandler}
-                    input={
-                      <OutlinedInput
-                        labelWidth={this.state.labelWidth}
-                        name="quantity"
-                        id="outlined-age-simple"
-                      />
-                    }
-                  >
-                    {
-                      quantityArray.map((item, index) =>
-                        <MenuItem key={index} value={item}>{item}</MenuItem>
-                      )
-                    }
-                  </Select>
-                </FormControl>
+
+                    <Select
+                      value={this.state.quantity}
+                      onChange={itemQuantityChangeHandler}
+                      input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          name="quantity"
+                          id="outlined-age-simple"
+                        />
+                      }
+                    >
+                      {
+                        quantityArray.map((item, index) =>
+                          <MenuItem key={index} value={item}>{item}</MenuItem>
+                        )
+                      }
+                    </Select>
+                  </FormControl>}
+
+
               </div>
               <div>
                 <Button variant="contained" className={classes.button} disabled={isAddingCartItem} fullWidth={true} onClick={() => { addCartButtonClickHandler() }}>
@@ -326,7 +380,7 @@ class ProductInfo extends React.Component<MyProps, MyState> {
         </Grid>
         <Divider className={classes.divider} />
         {info.productMetas && renderProductMetas(info.productMetas, theme, classes)}
-        <Divider className={classes.divider} />
+        {/* <Divider className={classes.divider} /> */}
         {renderCustomerReviews(productComments, theme, classes)}
       </div>;
     }

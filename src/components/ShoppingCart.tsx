@@ -61,7 +61,7 @@ const styles = (theme: Theme) => createStyles({
     }
   },
   checkoutBlock: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(3)
   },
   checkoutTotalPrice: {
     color: '#B12704',
@@ -184,7 +184,7 @@ const renderEmptyCartCaption = (props: any) => {
   let block: any = '';
 
   if (isFetchedShoppingCart) {
-    block = <ContentNotFound warningText={'Your cart is empty. Please add some items!'}/>;
+    block = <ContentNotFound warningText={'Your cart is empty. Please add some items!'} />;
   }
 
   return block;
@@ -206,7 +206,7 @@ const renderLoadingIndicator = (isFetchedShoppingCart: any) => {
   )
 }
 
-type MyState = { 
+type MyState = {
   itemCheckedState: any,
   itemQuantity: any,
   labelWidth: number
@@ -255,7 +255,7 @@ class ShoppingCart extends React.Component<MyProps, MyState> {
     const { info, classes, proceedShoppingCart, createOrder, isCreatingOrder, deleteShoppingCartItem, isFetchingShoppingCart, isFetchedShoppingCart } = this.props;
 
     let _itemCheckedState = [];
-    info.forEach((row: any)=> {
+    info.forEach((row: any) => {
       _itemCheckedState.push(false);
     });
 
@@ -374,21 +374,23 @@ class ShoppingCart extends React.Component<MyProps, MyState> {
                                 {row.product.name}
                               </a>
                             </Typography>
+                            <div>
                             <Typography variant="caption" gutterBottom>
                               {
                                 stockText(row.quantity, row.product.unitsInStock)
                               }
                             </Typography>
+                            </div>
                             <div style={{ display: "inline-flex" }}>
                               <Typography className={classes.itemAction} onClick={() => { handleDeleteClick(row.id) }} variant="caption" gutterBottom>
-                              <span className={classes.itemActionLink} >
+                                <span className={classes.itemActionLink} >
                                   Delete
-                          </span>
+                                </span>
                               </Typography>
                               <Typography className={classes.itemAction} variant="caption" gutterBottom>
-                              <a className={classes.itemActionLink}>
+                                <a className={classes.itemActionLink}>
                                   Save for later
-                          </a>
+                                </a>
                               </Typography>
                             </div>
                           </TableCell>
