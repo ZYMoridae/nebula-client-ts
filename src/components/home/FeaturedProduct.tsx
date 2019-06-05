@@ -53,10 +53,10 @@ const styles = (theme: Theme) => createStyles({
     backgroundColor: red[500],
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
   },
   cardHeader: {
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing(2)
   }
 });
 

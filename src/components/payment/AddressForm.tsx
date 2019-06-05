@@ -49,7 +49,7 @@ class PaymentAddressForm extends React.Component<MyProps, MyState> {
           <Typography variant="subtitle1">
             Address
           </Typography>
-          <Grid container spacing={40} className={classes.gridContainer}>
+          <Grid container spacing={4} className={classes.gridContainer}>
             <Grid item xs={12} md={6} className={classes.gridItem}>
               <TextField
                 id="outlined-name"

@@ -24,9 +24,9 @@ import Routes from '../utils/Routes';
 
 
 const nebulaTheme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
+  // typography: {
+  //   useNextVariants: true,
+  // },
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,

@@ -42,24 +42,24 @@ import { Theme, createStyles } from "@material-ui/core";
 
 const styles = (theme: Theme) => createStyles({
   container: {
-    paddingTop: theme.spacing.unit * 5,
-    marginBottom: theme.spacing.unit * 2
+    paddingTop: theme.spacing(5),
+    marginBottom: theme.spacing(2)
   },
   priceCaption: {
     color: '#B12704',
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   button: {
     backgroundColor: '#00B3A0',
     transition: 'all 0.3s',
-    marginTop: theme.spacing.unit,
-    maringRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
-    paddingTop: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    maringRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
     color: 'white',
     '&:hover': {
       backgroundColor: '#00877C',
@@ -67,20 +67,20 @@ const styles = (theme: Theme) => createStyles({
     }
   },
   metaContainer: {
-    paddingLeft: theme.spacing.unit * 2
+    paddingLeft: theme.spacing(2)
   },
   formControl: {
-    marginTop: theme.spacing.unit,
-    maringRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    maringRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     minWidth: 120,
   },
   table: {
     // minWidth: 700
   },
   divider: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1)
   }
 });
 
@@ -97,7 +97,7 @@ const renderProductMetas = (productMetas: any, theme: any, classes: any) => {
 
   if (productMetas == undefined || !Array.isArray(productMetas)) {
     isDataValid = false;
-    block = <ContentNotFound warningText="Product metas was unavailable!" paddingTop={theme.spacing.unit * 5} paddingBottom={theme.spacing.unit * 5} />
+    block = <ContentNotFound warningText="Product metas was unavailable!" paddingTop={theme.spacing(5)} paddingBottom={theme.spacing(5)} />
   } else {
     block = <Paper>
       <Table className={classes.table}>
@@ -135,7 +135,7 @@ const renderCustomerReviews = (productComments: any, theme: any, classes: any) =
       || !Array.isArray(productComments)
       || (Array.isArray(productComments) && productComments.length === 0)) {
     isDataValid = false;
-    block = <ContentNotFound warningText="No customer reviews!" paddingTop={theme.spacing.unit * 5} paddingBottom={theme.spacing.unit * 5} />
+    block = <ContentNotFound warningText="No customer reviews!" paddingTop={theme.spacing(5)} paddingBottom={theme.spacing(5)} />
   } else {
     block = <div>
       {productComments.map((productComment, index) =>
@@ -260,7 +260,7 @@ class ProductInfo extends React.Component<MyProps, MyState> {
       productInfoBlock = renderProductNotFoundBlock();
     } else {
       productInfoBlock = <div>
-        <Grid container spacing={40}>
+        <Grid container spacing={5}>
           <Grid item xs={12} sm={6}>
             {/* <Image imageStyle={{width: '100%', height: 'auto'}} src="http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png"/> */}
             <ImageGallery items={images} showNav={false} showPlayButton={false} autoPlay={true} lazyLoad={true} useBrowserFullscreen={false} />

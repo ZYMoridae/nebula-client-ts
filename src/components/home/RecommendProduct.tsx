@@ -52,7 +52,7 @@ const styles = (theme: Theme) => createStyles({
     backgroundColor: red[500],
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
   }
 });
 

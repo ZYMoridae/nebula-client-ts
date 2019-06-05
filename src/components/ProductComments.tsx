@@ -5,9 +5,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Grow from '@material-ui/core/Grow';
 
 const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  }
+  // typography: {
+  //   useNextVariants: true,
+  // }
 });
 
 const classes = {
@@ -15,20 +15,20 @@ const classes = {
     return {
       borderLeft: deepIndex != 1 ? 'solid 1px' : '',
       borderColor: 'lightgrey',
-      paddingTop: theme.spacing.unit,
-      paddingBottom: theme.spacing.unit,
-      paddingLeft: deepIndex != 1 ? theme.spacing.unit * 2 : theme.spacing.unit,
-      marginTop: theme.spacing.unit * 1.5,
-      marginBottom: theme.spacing.unit * 1.5,
-      marginLeft: deepIndex == 1 ? 0 : theme.spacing.unit * deepIndex
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+      paddingLeft: deepIndex != 1 ? theme.spacing(2) : theme.spacing(1),
+      marginTop: theme.spacing(1.5),
+      marginBottom: theme.spacing(1.5),
+      marginLeft: deepIndex == 1 ? 0 : theme.spacing(1) * deepIndex
     }
   },
   commentUser: {
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing(1)
   },
   commentUserImage: {
     verticalAlign: 'middle',
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   },
   cBody: {
   }

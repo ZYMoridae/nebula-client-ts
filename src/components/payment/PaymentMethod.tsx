@@ -64,7 +64,7 @@ class PaymentMethod extends React.Component<MyProps, MyState> {
             Payment Method
           </Typography>
 
-          <Grid container spacing={32} className={classes.paymentMethodContainer}>
+          <Grid container spacing={4} className={classes.paymentMethodContainer}>
             <Grid item xs={12} md={6} className={classes.gridItem + ' ' + isMobile ? classes.ccBlockMobile : ''}>
               <Cards
                 number={this.state.info.cardnumber ? this.state.info.cardnumber : ''}
@@ -76,7 +76,7 @@ class PaymentMethod extends React.Component<MyProps, MyState> {
             </Grid>
 
             <Grid item xs={12} md={6} className={classes.gridItem}>
-              <Grid container spacing={32} className={classes.paymentMethodInputContainer}>
+              <Grid container spacing={4} className={classes.paymentMethodInputContainer}>
                 <Grid item xs={12} md={6} className={classes.gridItem}>
                   <TextField
                     id="outlined-name"

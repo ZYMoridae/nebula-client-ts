@@ -30,12 +30,12 @@ class ContentNotFound extends React.Component<MyProps, MyState> {
 
     let defaultStyle = {
       emptyCartCaptionContainer: {
-        paddingLeft: theme.spacing.unit * 5,
-        paddingRight: theme.spacing.unit * 5,
-        paddingTop: theme.spacing.unit * 10,
-        paddingBottom: theme.spacing.unit * 10,
-        marginBottom: theme.spacing.unit * 3,
-        marginTop: theme.spacing.unit * 3,
+        paddingLeft: theme.spacing(5),
+        paddingRight: theme.spacing(5),
+        paddingTop: theme.spacing(10),
+        paddingBottom: theme.spacing(10),
+        marginBottom: theme.spacing(3),
+        marginTop: theme.spacing(3),
         // FIXME:
         textAlign: 'center' as 'center'
       }

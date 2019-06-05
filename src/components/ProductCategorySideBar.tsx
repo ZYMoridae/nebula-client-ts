@@ -35,7 +35,7 @@ const styles = (theme: Theme) => createStyles({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
   },
   toolbar: theme.mixins.toolbar,
   categoryItem: {
@@ -52,15 +52,15 @@ const styles = (theme: Theme) => createStyles({
     }
   },
   categoryContainer: {
-    marginLeft: theme.spacing.unit * 2,
-    marginTop: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
+    marginLeft: theme.spacing(2),
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(2),
     borderRight: 'solid 1px',
     borderColor: '#d3d3d3',
     height: 'max-content'
   },
   categoryListContainer: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   },
 });
 

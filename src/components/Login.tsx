@@ -34,8 +34,8 @@ const styles = (theme: Theme) => createStyles({
     flexWrap: 'wrap',
   },
   textField: {
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
+    // marginLeft: theme.spacing(1),
+    // marginRight: theme.spacing(1),
     // width: 200
   },
   dense: {
@@ -48,28 +48,28 @@ const styles = (theme: Theme) => createStyles({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
   loginContainer: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
     marginTop: isMobile ? '20vh' : '25vh',
     display: 'flex',
     flexWrap: 'wrap',
     width: 350,
-    marginLeft: isMobile ? theme.spacing.unit * 2 : '-40vw',
-    marginRight: theme.spacing.unit * 2
+    marginLeft: isMobile ? theme.spacing(2) : '-40vw',
+    marginRight: theme.spacing(2)
   },
   loginButton: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing(2)
   },
   newUserButton: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing(2)
   },
   accountIcon: {
     verticalAlign: 'middle',
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
     color: theme.palette.primary.main
   },
   signInCaption: {

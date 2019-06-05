@@ -50,8 +50,8 @@ const styles = (theme: Theme) => createStyles({
     color: '#3d3d3d'
   },
   blockContainer: {
-    marginTop: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit * 3
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3)
   },
   productsHero: {
     width: '100%',
@@ -60,7 +60,7 @@ const styles = (theme: Theme) => createStyles({
     justifyContent: 'space-between'
   },
   fetchedProductsContainer: {
-    marginBottom: theme.spacing.unit * 3
+    marginBottom: theme.spacing(3)
   },
   renewIcon: {
     paddingTop: '4px',
@@ -126,7 +126,7 @@ const BlockComponent = (props: any) => {
         </div>
       </div>
 
-      <Grid container spacing={32} className={classes.fetchedProductsContainer}>
+      <Grid container spacing={4} className={classes.fetchedProductsContainer}>
         {
           error == null && isFetchedProducts && Array.isArray(items) ?
             items.map((product, index) =>

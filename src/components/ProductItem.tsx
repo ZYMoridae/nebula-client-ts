@@ -51,7 +51,7 @@ const styles = (theme: Theme) => createStyles({
     backgroundColor: red[500],
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
   }
 });
 
@@ -103,7 +103,7 @@ class ProductItem extends React.Component<MyProps, MyState> {
             ${product.price}
           </Typography>
         </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
+        <CardActions className={classes.actions} disableSpacing>
           <IconButton aria-label="Share">
             <ShareIcon />
           </IconButton>

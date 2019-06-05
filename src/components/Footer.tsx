@@ -7,13 +7,13 @@ import { Theme, createStyles } from "@material-ui/core";
 const styles = (theme: Theme) => createStyles({
 	container: {
 		backgroundColor: '#401500',
-		paddingTop: theme.spacing.unit * 2,
-		paddingBottom: theme.spacing.unit * 2
+		paddingTop: theme.spacing(2),
+		paddingBottom: theme.spacing(2)
 	},
 	footerText: {
 		color: 'white',
-		paddingLeft: theme.spacing.unit * 2,
-		paddingRight: theme.spacing.unit * 2
+		paddingLeft: theme.spacing(2),
+		paddingRight: theme.spacing(2)
 	},
 	linkContainer: {
 		textAlign: 'center',
@@ -22,7 +22,7 @@ const styles = (theme: Theme) => createStyles({
 		width: '100%'
 	},
 	linkItem: {
-		marginRight: theme.spacing.unit * 2,
+		marginRight: theme.spacing(2),
 		transition: 'all 0.15s',
 		color: 'white',
 		textDecoration: 'none',

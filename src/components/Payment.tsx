@@ -18,30 +18,30 @@ import { Theme, createStyles } from "@material-ui/core";
 const styles = (theme: Theme) => createStyles({
   root: {
     // width: '90%',
-    marginTop: theme.spacing.unit * 5
+    marginTop: theme.spacing(5)
   },
   button: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   backButton: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   completed: {
     display: 'inline-block',
   },
   instructions: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   stepControllerContainer: {
-    marginTop: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit * 5,
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(5),
     textAlign: 'center'
   },
   // The bellow styles will apply to Payment Order page
   paymentOrderContainer: {
-    padding: theme.spacing.unit * 3,
-    marginTop: theme.spacing.unit * 4
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(4)
   },
   textField: {
 
@@ -51,18 +51,18 @@ const styles = (theme: Theme) => createStyles({
     paddingBottom: '0px !important'
   },
   gridContainer: {
-    marginBottom: theme.spacing.unit * 8,
-    marginTop: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 8,
-    paddingRight: theme.spacing.unit * 8
+    marginBottom: theme.spacing(8),
+    marginTop: theme.spacing(1),
+    paddingLeft: theme.spacing(8),
+    paddingRight: theme.spacing(8)
   },
   paymentMethodContainer: {
-    marginBottom: theme.spacing.unit * 4,
-    marginTop: theme.spacing.unit * 4
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4)
   },
   paymentMethodInputContainer: {
-    paddingRight: isMobile ? '0' : theme.spacing.unit * 8,
-    marginTop: isMobile ? theme.spacing.unit * 2 : '0'
+    paddingRight: isMobile ? '0' : theme.spacing(8),
+    marginTop: isMobile ? theme.spacing(2) : '0'
   },
   ccBlockMobile: {
     padding: '0 !important'

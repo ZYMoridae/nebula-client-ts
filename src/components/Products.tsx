@@ -29,31 +29,31 @@ const styles = (theme: Theme) => createStyles({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
   loginContainer: {
-    padding: theme.spacing.unit * 3,
-    marginTop: theme.spacing.unit * 12,
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(12),
     display: 'flex',
     flexWrap: 'wrap',
     width: 350
   },
   loginButton: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing(2)
   },
   productsContainer: {
-    marginLeft: theme.spacing.unit * 10,
-    marginRight: theme.spacing.unit * 10,
-    marginBottom: theme.spacing.unit * 7
+    marginLeft: theme.spacing(10),
+    marginRight: theme.spacing(10),
+    marginBottom: theme.spacing(7)
   },
   pagination: {
-    marginTop: theme.spacing.unit * 5,
+    marginTop: theme.spacing(5),
     textAlign: 'center'
   },
   prodcutContainer: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing(2)
   }
 
 });
@@ -108,18 +108,18 @@ class Products  extends React.Component<MyProps, MyState> {
     const { info, classes, perPage, totalPages, page } = this.props;
 
     const theme = createMuiTheme({
-      typography: {
-        useNextVariants: true,
-      },
+      // typography: {
+      //   useNextVariants: true,
+      // },
     });
 
     return (
       <div className={classes.productsContainer}>
 
-        <Grid container spacing={32} direction="row" className={classes.prodcutContainer}>
+        <Grid container spacing={4} direction="row" className={classes.prodcutContainer}>
           <Grid item xs={1} lg={2}></Grid>
           <Grid item xs={10} lg={8}>
-            <Grid container spacing={32} direction="row" alignContent='center'>
+            <Grid container spacing={4} direction="row" alignContent='center'>
               <Grid item xs={12}>
                 <Typography variant="h4" gutterBottom>
                   Products

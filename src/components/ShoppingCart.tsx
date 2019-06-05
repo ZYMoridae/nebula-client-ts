@@ -30,8 +30,8 @@ import { Theme, createStyles } from "@material-ui/core";
 
 const styles = (theme: Theme) => createStyles({
   root: {
-    marginTop: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit * 2
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(2)
   },
   table: {
     minWidth: '100%',
@@ -46,8 +46,8 @@ const styles = (theme: Theme) => createStyles({
     }
   },
   itemAction: {
-    marginRight: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     borderRight: 'solid 1px',
     borderColor: 'lightgrey'
   },
@@ -61,19 +61,19 @@ const styles = (theme: Theme) => createStyles({
     }
   },
   checkoutBlock: {
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing(1)
   },
   checkoutTotalPrice: {
     color: '#B12704',
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   },
   itemPrice: {
     color: '#B12704'
   },
   formControl: {
-    marginTop: theme.spacing.unit,
-    maringRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    maringRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     minWidth: 120,
   },
   cbox: {
@@ -84,12 +84,12 @@ const styles = (theme: Theme) => createStyles({
   },
   checked: {},
   emptyCartCaptionContainer: {
-    paddingLeft: theme.spacing.unit * 5,
-    paddingRight: theme.spacing.unit * 5,
-    paddingTop: theme.spacing.unit * 10,
-    paddingBottom: theme.spacing.unit * 10,
-    marginBottom: theme.spacing.unit * 3,
-    marginTop: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing(5),
+    paddingRight: theme.spacing(5),
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(10),
+    marginBottom: theme.spacing(3),
+    marginTop: theme.spacing(3),
     textAlign: 'center'
   }
 });
