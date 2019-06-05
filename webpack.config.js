@@ -1,5 +1,5 @@
 const path = require('path');
-// var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: "./index.tsx",
@@ -12,6 +12,8 @@ module.exports = {
   // Enable sourcemaps for debugging webpack's output.
   devtool: "source-map",
   devServer: {
+    // contentBase: path.join(__dirname, 'src'),
+    // watchContentBase: true,
     inline: true,
     port: 3000,
     hot: true,
@@ -93,9 +95,9 @@ module.exports = {
         }
       ]
   },
-  // plugins: [
-  //   new HtmlWebpackPlugin()
-  // ]
+  plugins: [
+    new HtmlWebpackPlugin()
+  ]
 
   // When importing a module whose path matches one of the following, just
   // assume a corresponding global variable exists and use that instead.

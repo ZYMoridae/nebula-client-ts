@@ -70,7 +70,7 @@
   "scripts": {
     "test": "jest",
     "start": "webpack-dev-server --hot --port 3000 --config webpack.config.js",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js && cp ./index.html ./dist/"
   },
   "author": "",
   "license": "ISC"
