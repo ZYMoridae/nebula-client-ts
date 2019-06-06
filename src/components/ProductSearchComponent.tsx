@@ -121,7 +121,6 @@ class ProductSearchComponent extends React.Component<MyProps, MyState> {
       fetch(`/api/products?page=0&size=5&sort=&keyword=${value.toLowerCase()}`)
         .then(response => response.json())
         .then(data => {
-          console.log(data);
           let suggestions = [];
           if (Array.isArray(data.content)) {
             suggestions = data.content;

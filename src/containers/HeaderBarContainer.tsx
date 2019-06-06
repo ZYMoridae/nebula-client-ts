@@ -130,9 +130,9 @@ const renderLoginButton = (props: any) => {
   return block;
 }
 
-type MyState = { 
+type MyState = {
   anchorEl: any,
-  mobileMoreAnchorEl: any ,
+  mobileMoreAnchorEl: any,
   isUserLogin: boolean
 };
 
@@ -272,7 +272,7 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
             {isUserLogin ?
               <div className={classes.sectionDesktop}>
                 <ProductSearchComponent />
-                            {/* <div className={classes.search}>
+                {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>

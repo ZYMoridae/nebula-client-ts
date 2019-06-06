@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { 
+import {
   fetchAuthInfo,
   hideLoginError
 } from '../actions';

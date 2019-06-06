@@ -12,7 +12,9 @@ let initState: any = {
   isCreatingShippingInfo: false,
   isCreatedShippingInfo: false,
   shippingInfoFormData: {},
-  creditCardInfo: {}
+  creditCardInfo: {},
+  redirectOrderId: -1,
+  redirectToPaymentPage: false
 }
 const paymentReducer = (state = initState, action: any) => {
   switch (action.type) {
@@ -85,6 +87,11 @@ const paymentReducer = (state = initState, action: any) => {
     case ActionType.SHIPPING_INFO_FORM_INPUT_CHANGED:
       return Object.assign({}, state, {
         shippingInfoFormData: action.info
+      })
+    case ActionType.REDIRECT_TO_PAYMENT_SUCCESS:
+      return Object.assign({}, state, {
+        redirectToPaymentPage: action.redirectToPaymentPage,
+        redirectOrderId: action.redirectOrderId
       })
     default:
       return state

@@ -39,12 +39,12 @@ const styles = (theme: Theme) => createStyles({
 	}
 });
 
-type MyState = { 
+type MyState = {
 };
 
 
 type MyProps = {
-  classes: any
+	classes: any
 };
 
 

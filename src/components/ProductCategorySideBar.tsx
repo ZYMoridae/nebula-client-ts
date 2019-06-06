@@ -64,7 +64,7 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-type MyState = { 
+type MyState = {
 };
 
 

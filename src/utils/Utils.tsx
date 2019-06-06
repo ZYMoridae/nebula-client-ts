@@ -5,7 +5,7 @@ const Utils = {
   addToken: (options: any) => {
     let token = sessionStorage.getItem('token');
     let tokenOption = {};
-    if(token !== undefined) {
+    if (token !== undefined) {
       tokenOption = {
         headers: {
           Authorization: `Bearer ${token}`

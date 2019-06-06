@@ -11,9 +11,11 @@ import Grid from '@material-ui/core/Grid';
 import PaymentOrder from './payment/PaymentOrder';
 import AddressForm from './payment/AddressForm';
 import PaymentMethod from './payment/PaymentMethod';
-import {isMobile} from 'react-device-detect';
-
+import { isMobile } from 'react-device-detect';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { Theme, createStyles } from "@material-ui/core";
+import { Redirect } from 'react-router-dom';
+import Fade from '@material-ui/core/Fade';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -66,6 +68,10 @@ const styles = (theme: Theme) => createStyles({
   },
   ccBlockMobile: {
     padding: '0 !important'
+  },
+  progress: {
+    color: 'white',
+    marginRight: theme.spacing(1)
   }
 });
 
@@ -86,7 +92,7 @@ function getStepContent(step: number) {
   }
 }
 
-type MyState = { 
+type MyState = {
   activeStep: number,
   completed: any,
   skipped: any
@@ -95,7 +101,14 @@ type MyState = {
 type MyProps = {
   dispatch: any,
   fetchActivateOrder: any,
-  classes: any, shippingInfoFormData: any, orderId: number, createShippingInfo: any, creditCardInfo: any
+  isPaymentProcessing: boolean,
+  classes: any,
+  shippingInfoFormData: any,
+  orderId: number,
+  createShippingInfo: any,
+  creditCardInfo: any,
+  redirectToPaymentPage: boolean,
+  redirectOrderId: number
 };
 
 class Payment extends React.Component<MyProps, MyState> {
@@ -142,9 +155,9 @@ class Payment extends React.Component<MyProps, MyState> {
   renderSubComponent(props: any, activeStep: number, classes: any) {
     return (
       <div>
-        {activeStep == 0 && <PaymentOrder {...props} classes={classes}/>}
-        {activeStep == 1 && <AddressForm {...props} classes={classes}/>}
-        {activeStep == 2 && <PaymentMethod {...props} classes={classes}/>}
+        {activeStep == 0 && <PaymentOrder {...props} classes={classes} />}
+        {activeStep == 1 && <AddressForm {...props} classes={classes} />}
+        {activeStep == 2 && <PaymentMethod {...props} classes={classes} />}
       </div>
     )
   }
@@ -155,15 +168,39 @@ class Payment extends React.Component<MyProps, MyState> {
     fetchActivateOrder(orderId);
   }
 
+  renderFinishButton(handleNext: any, classes: any, activeStep: number, steps: any, isPaymentProcessing: boolean) {
+    let buttonContent: any = 'Next';
+
+    if (isPaymentProcessing) {
+      buttonContent = <CircularProgress className={classes.progress} size={24} />;
+    } else {
+      if (activeStep === steps.length - 1) {
+        buttonContent = 'Finish';
+      }
+    }
+
+    return (
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleNext}
+        className={classes.button}
+      >
+        {buttonContent}
+      </Button>
+    )
+  }
+
+
   render() {
-    const { classes, shippingInfoFormData, orderId, createShippingInfo, creditCardInfo} = this.props;
+    const { classes, shippingInfoFormData, orderId, createShippingInfo, creditCardInfo, isPaymentProcessing, redirectToPaymentPage } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
 
     let cartItems = JSON.parse(localStorage.getItem('_pfc'));
     // const totalSteps = () => getSteps().length;
 
-    const isStepOptional = (step: number) => { return step === 1 };
+    const isStepOptional = (step: number) => { return false };
 
     const handleSkip = () => {
       const { activeStep } = this.state;
@@ -185,28 +222,28 @@ class Payment extends React.Component<MyProps, MyState> {
 
     const updateShippingInfo = () => {
       // Validate shipping info
-      if(!shippingInfoFormData.firstname 
-          || !shippingInfoFormData.lastname
-          || !shippingInfoFormData.email
-          || !shippingInfoFormData.telephone
-          || !shippingInfoFormData.postCode
-          || !shippingInfoFormData.address1
-          || !shippingInfoFormData.address2) {
-            return;
-          }
-      
+      if (!shippingInfoFormData.firstname
+        || !shippingInfoFormData.lastname
+        || !shippingInfoFormData.email
+        || !shippingInfoFormData.telephone
+        || !shippingInfoFormData.postCode
+        || !shippingInfoFormData.address1
+        || !shippingInfoFormData.address2) {
+        return;
+      }
+
       // Validate credit card info
-      if(!creditCardInfo.cardnumber
-          || !creditCardInfo.cardname
-          || !creditCardInfo.expiry
-          || !creditCardInfo.cvc) {
-            return;
-          }
-      
+      if (!creditCardInfo.cardnumber
+        || !creditCardInfo.cardname
+        || !creditCardInfo.expiry
+        || !creditCardInfo.cvc) {
+        return;
+      }
+
       let paymentPayload: any = {};
 
       paymentPayload.cardNumber = creditCardInfo.cardNumber;
-      paymentPayload.name = creditCardInfo.cardname; 
+      paymentPayload.name = creditCardInfo.cardname;
       paymentPayload.expiry = creditCardInfo.expiry;
       paymentPayload.cvv = creditCardInfo.cvc;
 
@@ -220,27 +257,23 @@ class Payment extends React.Component<MyProps, MyState> {
 
     const handleNext = () => {
       let activeStep;
-      
-      console.log(this.isLastStep());
-
 
       if (this.isLastStep()) {
-        console.log('222');
         updateShippingInfo();
-      }else {
+      } else {
         activeStep = this.state.activeStep + 1;
         this.setState({
           activeStep,
         });
       }
-      
+
       // if (this.isLastStep() && !this.allStepsCompleted()) {
       //   // It's the last step, but not all steps have been completed
       //   // find the first step that has been completed
       //   const steps = getSteps();
       //   activeStep = steps.findIndex((step, i) => !this.state.completed.has(i));
       // } else {
-        
+
       // }
 
     };
@@ -284,98 +317,99 @@ class Payment extends React.Component<MyProps, MyState> {
     };
 
     return (
-      <div className={classes.root}>
-        <Stepper alternativeLabel nonLinear activeStep={activeStep}>
-          {steps.map((label, index) => {
-            const props: any = {};
-            const buttonProps: any = {};
-            if (isStepOptional(index)) {
-              buttonProps.optional = <Typography variant="caption">Optional</Typography>;
-            }
-            if (this.isStepSkipped(index)) {
-              props.completed = false;
-            }
-            return (
-              <Step key={label} {...props}>
-                <StepButton
-                  onClick={handleStep(index)}
-                  completed={this.isStepComplete(index)}
-                  {...buttonProps}
-                >
-                  {label}
-                </StepButton>
-              </Step>
-            );
-          })}
-        </Stepper>
+      <div>
+        {redirectToPaymentPage ? <Redirect to={`/payment/${orderId}/success`} /> : <Fade in={!redirectToPaymentPage} timeout={1000}><div className={classes.root}>
+          <Stepper alternativeLabel nonLinear activeStep={activeStep}>
+            {steps.map((label, index) => {
+              const props: any = {};
+              const buttonProps: any = {};
+              if (isStepOptional(index)) {
+                buttonProps.optional = <Typography variant="caption">Optional</Typography>;
+              }
+              if (this.isStepSkipped(index)) {
+                props.completed = false;
+              }
+              return (
+                <Step key={label} {...props}>
+                  <StepButton
+                    onClick={handleStep(index)}
+                    completed={this.isStepComplete(index)}
+                    {...buttonProps}
+                  >
+                    {label}
+                  </StepButton>
+                </Step>
+              );
+            })}
+          </Stepper>
 
-        <Grid container spacing={0}>
-          <Grid item xs={1} md={2}>
+          <Grid container spacing={0}>
+            <Grid item xs={1} md={2}>
 
-          </Grid>
-          <Grid item xs={10} md={8}>
-            {/* Rendering sub-components */}
-            {this.renderSubComponent(this.props, this.state.activeStep, classes)}
+            </Grid>
+            <Grid item xs={10} md={8}>
+              {/* Rendering sub-components */}
+              {this.renderSubComponent(this.props, this.state.activeStep, classes)}
 
-            <div className={classes.stepControllerContainer}>
-              {this.allStepsCompleted() ? (
-                <div>
-                  <Typography className={classes.instructions}>
-                    All steps completed - you&apos;re finished
-              </Typography>
-                  <Button onClick={handleReset}>Reset</Button>
-                </div>
-              ) : (
+              <div className={classes.stepControllerContainer}>
+                {this.allStepsCompleted() ? (
                   <div>
-                    {/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
-                    <div>
-                      <Button
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        className={classes.button}
-                      >
-                        Back
-                </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'} 
-                </Button>
-                      {isStepOptional(activeStep) &&
-                        !this.state.completed.has(this.state.activeStep) && (
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleSkip}
-                            className={classes.button}
-                          >
-                            Skip
-                    </Button>
-                        )}
-                      {/* {activeStep !== steps.length &&
-                        (this.state.completed.has(this.state.activeStep) ? (
-                          <Typography variant="caption" className={classes.completed}>
-                            Step {activeStep + 1} already completed
-                    </Typography>
-                        ) : (
-                            <Button variant="contained" color="primary" onClick={this.handleComplete}>
-                              {this.completedSteps() === this.totalSteps() - 1 ? 'Finish' : 'Complete Step'}
-                            </Button>
-                          ))} */}
-                    </div>
+                    <Typography className={classes.instructions}>
+                      All steps completed - you&apos;re finished
+            </Typography>
+                    <Button onClick={handleReset}>Reset</Button>
                   </div>
-                )}
-            </div>
-          </Grid>
-          <Grid item xs={1} md={2}>
+                ) : (
+                    <div>
+                      {/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
+                      <div>
+                        <Button
+                          disabled={activeStep === 0}
+                          onClick={handleBack}
+                          className={classes.button}
+                        >
+                          Back
+              </Button>
+                        {this.renderFinishButton(handleNext, classes, activeStep, steps, isPaymentProcessing)}
 
+                        {isStepOptional(activeStep) &&
+                          !this.state.completed.has(this.state.activeStep) && (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={handleSkip}
+                              className={classes.button}
+                            >
+                              Skip
+                  </Button>
+                          )}
+                        {/* {activeStep !== steps.length &&
+                      (this.state.completed.has(this.state.activeStep) ? (
+                        <Typography variant="caption" className={classes.completed}>
+                          Step {activeStep + 1} already completed
+                  </Typography>
+                      ) : (
+                          <Button variant="contained" color="primary" onClick={this.handleComplete}>
+                            {this.completedSteps() === this.totalSteps() - 1 ? 'Finish' : 'Complete Step'}
+                          </Button>
+                        ))} */}
+                      </div>
+                    </div>
+                  )}
+              </div>
+            </Grid>
+            <Grid item xs={1} md={2}>
+
+            </Grid>
           </Grid>
-        </Grid>
+
+        </div></Fade>}
 
       </div>
+
+
+
+
     );
   }
 }

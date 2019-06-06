@@ -22,7 +22,9 @@ const mapStateToProps = (state: any) => {
     isCreatingShippingInfo: state.PaymentReducer.isCreatingShippingInfo,
     isCreatedShippingInfo: state.PaymentReducer.isCreatedShippingInfo,
     shippingInfoFormData: state.PaymentReducer.shippingInfoFormData,
-    creditCardInfo: state.PaymentReducer.creditCardInfo
+    creditCardInfo: state.PaymentReducer.creditCardInfo,
+    redirectToPaymentPage: state.PaymentReducer.redirectToPaymentPage,
+    redirectOrderId: state.PaymentReducer.redirectOrderId
   }
 }
 
@@ -36,7 +38,6 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(fetchActivateOrder(orderId));
     },
     createShippingInfo: (orderId: number, shippingInfo: any, creditCardInfo: any) => {
-      console.log(shippingInfo);
       dispatch(createShippingInfo(orderId, shippingInfo, creditCardInfo));
     },
     shippingInfoFormInputChanged: (shippingInfoFormData: any) => {

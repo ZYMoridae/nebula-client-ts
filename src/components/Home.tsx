@@ -99,7 +99,7 @@ const BlockComponent = (props: any) => {
   const TagName = props.tag;
   const contentLoadersArray = _.range(4);
   const renewClicked = () => {
-    console.log('clicked');
+
   };
 
   return (
@@ -116,13 +116,13 @@ const BlockComponent = (props: any) => {
                   Products
                 </Fab> */}
         <div className={classes.productsHero}>
-          <a href="/products" style={{ textDecoration: 'none'}}>
+          <a href="/products" style={{ textDecoration: 'none' }}>
             <Typography variant="h6" gutterBottom className={classes.nav}>
               {title}
             </Typography>
           </a>
           <span>
-            <AutorenewIcon className={classes.renewIcon} onClick={renewClicked}/>
+            <AutorenewIcon className={classes.renewIcon} onClick={renewClicked} />
           </span>
         </div>
       </div>
@@ -145,7 +145,7 @@ const BlockComponent = (props: any) => {
   )
 }
 
-type MyState = { 
+type MyState = {
 
 };
 
@@ -192,27 +192,27 @@ class Home extends React.Component<MyProps, MyState> {
 
             </Grid>
             <Grid item xs={10} md={8} xl={8}>
-            <div>
-            <Slider {...settings}>
-              {info.map((promotion: any, index: number) =>
-                <div key={index}>
-                  {/* <img src={promotion.imageUrl} style={{height: 400, width: '100%'}}/> */}
+              <div>
+                <Slider {...settings}>
+                  {info.map((promotion: any, index: number) =>
+                    <div key={index}>
+                      {/* <img src={promotion.imageUrl} style={{height: 400, width: '100%'}}/> */}
 
-                  <div style={{ background: `url('${promotion.imageUrl}') no-repeat center center`, height: 400, textAlign: 'center', display: 'table', width: '100%'}}>
-                    <div style={{ display: 'table-cell', verticalAlign: 'middle'}}>
-                      <Typography variant="h3" gutterBottom className={classes.title}>
-                        {promotion.title}
-                      </Typography>
-                      <Typography variant="subtitle2" gutterBottom>
-                        {promotion.description}
-                      </Typography>
+                      <div style={{ background: `url('${promotion.imageUrl}') no-repeat center center`, height: 400, textAlign: 'center', display: 'table', width: '100%' }}>
+                        <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+                          <Typography variant="h3" gutterBottom className={classes.title}>
+                            {promotion.title}
+                          </Typography>
+                          <Typography variant="subtitle2" gutterBottom>
+                            {promotion.description}
+                          </Typography>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              )}
-            </Slider>
-            </div>
-            {/* <Slider autoplay={3000} previousButton={<ChevronLeft fontSize='large' className={classes.nav} />} nextButton={<ChevronRight fontSize='large' className={classes.nav} />}>
+                  )}
+                </Slider>
+              </div>
+              {/* <Slider autoplay={3000} previousButton={<ChevronLeft fontSize='large' className={classes.nav} />} nextButton={<ChevronRight fontSize='large' className={classes.nav} />}>
                 {info.map((promotion, index) =>
                   <div key={index} style={{ background: `url('${promotion.imageUrl}') no-repeat center center` }}>
                     <div className={classes.promotionMetaContainer}>
@@ -226,15 +226,15 @@ class Home extends React.Component<MyProps, MyState> {
                   </div>
                 )}
               </Slider>  */}
-              {fetchHomeBannerError == null ? '': <ContentLoader
+              {fetchHomeBannerError == null ? '' : <ContentLoader
                 height={170}
                 width={400}
                 speed={2}
                 primaryColor="#f3f3f3"
                 secondaryColor="#ecebeb"
               >
-                  <rect x="0" y="10" width="400" height="160" rx="5" />
-                </ContentLoader>}
+                <rect x="0" y="10" width="400" height="160" rx="5" />
+              </ContentLoader>}
 
               <BlockComponent classes={classes} title={'Featured Products'} isFetchedProducts={isFetchedProducts} items={featuredProducts} tag={FeaturedProduct} error={fetchProductsError}></BlockComponent>
 

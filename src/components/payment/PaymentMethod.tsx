@@ -9,7 +9,7 @@ import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import { isMobile } from 'react-device-detect';
 
-type MyState = { 
+type MyState = {
   info: any
 };
 

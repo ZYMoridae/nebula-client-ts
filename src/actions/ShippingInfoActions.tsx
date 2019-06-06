@@ -40,8 +40,6 @@ export const createShippingInfo = (orderId: number, data: any, creditCardInfo: a
       data: data
     };
 
-    console.log(options);
-
     Zjax.request({
       url: `/api/orders/${orderId}/shipping-info`,
       option: Utils.addToken(options),

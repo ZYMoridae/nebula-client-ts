@@ -53,8 +53,6 @@ class ContentNotFound extends React.Component<MyProps, MyState> {
       defaultStyle.emptyCartCaptionContainer.paddingBottom = paddingBottom;
     }
 
-    console.log(defaultStyle.emptyCartCaptionContainer);
-
     return (
       <Paper style={defaultStyle.emptyCartCaptionContainer}>
         <WarningIcon fontSize="large" color="primary" className={classes.warningIcon} />

@@ -104,7 +104,6 @@ export const fetchProductInfo = (productId: number) => {
         dispatch(receieveProductInfo(response.data));
       },
       failureCallback: (error: any) => {
-        console.log(error);
         dispatch(fetchingProductInfoError(error));
       }
     });

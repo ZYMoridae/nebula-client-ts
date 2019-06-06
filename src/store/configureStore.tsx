@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import logger from 'redux-logger';
 
-export default function configureStore({}) {
+export default function configureStore({ }) {
 	return createStore(
 		rootReducer,
 		{},

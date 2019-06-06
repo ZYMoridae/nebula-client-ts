@@ -158,7 +158,6 @@ const renderProductMetas = (productMetas: any, theme: any, classes: any) => {
  * @param classes 
  */
 const renderCustomerReviews = (productComments: any, theme: any, classes: any) => {
-  console.log(productComments)
   let block: any = '';
   let isDataValid = true;
 
@@ -312,7 +311,7 @@ class ProductInfo extends React.Component<MyProps, MyState> {
               <Typography variant="h4" gutterBottom className={classes.productName}>
                 {_.capitalize(info.name)}
               </Typography>
-              
+
               {/* {info.vendor && <Typography variant="caption" gutterBottom>
                 by {_.capitalize(info.vendor.username)}
               </Typography>} */}

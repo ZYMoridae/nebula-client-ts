@@ -15,6 +15,7 @@ import ProductsContainer from '../containers/ProductsContainer';
 import ProductInfoContainer from '../containers/ProductInfoContainer';
 import ShoppingCartContainer from '../containers/ShoppingCartContainer';
 import PaymentContainer from '../containers/PaymentContainer';
+import PaymentSuccessContainer from '../containers/PaymentSuccessContainer';
 
 import Footer from './Footer';
 
@@ -113,6 +114,14 @@ const PaymentComponent = ({ match }: { match: any }) => {
   )
 }
 
+const PaymentSuccessComponent = ({ match }: { match: any }) => {
+  return (
+    <div>
+      <PaymentSuccessContainer orderId={match.params.orderId}></PaymentSuccessContainer>
+    </div>
+  )
+}
+
 class App extends React.Component {
   render() {
 
@@ -128,6 +137,7 @@ class App extends React.Component {
               <Route exact path="/products/:id" component={ProductInfo} />
               <PrivateRoute exact path="/cart" component={CartInfo} />
               <PrivateRoute exact path="/payment/:orderId" component={PaymentComponent} />
+              <PrivateRoute exact path="/payment/:orderId/success" component={PaymentSuccessComponent} />
 
               <Route path="/user/login" component={Login} />
               <Redirect to="/" />

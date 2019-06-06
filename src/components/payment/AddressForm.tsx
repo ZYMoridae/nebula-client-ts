@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
-type MyState = { 
+type MyState = {
   inputValues: any
 };
 
@@ -40,7 +40,6 @@ class PaymentAddressForm extends React.Component<MyProps, MyState> {
       this.setState({
         inputValues: _inputValues
       });
-      console.log(shippingInfoFormData);
     };
 
     return (
@@ -85,6 +84,7 @@ class PaymentAddressForm extends React.Component<MyProps, MyState> {
                 name="email"
                 className={classes.textField}
                 margin="normal"
+                type="email"
                 value={this.state.inputValues.email ? this.state.inputValues.email : ''}
                 // variant="outlined"
                 fullWidth={true}

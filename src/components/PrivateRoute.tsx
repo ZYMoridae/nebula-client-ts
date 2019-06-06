@@ -8,7 +8,7 @@ function checkToken() {
     }
 }
 
-const PrivateRoute = ({ exact, path, component: Component, ...rest } : { exact?: boolean, path: string, component?: any, rest?: any }) => {
+const PrivateRoute = ({ exact, path, component: Component, ...rest }: { exact?: boolean, path: string, component?: any, rest?: any }) => {
     checkToken();
     return (
         <Route {...rest} render={props => (

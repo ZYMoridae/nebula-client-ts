@@ -13,7 +13,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { withStyles } from '@material-ui/core/styles';
 
-const variantIcon:any = {
+const variantIcon: any = {
   'success': CheckCircleIcon,
   'warning': WarningIcon,
   'error': ErrorIcon,
@@ -47,8 +47,8 @@ const styles1 = (theme: any) => ({
 });
 
 function MySnackbarContent(props: any) {
-  const { classes, className, message, onClose, variant, ...other} : {
-    classes: any, className: any, message: string, onClose: any, variant: string, other: any 
+  const { classes, className, message, onClose, variant, ...other }: {
+    classes: any, className: any, message: string, onClose: any, variant: string, other: any
   } = props;
   const Icon = variantIcon[variant];
 

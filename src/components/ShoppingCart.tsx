@@ -375,11 +375,11 @@ class ShoppingCart extends React.Component<MyProps, MyState> {
                               </a>
                             </Typography>
                             <div>
-                            <Typography variant="caption" gutterBottom>
-                              {
-                                stockText(row.quantity, row.product.unitsInStock)
-                              }
-                            </Typography>
+                              <Typography variant="caption" gutterBottom>
+                                {
+                                  stockText(row.quantity, row.product.unitsInStock)
+                                }
+                              </Typography>
                             </div>
                             <div style={{ display: "inline-flex" }}>
                               <Typography className={classes.itemAction} onClick={() => { handleDeleteClick(row.id) }} variant="caption" gutterBottom>

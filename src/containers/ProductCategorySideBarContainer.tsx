@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { 
+import {
   fetchProductCategoryInfo
 } from '../actions';
 import ProductCategorySideBar from '../components/ProductCategorySideBar';

@@ -55,7 +55,7 @@ const styles = (theme: Theme) => createStyles({
   }
 });
 
-type MyState = { 
+type MyState = {
   expanded: boolean
 };
 
@@ -76,7 +76,7 @@ class ProductItem extends React.Component<MyProps, MyState> {
 
   render() {
     const { classes, product } = this.props;
-    
+
     return (
       <Card className={classes.card}>
         <CardHeader

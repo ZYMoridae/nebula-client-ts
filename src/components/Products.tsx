@@ -58,7 +58,7 @@ const styles = (theme: Theme) => createStyles({
 
 });
 
-type MyState = { 
+type MyState = {
   offset: number
 };
 
@@ -75,7 +75,7 @@ type MyProps = {
 };
 
 
-class Products  extends React.Component<MyProps, MyState> {
+class Products extends React.Component<MyProps, MyState> {
   constructor(props: any) {
     super(props);
     this.state = { offset: 0 };

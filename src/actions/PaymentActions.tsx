@@ -28,8 +28,10 @@ export const paymentError = (error: any) => {
     error: error
   }
 }
-
-
+/**
+ * 
+ * @param creditCardInfo 
+ */
 export const doPayment = (creditCardInfo: any) => {
   return function (dispatch: any) {
     dispatch(paymentPending());
@@ -43,11 +45,25 @@ export const doPayment = (creditCardInfo: any) => {
       url: `/api/payments/finalise`,
       option: Utils.addToken(options),
       successCallback: (response: any) => {
-        dispatch(paymentSucess(response.data));
+        dispatch(redirectToSuccessPaymentPage(response.data.order.id));
+        // dispatch(paymentSucess(response.data));
       },
       failureCallback: (error: any) => {
         dispatch(paymentError(error));
       }
     });
+  }
+}
+
+/**
+ * 
+ * @param orderId 
+ */
+export const redirectToSuccessPaymentPage = (orderId: number) => {
+  // location.href = `/payment/${orderId}/success`;
+  return {
+    type: ActionType.REDIRECT_TO_PAYMENT_SUCCESS,
+    redirectOrderId: orderId,
+    redirectToPaymentPage: true
   }
 }

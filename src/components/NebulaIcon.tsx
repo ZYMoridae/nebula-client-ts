@@ -10,7 +10,7 @@ const styles = (theme: Theme) => createStyles({
   }
 })
 
-type MyState = { 
+type MyState = {
 };
 
 
@@ -24,10 +24,10 @@ class NebulaIcon extends React.Component<MyProps, MyState> {
 
     const nebulaLogoPath = require("./nebula.svg") as string;
 
-    return(
+    return (
       <span>
         <a href="/">
-          <img src={nebulaLogoPath} alt="" className={classes.nebulaIcon}/>
+          <img src={nebulaLogoPath} alt="" className={classes.nebulaIcon} />
         </a>
       </span>
     )
