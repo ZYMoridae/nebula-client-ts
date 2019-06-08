@@ -10,7 +10,8 @@ import 'react-credit-cards/es/styles-compiled.css';
 import { isMobile } from 'react-device-detect';
 
 type MyState = {
-  info: any
+  info: any,
+  inputErrors: any
 };
 
 type MyProps = {
@@ -30,24 +31,29 @@ class PaymentMethod extends React.Component<MyProps, MyState> {
     });
   }
 
-
   render() {
     const { classes, info, creditCardInfo } = this.props;
 
     const handleChange = (event: any) => {
-      let _inputValues = creditCardInfo;
-      let value = event.target.value;
+      let _inputValues = creditCardInfo,
+          value = event.target.value,
+          inputErros = this.state.inputErrors;
 
-      if (event.target.name == 'cardnumber') {
-        value = value.substring(0, 16);
-      }
-
-      if (event.target.name == 'expiry') {
-        value = value.substring(0, 4);
-      }
-
-      if (event.target.name == 'cvc') {
-        value = value.substring(0, 3);
+      switch(event.target,name) {
+        case 'cardnumber': {
+          value = value.substring(0, 16);
+          break;
+        }
+        case 'expiry': {
+          value = value.substring(0, 4);
+          break;
+        }
+        case 'cvc': {
+          value = value.substring(0, 3);
+          break;
+        }
+        default:
+          break;
       }
 
       _inputValues[event.target.name] = value;

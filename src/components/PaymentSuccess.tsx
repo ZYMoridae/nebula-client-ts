@@ -11,7 +11,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Fade from '@material-ui/core/Fade';
 
 const styles = (theme: Theme) => createStyles({
   successText: {
@@ -65,56 +64,56 @@ class PaymentSuccess extends React.Component<MyProps, MyState> {
     };
 
     return (
-      <Fade in={true} timeout={1000}>
-        <Grid container spacing={0} className={classes.root}>
-          <Grid item xs={1} md={2} xl={2}>
 
-          </Grid>
-          <Grid item xs={10} md={8} xl={8}>
-            <Paper style={defaultStyle.emptyCartCaptionContainer}>
+      <Grid container spacing={0} className={classes.root}>
+        <Grid item xs={1} md={2} xl={2}>
+
+        </Grid>
+        <Grid item xs={10} md={8} xl={8}>
+          <Paper style={defaultStyle.emptyCartCaptionContainer}>
 
 
-              <CheckCircleIcon fontSize="large" color="primary" className={classes.checkCircleIcon} />
+            <CheckCircleIcon fontSize="large" color="primary" className={classes.checkCircleIcon} />
 
-              <Typography variant="caption" gutterBottom className={classes.successText}>
-                Payment Success!
+            <Typography variant="caption" gutterBottom className={classes.successText}>
+              Payment Success!
             </Typography>
 
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      Product
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>
+                    Product
                   </TableCell>
-                    <TableCell align="right">Price</TableCell>
-                    <TableCell align="right">Quantity</TableCell>
+                  <TableCell align="right">Price</TableCell>
+                  <TableCell align="right">Quantity</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {order && order.orderItems.map((row: any, index: number) => (
+                  <TableRow key={row.id}>
+                    <TableCell component="th" scope="row">
+                      {row.product.name}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.product.price}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.quantity}
+                    </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {order && order.orderItems.map((row: any, index: number) => (
-                    <TableRow key={row.id}>
-                      <TableCell component="th" scope="row">
-                        {row.product.name}
-                      </TableCell>
-                      <TableCell align="right">
-                        {row.product.price}
-                      </TableCell>
-                      <TableCell align="right">
-                        {row.quantity}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                ))}
 
-                </TableBody>
-              </Table>
-            </Paper>
+              </TableBody>
+            </Table>
+          </Paper>
 
-          </Grid>
-          <Grid item xs={1} md={2} xl={2}>
-
-          </Grid>
         </Grid>
-      </Fade>
+        <Grid item xs={1} md={2} xl={2}>
+
+        </Grid>
+      </Grid>
+
 
 
     )

@@ -32,7 +32,7 @@ export const paymentError = (error: any) => {
  * 
  * @param creditCardInfo 
  */
-export const doPayment = (creditCardInfo: any) => {
+export const doPayment = (id: number, creditCardInfo: any) => {
   return function (dispatch: any) {
     dispatch(paymentPending());
 
@@ -42,7 +42,7 @@ export const doPayment = (creditCardInfo: any) => {
     };
 
     Zjax.request({
-      url: `/api/payments/finalise`,
+      url: `/api/payments/${id}/finalise`,
       option: Utils.addToken(options),
       successCallback: (response: any) => {
         dispatch(redirectToSuccessPaymentPage(response.data.order.id));

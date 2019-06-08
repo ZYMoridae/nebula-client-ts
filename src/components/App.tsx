@@ -16,13 +16,14 @@ import ProductInfoContainer from '../containers/ProductInfoContainer';
 import ShoppingCartContainer from '../containers/ShoppingCartContainer';
 import PaymentContainer from '../containers/PaymentContainer';
 import PaymentSuccessContainer from '../containers/PaymentSuccessContainer';
+import PreferenceIndex from '../components/ms-preference/PreferenceIndex';
 
 import Footer from './Footer';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Routes from '../utils/Routes';
-
+import Fade from '@material-ui/core/Fade';
 
 const nebulaTheme = createMuiTheme({
   // typography: {
@@ -122,6 +123,12 @@ const PaymentSuccessComponent = ({ match }: { match: any }) => {
   )
 }
 
+const PreferenceComponent = () => {
+  return (
+    <PreferenceIndex />
+  )
+}
+
 class App extends React.Component {
   render() {
 
@@ -131,22 +138,27 @@ class App extends React.Component {
           <div>
             {location.pathname !== Routes.USER.LOGIN && <HeaderBarContainer></HeaderBarContainer>}
 
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/products" component={Products} /> */}
-              <Route exact path="/products/:id" component={ProductInfo} />
-              <PrivateRoute exact path="/cart" component={CartInfo} />
-              <PrivateRoute exact path="/payment/:orderId" component={PaymentComponent} />
-              <PrivateRoute exact path="/payment/:orderId/success" component={PaymentSuccessComponent} />
+            <Fade in={true} timeout={1200}>
+              <div>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/products" component={Products} /> */}
+                <Route exact path="/products/:id" component={ProductInfo} />
+                  <PrivateRoute exact path="/cart" component={CartInfo} />
+                  <PrivateRoute exact path="/payment/:orderId" component={PaymentComponent} />
+                  <PrivateRoute exact path="/payment/:orderId/success" component={PaymentSuccessComponent} />
+                  <PrivateRoute exact path="/preference" component={PreferenceComponent} />
 
-              <Route path="/user/login" component={Login} />
-              <Redirect to="/" />
-            </Switch>
+                  <Route path="/user/login" component={Login} />
+                  <Redirect to="/" />
+                </Switch>
+              </div>
+            </Fade>
 
             {location.pathname !== Routes.USER.LOGIN && <Footer></Footer>}
           </div>
         </MuiThemeProvider>
-      </Router>
+      </Router >
     )
   }
 }

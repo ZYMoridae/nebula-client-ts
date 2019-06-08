@@ -30,6 +30,13 @@ export const creatingShippingInfoError = (error: any) => {
   }
 }
 
+/**
+ * TODO: Logic need to be amended
+ * 
+ * @param orderId 
+ * @param data 
+ * @param creditCardInfo 
+ */
 export const createShippingInfo = (orderId: number, data: any, creditCardInfo: any) => {
   
   return function (dispatch: any) {
@@ -45,7 +52,7 @@ export const createShippingInfo = (orderId: number, data: any, creditCardInfo: a
       option: Utils.addToken(options),
       successCallback: (response: any) => {
         dispatch(receieveShippingInfo(response.data));
-        dispatch(doPayment(creditCardInfo));
+        dispatch(doPayment(orderId, creditCardInfo));
         // dispatch(redirectToPaymentPage(response.data.id));
       },
       failureCallback: (error: any) => {

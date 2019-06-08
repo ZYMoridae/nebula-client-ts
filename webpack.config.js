@@ -4,9 +4,9 @@ const path = require('path');
 module.exports = {
   entry: "./index.tsx",
   output: {
-      filename: "bundle.js",
-      path: path.resolve('dist'),
-      publicPath: '/'
+    filename: "bundle.js",
+    path: path.resolve('dist'),
+    publicPath: '/'
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -21,80 +21,80 @@ module.exports = {
     https: false,
     historyApiFallback: true,
     proxy: {
-       // '/api': 'http://ec2-13-54-77-173.ap-southeast-2.compute.amazonaws.com:8080',
-       '/api': 'http://localhost:8080'
+      // '/api': 'http://ec2-13-54-77-173.ap-southeast-2.compute.amazonaws.com:8080',
+      '/api': 'http://localhost:8080'
     }
   },
   resolve: {
-      // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: [".ts", ".tsx", ".js", ".json", ".jsx", ".css"]
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: [".ts", ".tsx", ".js", ".json", ".jsx", ".css"]
   },
 
   module: {
-      rules: [
-          // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-          { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+    rules: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
-          // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-          { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
 
-          {
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            query: {
-               presets: ['es2017', 'react'],
-               plugins: [
-                 "transform-object-rest-spread",
-               ]
-            }
-         },
-         {
-           test: /\.css$/,
-           use: [
-               {loader: "style-loader"},
-               {loader: "css-loader"}
-           ]
-         },          
-         {
-           test: /\.(jpg|png)$/,
-           use: {
-             loader: "url-loader",
-             options: {
-               limit: 25000,
-             },
-           }
-         },
-         {
-           test: /\.(png|jpg|gif)$/,
-           use: [
-             {
-               loader: 'file-loader',
-               options: {},
-             },
-           ],
-         },
-         {
-           test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-           use: [{
-               loader: 'file-loader',
-               options: {
-                   name: '[name].[ext]',
-                   outputPath: 'fonts/'
-               }
-           }]
-         },
-         {
-           test: /\.(jpg|png)$/,
-           use: {
-              loader: "file-loader",
-              options: {
-              name: "[path][name].[hash].[ext]",
-              },
-           }
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2017', 'react'],
+          plugins: [
+            "transform-object-rest-spread"
+          ]
         }
-      ]
-  },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }
+        ]
+      },
+      {
+        test: /\.(jpg|png)$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 25000,
+          },
+        }
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {},
+          },
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/'
+          }
+        }]
+      },
+      {
+        test: /\.(jpg|png|svg)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[path][name].[hash].[ext]",
+          },
+        }
+      }
+    ]
+  }
   // plugins: [
   //   new HtmlWebpackPlugin()
   // ]

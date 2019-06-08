@@ -10,28 +10,32 @@ let initState = {
 const loginReducer = (state = initState, action: any) => {
   switch (action.type) {
     case ActionType.AUTH_FAIL:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedAuth: action.isFetchedAuth,
         isFetchingAuth: action.isFetchingAuth,
         isShowLoginError: action.isShowLoginError
-      })
+      }
     case ActionType.AUTH_PENDING:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedAuth: action.isFetchedAuth,
         isFetchingAuth: action.isFetchingAuth,
         isShowLoginError: action.isShowLoginError
-      })
+      }
     case ActionType.AUTH_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedAuth: action.isFetchedAuth,
         isFetchingAuth: action.isFetchingAuth,
         isShowLoginError: action.isShowLoginError,
         info: action.info
-      })
+      }
     case ActionType.HIDE_ERROR:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isShowLoginError: action.isShowLoginError
-      })
+      }
     default:
       return state
   }

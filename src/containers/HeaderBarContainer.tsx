@@ -17,6 +17,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import NebulaIcon from '../components/NebulaIcon';
 import Routes from '../utils/Routes';
 
@@ -175,6 +177,18 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
     location.href = Routes.USER.LOGIN;
   }
 
+  handleMenuItemClick = (targetName: string) => {
+    switch (targetName) {
+      case 'myAccount': {
+        location.href = '/preference';
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
+
   render() {
     const { anchorEl, mobileMoreAnchorEl, isUserLogin } = this.state;
     const { classes } = this.props;
@@ -189,9 +203,19 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        <MenuItem onClick={this.handleLogout}>Log Out</MenuItem>
+        {/* <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem> */}
+        <MenuItem onClick={() => { this.handleMenuItemClick('myAccount') }}>
+          <IconButton color="inherit">
+            <AccountCircle color="primary"/>
+          </IconButton>
+          <span style={{ paddingRight: '12px' }}>My account</span>
+        </MenuItem>
+        <MenuItem onClick={this.handleLogout}>
+          <IconButton color="inherit">
+            <ExitToAppIcon color="primary"/>
+          </IconButton>
+          <span style={{ paddingRight: '12px' }}>Log out</span>
+          </MenuItem>
       </Menu>
     );
 

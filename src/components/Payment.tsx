@@ -15,7 +15,7 @@ import { isMobile } from 'react-device-detect';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Theme, createStyles } from "@material-ui/core";
 import { Redirect } from 'react-router-dom';
-import Fade from '@material-ui/core/Fade';
+
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -318,7 +318,7 @@ class Payment extends React.Component<MyProps, MyState> {
 
     return (
       <div>
-        {redirectToPaymentPage ? <Redirect to={`/payment/${orderId}/success`} /> : <Fade in={!redirectToPaymentPage} timeout={1000}><div className={classes.root}>
+        {redirectToPaymentPage ? <Redirect to={`/payment/${orderId}/success`} /> : <div className={classes.root}>
           <Stepper alternativeLabel nonLinear activeStep={activeStep}>
             {steps.map((label, index) => {
               const props: any = {};
@@ -403,7 +403,7 @@ class Payment extends React.Component<MyProps, MyState> {
             </Grid>
           </Grid>
 
-        </div></Fade>}
+        </div>}
 
       </div>
 

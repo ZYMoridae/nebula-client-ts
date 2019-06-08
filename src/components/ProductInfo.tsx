@@ -27,7 +27,7 @@ import Paper from '@material-ui/core/Paper';
 import Snackbar from '@material-ui/core/Snackbar';
 import MySnackbarContent from './MySnackbarContent';
 
-import Fade from '@material-ui/core/Fade';
+
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -96,7 +96,7 @@ const styles = (theme: Theme) => createStyles({
     marginBottom: theme.spacing(2)
   },
   productName: {
-    fontFamily: "'Oswald', sans-serif"
+    fontFamily: "'Ubuntu', sans-serif"
   },
   productMetasContainer: {
     marginTop: theme.spacing(4),
@@ -404,20 +404,20 @@ class ProductInfo extends React.Component<MyProps, MyState> {
 
         {!info && <CircularProgress />}
 
-        <Fade in={true} timeout={1000}>
-          <Grid container >
-            <Grid item xs={1} sm={2}>
-              {/* <ProductCategorySideBarContainer></ProductCategorySideBarContainer> */}
-            </Grid>
 
-            <Grid item xs={10} sm={8} className={classes.container}>
-              {info && productInfoBlock}
-            </Grid>
-            <Grid item xs={1} sm={2}>
-
-            </Grid>
+        <Grid container >
+          <Grid item xs={1} sm={2}>
+            {/* <ProductCategorySideBarContainer></ProductCategorySideBarContainer> */}
           </Grid>
-        </Fade>
+
+          <Grid item xs={10} sm={8} className={classes.container}>
+            {info && productInfoBlock}
+          </Grid>
+          <Grid item xs={1} sm={2}>
+
+          </Grid>
+        </Grid>
+
 
 
 

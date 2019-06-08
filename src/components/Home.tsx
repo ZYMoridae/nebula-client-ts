@@ -8,7 +8,6 @@ import 'react-animated-slider/build/horizontal.css';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import Grid from '@material-ui/core/Grid';
-import Fade from '@material-ui/core/Fade';
 
 import FeaturedProduct from './home/FeaturedProduct';
 import TodayDealsProduct from './home/TodayDealsProduct';
@@ -186,7 +185,7 @@ class Home extends React.Component<MyProps, MyState> {
 
     return (
       <div className={classes.root}>
-        <Fade in={true} timeout={1000}>
+ 
           <Grid container spacing={0}>
             <Grid item xs={1} md={2} xl={2}>
 
@@ -248,7 +247,7 @@ class Home extends React.Component<MyProps, MyState> {
 
             </Grid>
           </Grid>
-        </Fade>
+ 
 
 
 

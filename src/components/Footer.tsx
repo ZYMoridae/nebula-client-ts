@@ -4,12 +4,14 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { Theme, createStyles } from "@material-ui/core";
 
+import CatIcon from '../components/icons/Cat';
+
 const styles = (theme: Theme) => createStyles({
 	container: {
-		backgroundColor: '#401500',
-		paddingTop: theme.spacing(2),
-		paddingBottom: theme.spacing(2),
-		marginTop: theme.spacing(8),
+		backgroundColor: '#232F3E',
+		paddingTop: theme.spacing(4),
+		paddingBottom: theme.spacing(4),
+		// marginTop: theme.spacing(8),
 		textAlign: 'center'
 	},
 	footerText: {
@@ -36,6 +38,20 @@ const styles = (theme: Theme) => createStyles({
 			transition: 'all 0.15s',
 			textDecoration: 'underline'
 		}
+	},
+	rootContianer: {
+		paddingTop: theme.spacing(4),
+		paddingBottom: theme.spacing(4)
+	},
+	backToTop: {
+		backgroundColor: '#37475A',
+		paddingTop: theme.spacing(1.5),
+		paddingBottom: theme.spacing(1.5),
+		textAlign: 'center',
+		transition: 'all .2s',
+		'&:hover': {
+			backgroundColor: '#516680'
+		}
 	}
 });
 
@@ -47,31 +63,54 @@ type MyProps = {
 	classes: any
 };
 
+const scrollToTop = () => {
+  const c = document.documentElement.scrollTop || document.body.scrollTop;
+  if (c > 0) {
+    window.requestAnimationFrame(scrollToTop);
+    window.scrollTo(0, c - c / 8);
+  }
+};
 
 class Footer extends React.Component<MyProps, MyState> {
+
+	backToTop() {
+		scrollToTop();
+	}
 
 	render() {
 		const { classes } = this.props;
 
 		return (
-			<div className={classes.container}>
-				<div className={classes.footerTextContainer}>
+			<div className={classes.rootContianer}>
+				<div className={classes.backToTop} onClick={this.backToTop}>
 					<Typography variant="caption" gutterBottom align="center" className={classes.footerText}>
-						<a href='/' className={classes.linkItem}>
-							Condition of Use
-						</a>
-						<a href='/' className={classes.linkItem}>
-							Privacy Notice
-						</a>
-						<a href='/' className={classes.linkItem}>
-							Cookies
-						</a>
+						Back to top
 					</Typography>
 				</div>
-				<Typography variant="caption" gutterBottom align="center" className={classes.footerText}>
-					© 2019, Max Studio
-				</Typography>
+				<div className={classes.container}>
+					<div className={classes.footerTextContainer}>
+						<Typography variant="caption" gutterBottom align="center" className={classes.footerText}>
+							<a href='/' className={classes.linkItem}>
+								Condition of Use
+							</a>
+							<a href='/' className={classes.linkItem}>
+								Privacy Notice
+							</a>
+							<a href='/' className={classes.linkItem}>
+								Cookies
+							</a>
+						</Typography>
+					</div>
+					<div>
+						<CatIcon color="white" style={{marginTop: '16px', marginBottom: '16px'}}></CatIcon>
+					</div>
+					<Typography variant="caption" gutterBottom align="center" className={classes.footerText}>
+						© 2019, Max Studio
+					</Typography>
+				</div>
 			</div>
+
+
 		)
 	}
 }

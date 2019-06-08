@@ -17,8 +17,6 @@ import {
 import Snackbar from '@material-ui/core/Snackbar';
 import MySnackbarContent from './MySnackbarContent';
 
-import Fade from '@material-ui/core/Fade';
-
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import HeaderBarContainer from '../containers/HeaderBarContainer';
@@ -159,9 +157,9 @@ class Login extends React.Component<MyProps, MyState> {
     return (
 
       <div className={classes.containerBg}>
-        <Fade in={true} timeout={400}>
-          <img className={classes.backgroundImage} src="https://thewallpaper.co//wp-content/uploads/2016/02/cat-piano-hd-cat-wallpapers-kittens-widescreen-pussycats-high-resolution-pet-photos-baby-cat-desktop-images-cat-wallpapers-for-mac-windows-wallpapers-of-cats-1805x1015.jpg" />
-        </Fade>
+
+        <img className={classes.backgroundImage} src="https://thewallpaper.co//wp-content/uploads/2016/02/cat-piano-hd-cat-wallpapers-kittens-widescreen-pussycats-high-resolution-pet-photos-baby-cat-desktop-images-cat-wallpapers-for-mac-windows-wallpapers-of-cats-1805x1015.jpg" />
+
         <HeaderBarContainer />
         <Snackbar
           anchorOrigin={{
@@ -179,59 +177,59 @@ class Login extends React.Component<MyProps, MyState> {
           />
         </Snackbar>
 
-        <Fade in={true} timeout={1200}>
-          <form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
 
-            <Grid container alignItems="center" justify="center" direction="row">
-              <Paper className={classes.loginContainer}>
-                <Grid item xs={12}>
-                  <Typography variant="h5" gutterBottom className={classes.signInCaption}>
-                    <AccountCircleIcon fontSize="large" className={classes.accountIcon} />
-                    Sign In
+        <form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
+
+          <Grid container alignItems="center" justify="center" direction="row">
+            <Paper className={classes.loginContainer}>
+              <Grid item xs={12}>
+                <Typography variant="h5" gutterBottom className={classes.signInCaption}>
+                  <AccountCircleIcon fontSize="large" className={classes.accountIcon} />
+                  Sign In
                   </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    id="outlined-name"
-                    label="Name"
-                    name="username"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    fullWidth={true}
-                    onChange={(e) => { this.onChange(e) }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    id="outlined-password"
-                    label="Password"
-                    name="password"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    type="password"
-                    fullWidth={true}
-                    onChange={(e) => { this.onChange(e) }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button variant="contained" color="primary" size="large" fullWidth={true} className={classes.loginButton} type="submit">
-                    Login
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined-name"
+                  label="Name"
+                  name="username"
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                  fullWidth={true}
+                  onChange={(e) => { this.onChange(e) }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined-password"
+                  label="Password"
+                  name="password"
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                  type="password"
+                  fullWidth={true}
+                  onChange={(e) => { this.onChange(e) }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" color="primary" size="large" fullWidth={true} className={classes.loginButton} type="submit">
+                  Login
                   </Button>
-                </Grid>
-                <Grid>
-                  <div className={classes.newUserButton}>
-                    <Typography variant="caption" gutterBottom>
-                      No account? <a href='/'>Create one!</a>
-                    </Typography>
-                  </div>
-                </Grid>
-              </Paper>
-            </Grid>
+              </Grid>
+              <Grid>
+                <div className={classes.newUserButton}>
+                  <Typography variant="caption" gutterBottom>
+                    No account? <a href='/'>Create one!</a>
+                  </Typography>
+                </div>
+              </Grid>
+            </Paper>
+          </Grid>
 
-          </form>
-        </Fade>
+        </form>
+
 
         <div className={classes.footerContainer}>
           <Footer />

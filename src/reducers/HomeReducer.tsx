@@ -14,40 +14,46 @@ let initState: any = {
 const homeReducer = (state = initState, action: any) => {
   switch (action.type) {
     case ActionType.FETCHING_HOMEBANNER_REJECTED:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedHomeBanner: action.isFetchedHomeBanner,
         isFetchingHomeBanner: action.isFetchingHomeBanner,
         fetchHomeBannerError: action.error
-      })
+      }
     case ActionType.FETCHING_HOMEBANNER_PENDING:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedHomeBanner: action.isFetchedHomeBanner,
         isFetchingHomeBanner: action.isFetchingHomeBanner
-      })
+      }
     case ActionType.RECEIVE_HOMEBANNER:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedHomeBanner: action.isFetchedHomeBanner,
         isFetchingHomeBanner: action.isFetchingHomeBanner,
         info: action.info
-      })
+      }
     case ActionType.FETCHING_PRODUCTS_REJECTED:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedProducts: action.isFetchedProducts,
         isFetchingProducts: action.isFetchingProducts,
         fetchProductsError: action.error
-      })
+      }
     case ActionType.FETCHING_PRODUCTS_PENDING:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedProducts: action.isFetchedProducts,
         isFetchingProducts: action.isFetchingProducts
-      })
+      }
     case ActionType.RECEIVE_PRODUCTS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetchedProducts: action.isFetchedProducts,
         isFetchingProducts: action.isFetchingProducts,
         featuredProducts: action.info,
         totalPages: action.totalPages
-      })
+      }
     default:
       return state
   }
