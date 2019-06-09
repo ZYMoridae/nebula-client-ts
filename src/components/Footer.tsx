@@ -40,8 +40,8 @@ const styles = (theme: Theme) => createStyles({
 		}
 	},
 	rootContianer: {
-		paddingTop: theme.spacing(4),
-		paddingBottom: theme.spacing(4)
+		marginTop: theme.spacing(10),
+		// paddingBottom: theme.spacing(4)
 	},
 	backToTop: {
 		backgroundColor: '#37475A',

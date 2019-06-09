@@ -75,7 +75,7 @@ const renderPreferenceItem = (defaultStyle: any, classes: any, preferenceData: a
 
 
   return (
-    <Button style={defaultStyle.emptyCartCaptionContainer}>
+    <Button style={defaultStyle.emptyCartCaptionContainer} onClick={preferenceData.onClickHandler}>
       {icon}
 
       
@@ -100,6 +100,9 @@ const PreferenceList = [
     "icon": {
       "type": "tag",
       "component": LocalShippingRoundedIcon
+    },
+    "onClickHandler": () => {
+
     }
   },
   {
@@ -107,6 +110,9 @@ const PreferenceList = [
     "icon": {
       "type": "tag",
       "component": SecurityRoundedIcon
+    },
+    "onClickHandler": () => {
+      
     }
   },
   {
@@ -114,6 +120,9 @@ const PreferenceList = [
     "icon": {
       "type": "tag",
       "component": ReceiptIcon
+    },
+    "onClickHandler": () => {
+      location.href = '/preference/orders';
     }
   },
   {
@@ -121,6 +130,9 @@ const PreferenceList = [
     "icon": {
       "type": "tag",
       "component": PaymentIcon
+    },
+    "onClickHandler": () => {
+      
     }
   },
   {
@@ -128,6 +140,9 @@ const PreferenceList = [
     "icon": {
       "type": "image",
       "component": CatIcon
+    },
+    "onClickHandler": () => {
+      
     }
   },
   {
@@ -135,6 +150,9 @@ const PreferenceList = [
     "icon": {
       "type": "tag",
       "component": CardGiftcardRoundedIcon
+    },
+    "onClickHandler": () => {
+      
     }
   }
 ];

@@ -9,7 +9,6 @@ import HeaderBarContainer from '../containers/HeaderBarContainer';
 import HomeContainer from '../containers/HomeContainer';
 import LoginContainer from '../containers/LoginContainer';
 
-// import UserContainer from '../containers/NoteContainer';
 import PrivateRoute from './PrivateRoute';
 import ProductsContainer from '../containers/ProductsContainer';
 import ProductInfoContainer from '../containers/ProductInfoContainer';
@@ -17,6 +16,7 @@ import ShoppingCartContainer from '../containers/ShoppingCartContainer';
 import PaymentContainer from '../containers/PaymentContainer';
 import PaymentSuccessContainer from '../containers/PaymentSuccessContainer';
 import PreferenceIndex from '../components/ms-preference/PreferenceIndex';
+import OrdersContainer from '../containers/ms-preference/OrdersContainer';
 
 import Footer from './Footer';
 
@@ -24,6 +24,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Routes from '../utils/Routes';
 import Fade from '@material-ui/core/Fade';
+
+import Utils from  '../utils/Utils';
 
 const nebulaTheme = createMuiTheme({
   // typography: {
@@ -129,6 +131,14 @@ const PreferenceComponent = () => {
   )
 }
 
+const PreferenceOrderContainer = () => {
+  let paginationParams: any = Utils.extractPaginationParams(1, 10, '');
+  return (
+   <OrdersContainer page={paginationParams.page} perPage={paginationParams.perPage} orderBy={paginationParams.orderBy} ></OrdersContainer>
+  )
+}
+
+
 class App extends React.Component {
   render() {
 
@@ -148,6 +158,7 @@ class App extends React.Component {
                   <PrivateRoute exact path="/payment/:orderId" component={PaymentComponent} />
                   <PrivateRoute exact path="/payment/:orderId/success" component={PaymentSuccessComponent} />
                   <PrivateRoute exact path="/preference" component={PreferenceComponent} />
+                  <PrivateRoute exact path="/preference/orders" component={PreferenceOrderContainer} />
 
                   <Route path="/user/login" component={Login} />
                   <Redirect to="/" />

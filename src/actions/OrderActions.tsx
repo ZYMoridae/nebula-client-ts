@@ -3,6 +3,9 @@ import Utils from '../utils/Utils';
 import ActionType from './ActionType';
 import { redirectToSuccessPaymentPage } from './PaymentActions';
 
+import PaginationInterface from '../interfaces/PaginationInterface';
+import OrderInterface from '../interfaces/OrderInterface';
+
 // -------- Shopping Cart Actions ----------
 export const receieveOrder = (results: any) => {
   return {
@@ -160,4 +163,58 @@ export const fetchOrder = (orderId: number) => {
       }
     });
   }
+}
+
+// ------ Get orders by user id ------
+
+export const fetchedUserOrders = (results: any) => {
+  return {
+    type: ActionType.ORDER.RECEIEVE_USER_ORDERS,
+    isFetchingUserOrders: false,
+    isFetchedUserOrders: true,
+    info: results
+  }
+}
+
+export const fetchingUserOrders = () => {
+  return {
+    type: ActionType.ORDER.FETCHING_USER_ORDERS_PENDING,
+    isFetchingUserOrders: true,
+    isFetchedUserOrders: false
+  }
+}
+
+export const fetchingUserOrdersError = (error: any) => {
+  return {
+    type: ActionType.ORDER.FETCHING_USER_ORDERS_REJECTED,
+    isFetchingUserOrders: false,
+    isFetchedUserOrders: true,
+    error: error
+  }
+}
+
+export const fetchUserOrders = (page: number, perPage: number, orderBy: string) => {
+  return function (dispatch: any) {
+    dispatch(fetchingUserOrders());
+
+    let options = {
+      method: 'get'
+    };
+
+    Zjax.request({
+      url: `/api/orders?page=${page - 1}&size=${perPage}&sort=${orderBy}&keyword`,
+      option: Utils.addToken(options),
+      successCallback: (response: any) => {
+        const { data }: { data: OrdersPagination } = response;
+        dispatch(fetchedUserOrders(data));
+      },
+      failureCallback: (error: any) => {
+        dispatch(fetchingUserOrdersError(error));
+      }
+    });
+  }
+}
+
+interface OrdersPagination extends PaginationInterface {
+  content: Array<OrderInterface>
 }

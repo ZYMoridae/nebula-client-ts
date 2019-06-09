@@ -7,8 +7,9 @@ import ShoppingCartReducer from './ShoppingCartReducer';
 import PaymentReducer from './PaymentReducer';
 import PaymentSuccessReducer from './PaymentSuccessReducer';
 import HomeReducer from './HomeReducer';
+import OrdersReducer from './ms-preference/OrdersReducer'
 
-const counterApp = combineReducers({
+const appReducer = combineReducers({
   LoginReducer,
   ProductsReducer,
   ProductInfoReducer,
@@ -16,7 +17,8 @@ const counterApp = combineReducers({
   ShoppingCartReducer,
   PaymentReducer,
   PaymentSuccessReducer,
-  HomeReducer
+  HomeReducer,
+  OrdersReducer
 })
 
-export default counterApp;
+export default appReducer;

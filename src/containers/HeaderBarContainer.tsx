@@ -26,6 +26,9 @@ import ProductSearchComponent from '../components/ProductSearchComponent';
 
 import { Theme, createStyles } from "@material-ui/core";
 
+
+import CatIcon from '../components/icons/Cat';
+
 const styles = (theme: Theme) => createStyles({
   root: {
     width: '100%',
@@ -272,7 +275,8 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
             </IconButton> : ''}
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               <Toolbar>
-                <NebulaIcon />
+                {/* <NebulaIcon /> */}
+                <CatIcon color='white' />
                 <Typography variant="h6" color="inherit" noWrap>
                   <a href="/" className={classes.homeButton}>
                     Max Studio
