@@ -1,194 +1,188 @@
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import { makeStyles, useTheme, Theme, createStyles, createMuiTheme } from '@material-ui/core/styles';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableFooter from '@material-ui/core/TableFooter';
-// import TablePagination from '@material-ui/core/TablePagination';
-// import TableRow from '@material-ui/core/TableRow';
-// import Paper from '@material-ui/core/Paper';
-// import IconButton from '@material-ui/core/IconButton';
-// import FirstPageIcon from '@material-ui/icons/FirstPage';
-// import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-// import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-// import LastPageIcon from '@material-ui/icons/LastPage';
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { Theme, createStyles } from "@material-ui/core";
+// import PaginationList from "../utils/PaiginationList";
 
-// const uiTheme = createMuiTheme({});
+import OrderInterface from "../../interfaces/OrderInterface";
+import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
+import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
+import Typography from '@material-ui/core/Typography';
 
+import './PaginationList.css';
 
-// const useStyles1 = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-//       flexShrink: 0,
-//       color: theme.palette.text.secondary,
-//       marginLeft: theme.spacing(2.5),
-//     },
-//   }),
-// );
+import _ from 'lodash';
 
-// interface TablePaginationActionsProps {
-//   count: number;
-//   page: number;
-//   rowsPerPage: number;
-//   onChangePage: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, newPage: number) => void;
-// }
+const styles = (theme: Theme) => createStyles({
+  paginationWrapper: {
+    width: '100%',
+    textAlign: 'center'
+  }
+});
 
-// function TablePaginationActions(props: TablePaginationActionsProps) {
-//   const classes = useStyles1(uiTheme);
-//   const theme = useTheme();
-//   const { count, page, rowsPerPage, onChangePage } = props;
-
-//   function handleFirstPageButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-//     onChangePage(event, 0);
-//   }
-
-//   function handleBackButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-//     onChangePage(event, page - 1);
-//   }
-
-//   function handleNextButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-//     onChangePage(event, page + 1);
-//   }
-
-//   function handleLastPageButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-//     onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-//   }
-
-//   return (
-//     <div className={classes.root}>
-//       <IconButton
-//         onClick={handleFirstPageButtonClick}
-//         disabled={page === 0}
-//         aria-label="First Page"
-//       >
-//         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-//       </IconButton>
-//       <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="Previous Page">
-//         {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-//       </IconButton>
-//       <IconButton
-//         onClick={handleNextButtonClick}
-//         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-//         aria-label="Next Page"
-//       >
-//         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-//       </IconButton>
-//       <IconButton
-//         onClick={handleLastPageButtonClick}
-//         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-//         aria-label="Last Page"
-//       >
-//         {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-//       </IconButton>
-//     </div>
-//   );
-// }
-
-// TablePaginationActions.propTypes = {
-//   count: PropTypes.number.isRequired,
-//   onChangePage: PropTypes.func.isRequired,
-//   page: PropTypes.number.isRequired,
-//   rowsPerPage: PropTypes.number.isRequired,
-// };
-
-// function createData(name: string, calories: number, fat: number) {
-//   return { name, calories, fat };
-// }
-
-// const rows = [
-//   createData('Cupcake', 305, 3.7),
-//   createData('Donut', 452, 25.0),
-//   createData('Eclair', 262, 16.0),
-//   createData('Frozen yoghurt', 159, 6.0),
-//   createData('Gingerbread', 356, 16.0),
-//   createData('Honeycomb', 408, 3.2),
-//   createData('Ice cream sandwich', 237, 9.0),
-//   createData('Jelly Bean', 375, 0.0),
-//   createData('KitKat', 518, 26.0),
-//   createData('Lollipop', 392, 0.2),
-//   createData('Marshmallow', 318, 0),
-//   createData('Nougat', 360, 19.0),
-//   createData('Oreo', 437, 18.0),
-// ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
+type MyState = {
+  perPage: number,
+  orderBy: string,
+  page: number
+};
 
 
-// const styles = (theme: Theme) => createStyles({
-//   root: {
-//     width: '100%',
-//     marginTop: theme.spacing(3),
-//   },
-//   table: {
-//     minWidth: 500,
-//   },
-//   tableWrapper: {
-//     overflowX: 'auto',
-//   }
-// });
+type MyProps = {
+  classes: any,
+  theme: any,
+  onPageChanged: any,
+  count: number,
+  initialPage?: number
+};
+
+/**
+ * 
+ * @param pageNumbersArray 
+ * @param onPageChanged 
+ * @param page 
+ * @param count 
+ */
+const renderPageNumbers = (pageNumbersArray: Array<any>, onPageChanged: any, page: number, count: number) => {
+
+  let pagginationArray: Array<any> = [];
+
+  const arrayToNode = (pageNumbersArray: Array<any>) => {
+    return (
+      <div>
+        {pageNumbersArray.map((item, index) =>
+          _.isNumber(item) ? <li className={`pagination-block page-number ${page === item ? 'active' : ''}`} key={index}><a className='num' onClick={() => { onPageChanged(item); }}>{item}</a></li> : <li key={index} className='pagination-block page-spread'>...</li>
+        )}
+      </div>
+    )
+  }
+
+  if (count > 2 && count < 5) {
+    pagginationArray = pageNumbersArray;
+  } else if (count >= 5) {
+    if (page <= 5) {
+      let firstFivePageNumbers: Array<any> = [...Array(page + 2).keys()].map(item => ++item);
+      firstFivePageNumbers.push('...');
+      pagginationArray = firstFivePageNumbers;
+    } else {
+      if (page + 2 <= count) {
+        let curentPageNumbers = [1, 2, '...', page - 2, page - 1, page, page + 1, page + 2, '...'];
+        pagginationArray = curentPageNumbers;
+      } else {
+        let curentPageNumbers: Array<any> = [1, 2, '...'];
+        for (var i = count - 4; i <= count; i++) {
+          curentPageNumbers.push(i);
+        }
+
+        pagginationArray = curentPageNumbers;
+      }
+    }
+  }
+  return (
+    <div>
+      {arrayToNode(pagginationArray)}
+    </div>
+  )
+}
 
 
-// function PaginationList() {
-//   const classes = this.props
-//   const [page, setPage] = React.useState(0);
-//   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+class PaginationList extends React.Component<MyProps, MyState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      perPage: 1,
+      orderBy: '',
+      page: 1
+    };
+  }
 
-//   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  updateUrlParmas(page: number, perPage: number, orderBy: string) {
+    if (history.pushState) {
+      let url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?page=${page}&perPage=${perPage}&orderBy=${orderBy}`;
+      window.history.pushState({
+        path: url
+      }, '', url);
+    }
+  }
 
-//   function handleChangePage(
-//     event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
-//     newPage: number,
-//   ) {
-//     setPage(newPage);
-//   }
+  componentWillMount() {
+    const { initialPage } = this.props;
+    this.setState({
+      page: initialPage
+    })
+  }
 
-//   function handleChangeRowsPerPage(
-//     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-//   ) {
-//     setRowsPerPage(parseInt(event.target.value, 10));
-//   }
+  componentDidMount() {
+    const { onPageChanged } = this.props;
+    onPageChanged(this.state.page, this.state.perPage, this.state.orderBy);
 
-//   return (
-//     <Paper className={classes.root}>
-//       <div className={classes.tableWrapper}>
-//         <Table className={classes.table}>
-//           <TableBody>
-//             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
-//               <TableRow key={row.name}>
-//                 <TableCell component="th" scope="row">
-//                   {row.name}
-//                 </TableCell>
-//                 <TableCell align="right">{row.calories}</TableCell>
-//                 <TableCell align="right">{row.fat}</TableCell>
-//               </TableRow>
-//             ))}
-//             {emptyRows > 0 && (
-//               <TableRow style={{ height: 48 * emptyRows }}>
-//                 <TableCell colSpan={6} />
-//               </TableRow>
-//             )}
-//           </TableBody>
-//           <TableFooter>
-//             <TableRow>
-//               <TablePagination
-//                 rowsPerPageOptions={[5, 10, 25]}
-//                 colSpan={3}
-//                 count={rows.length}
-//                 rowsPerPage={rowsPerPage}
-//                 page={page}
-//                 SelectProps={{
-//                   inputProps: { 'aria-label': 'Rows per page' },
-//                   native: true,
-//                 }}
-//                 onChangePage={handleChangePage}
-//                 onChangeRowsPerPage={handleChangeRowsPerPage}
-//                 ActionsComponent={TablePaginationActions}
-//               />
-//             </TableRow>
-//           </TableFooter>
-//         </Table>
-//       </div>
-//     </Paper>
-//   );
-// }
+  }
 
-// export default withStyles(styles, { withTheme: true })(Orders);
+
+  pageChanged = (item: number) => {
+    this.setState({
+      page: item
+    });
+    this.props.onPageChanged(item, this.state.perPage, this.state.orderBy);
+    this.updateUrlParmas(item, this.state.perPage, this.state.orderBy);
+  }
+
+  previousBtnClick = () => {
+    let page = this.state.page;
+
+    if (page - 1 >= 1) {
+      page = page - 1;
+    }
+
+    this.setState({
+      page: page
+    });
+
+    this.pageChanged(page);
+  }
+
+  nextBtnClick = () => {
+    let page = this.state.page;
+
+    if (page + 1 <= this.props.count) {
+      page = page + 1;
+    }
+
+    this.setState({
+      page: page
+    });
+
+    this.pageChanged(page);
+  }
+
+  render() {
+    const { classes, count } = this.props;
+
+
+    let pageNumbersArray = [...Array(count).keys()].map(item => ++item);
+
+    // console.log(count);
+    return (
+      <div className={classes.paginationWrapper}>
+
+        <ul className='pagination-container'>
+
+          <li className='pagination-block previousBtn' onClick={this.previousBtnClick}>
+            <KeyboardArrowLeftRoundedIcon />
+          </li>
+
+          {renderPageNumbers(pageNumbersArray, this.pageChanged, this.state.page, count)}
+
+          <li className='pagination-block nextBtn' onClick={this.nextBtnClick}>
+            <KeyboardArrowRightRoundedIcon />
+          </li>
+
+        </ul>
+
+      </div>
+
+
+    )
+  }
+
+}
+
+export default withStyles(styles, { withTheme: true })(PaginationList);

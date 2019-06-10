@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Theme, createStyles } from "@material-ui/core";
-// import PaginationList from "../utils/PaiginationList";
+import PaginationList from "../utils/PaiginationList";
 
 import OrderInterface from "../../interfaces/OrderInterface";
 
@@ -47,7 +47,10 @@ class Orders extends React.Component<MyProps, MyState> {
     console.log(totalPages);
     return (
       <div>
-        {/* <PaginationList info={info} totalPages={Math.ceil(totalPages)} onPageChanged={fetchUserOrders} renderChildren={renderChildren}/> */}
+        {info.map((item, index) => <div key={index}>
+          {item.id}
+        </div>)}
+        <PaginationList count={totalPages} onPageChanged={fetchUserOrders} initialPage={page}/>
 
       </div>
     )

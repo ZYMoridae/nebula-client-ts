@@ -40,7 +40,7 @@ const styles = (theme: Theme) => createStyles({
 		}
 	},
 	rootContianer: {
-		marginTop: theme.spacing(10),
+		marginTop: theme.spacing(5),
 		// paddingBottom: theme.spacing(4)
 	},
 	backToTop: {
