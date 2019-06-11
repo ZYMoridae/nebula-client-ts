@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Theme, createStyles } from "@material-ui/core";
-// import PaginationList from "../utils/PaiginationList";
 
-import OrderInterface from "../../interfaces/OrderInterface";
-import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
-import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
-import Typography from '@material-ui/core/Typography';
+import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
+import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
 
 import './PaginationList.css';
 
 import _ from 'lodash';
+import Typography from '@material-ui/core/Typography';
 
 const styles = (theme: Theme) => createStyles({
   paginationWrapper: {
     width: '100%',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4)
   }
 });
 
@@ -156,27 +156,29 @@ class PaginationList extends React.Component<MyProps, MyState> {
   render() {
     const { classes, count } = this.props;
 
-
     let pageNumbersArray = [...Array(count).keys()].map(item => ++item);
 
-    // console.log(count);
     return (
       <div className={classes.paginationWrapper}>
 
         <ul className='pagination-container'>
 
           <li className='pagination-block previousBtn' onClick={this.previousBtnClick}>
-            <KeyboardArrowLeftRoundedIcon />
+            <NavigateBeforeRoundedIcon />
           </li>
 
           {renderPageNumbers(pageNumbersArray, this.pageChanged, this.state.page, count)}
 
           <li className='pagination-block nextBtn' onClick={this.nextBtnClick}>
-            <KeyboardArrowRightRoundedIcon />
+            <NavigateNextRoundedIcon />
           </li>
 
+          <li className='pagination-info'>
+            <Typography variant="caption" gutterBottom>
+              Total {count} pages
+            </Typography>
+          </li>
         </ul>
-
       </div>
 
 

@@ -54,7 +54,7 @@ type MyProps = {
 
 const renderPreferenceItem = (defaultStyle: any, classes: any, preferenceData: any) => {
   const handleClick = (event: any) => {
-    console.log('123');
+    // console.log('123');
   }
   
   let icon: any = '';
