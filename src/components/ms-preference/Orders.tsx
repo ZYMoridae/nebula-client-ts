@@ -12,13 +12,31 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Divider from '@material-ui/core/Divider';
 
 const styles = (theme: Theme) => createStyles({
   table: {
     // marginTop: theme.spacing(4)
   },
   root: {
-    marginTop: theme.spacing(4)  
+    marginTop: theme.spacing(4)
+  },
+  isLoading: {
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    zIndex: 9999
+  },
+  progressContainer: {
+    width: '100%',
+    textAlign: 'center'
+  },
+  progress: {
+
   }
 });
 
@@ -31,6 +49,7 @@ type MyProps = {
   classes: any,
   theme: any,
   fetchUserOrders: any,
+  isFetchingUserOrders: boolean,
   totalPages: number,
   page: number,
   perPage: number,
@@ -56,45 +75,65 @@ class Orders extends React.Component<MyProps, MyState> {
 
 
   render() {
-    const { totalPages, page, perPage, orderBy, info, fetchUserOrders, classes } = this.props;
-    
+    const { totalPages, page, perPage, orderBy, info, fetchUserOrders, classes, isFetchingUserOrders } = this.props;
+
     return (
       <div className={classes.root}>
+
+
+
         <Grid container spacing={0}>
           <Grid item xs={1} md={2} xl={2}>
 
           </Grid>
           <Grid item xs={10} md={8} xl={8}>
+
             <Typography variant="h6" gutterBottom>
               My Orders
             </Typography>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <TableCell>
-                    Product
-                  </TableCell>
-                  <TableCell align="right">Price</TableCell>
-                  <TableCell align="right">Quantity</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {info.map((row: any, index: number) => (
-                  <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="right">
-                      {row.createdAt}
-                    </TableCell>
-                    <TableCell align="right">
-                      {row.orderStatus.name}
-                    </TableCell>
-                  </TableRow>
-                ))}
+            
+            {isFetchingUserOrders && <div className={classes.progressContainer}>
+              <CircularProgress></CircularProgress>
+            </div>}
+            <div>
 
-              </TableBody>
-            </Table>
+              {!isFetchingUserOrders && <Table className={classes.table}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      Booking Ref
+                  </TableCell>
+                    <TableCell align="right">Created At</TableCell>
+                    <TableCell align="right">Status</TableCell>
+                  </TableRow>
+                </TableHead>
+
+
+                <TableBody>
+                  {info.map((row: any, index: number) => (
+                    <TableRow key={row.id}>
+                      <TableCell component="th" scope="row">
+                        {row.id}
+                      </TableCell>
+                      <TableCell align="right">
+                        {row.createdAt}
+                      </TableCell>
+                      <TableCell align="right">
+                        {row.orderStatus.name}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+
+                </TableBody>
+
+              </Table>}
+
+
+
+            </div>
+
+
+
 
           </Grid>
           <Grid item xs={1} md={2} xl={2}>

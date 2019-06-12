@@ -18,16 +18,16 @@ const styles = (theme: Theme) => createStyles({
   warningText: {
     color: '#a9a9a9',
     marginLeft: theme.spacing(2),
-    
+
   },
   warningIcon: {
     verticalAlign: 'middle'
   },
   container: {
     marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(5),
-    marginLeft: theme.spacing(30),
-    marginRight: theme.spacing(30)
+    marginBottom: theme.spacing(5)
+    // marginLeft: theme.spacing(50),
+    // marginRight: theme.spacing(50)
   },
   preferencesContainer: {
     marginTop: theme.spacing(3)
@@ -56,16 +56,16 @@ const renderPreferenceItem = (defaultStyle: any, classes: any, preferenceData: a
   const handleClick = (event: any) => {
     // console.log('123');
   }
-  
+
   let icon: any = '';
 
-  switch(preferenceData.icon.type) {
+  switch (preferenceData.icon.type) {
     case 'tag': {
       icon = <preferenceData.icon.component fontSize="large" color="primary" className={classes.warningIcon} />;
       break;
     }
     case 'image': {
-      icon = <preferenceData.icon.component color="#ff5000"/>;
+      icon = <preferenceData.icon.component color="#ff5000" />;
       break;
     }
     default:
@@ -78,18 +78,10 @@ const renderPreferenceItem = (defaultStyle: any, classes: any, preferenceData: a
     <Button style={defaultStyle.emptyCartCaptionContainer} onClick={preferenceData.onClickHandler}>
       {icon}
 
-      
-
       <Typography variant="caption" className={classes.warningText}>
         {preferenceData.name}
-
       </Typography>
     </Button>
-
-    // <Paper style={defaultStyle.emptyCartCaptionContainer} onClick={handleClick}>
-
-
-    // </Paper>
   )
 }
 
@@ -112,7 +104,7 @@ const PreferenceList = [
       "component": SecurityRoundedIcon
     },
     "onClickHandler": () => {
-      
+
     }
   },
   {
@@ -132,7 +124,7 @@ const PreferenceList = [
       "component": PaymentIcon
     },
     "onClickHandler": () => {
-      
+
     }
   },
   {
@@ -142,7 +134,7 @@ const PreferenceList = [
       "component": CatIcon
     },
     "onClickHandler": () => {
-      
+
     }
   },
   {
@@ -152,7 +144,7 @@ const PreferenceList = [
       "component": CardGiftcardRoundedIcon
     },
     "onClickHandler": () => {
-      
+
     }
   }
 ];
@@ -194,19 +186,31 @@ class PreferenceIndex extends React.Component<MyProps, MyState> {
 
     return (
       <div className={classes.container}>
-        <div>
-          <Typography variant="h5" gutterBottom className={classes.signInCaption}>
-            Management
+
+        <Grid container>
+          <Grid item xs={1}>
+            {/* <ProductCategorySideBarContainer></ProductCategorySideBarContainer> */}
+          </Grid>
+
+          <Grid item xs={10}>
+            <div>
+              <Typography variant="h5" gutterBottom className={classes.signInCaption}>
+                Management
           </Typography>
-          <Divider />
+              <Divider />
 
-        </div>
-        <Grid container spacing={5} className={classes.preferencesContainer}>
+            </div>
+            <Grid container spacing={5} className={classes.preferencesContainer}>
 
-          {PreferenceList.map((item, index) =>
-            <Grid item xs={12} md={3} xl={3} key={index}>
-              {renderPreferenceItem(defaultStyle, classes, item)}
-            </Grid>)}
+              {PreferenceList.map((item, index) =>
+                <Grid item sm={12} md={4} xl={3} key={index}>
+                  {renderPreferenceItem(defaultStyle, classes, item)}
+                </Grid>)}
+            </Grid>
+          </Grid>
+          <Grid item xs={1}>
+
+          </Grid>
         </Grid>
 
       </div>

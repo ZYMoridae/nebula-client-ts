@@ -87,7 +87,7 @@ class FeaturedProduct extends React.Component<MyProps, MyState> {
         <CardHeader
           className={classes.cardHeader}
           title={
-            <a className={classes.productItemLink} href={`/products/${product.id}`}>
+            <a className={classes.productItemLink} href={`/products/${product.id}`} target="_blank">
               <Typography variant="subtitle2" className={classes.productItemLink} color="primary" gutterBottom>
                 {_.capitalize(product.name)}
               </Typography>

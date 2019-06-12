@@ -101,7 +101,8 @@ const styles = (theme: Theme) => createStyles({
   },
   homeButton: {
     textDecoration: 'none',
-    color: 'white'
+    color: 'white',
+    marginLeft: theme.spacing(1.5)
   },
   myAppBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -270,9 +271,9 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
       <div className={classes.root}>
         <AppBar position="static" className={classes.myAppBar}>
           <Toolbar>
-            {isUserLogin ? <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
+            {/* {isUserLogin ? <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />
-            </IconButton> : ''}
+            </IconButton> : ''} */}
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               <Toolbar>
                 {/* <NebulaIcon /> */}

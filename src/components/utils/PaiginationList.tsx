@@ -88,7 +88,7 @@ class PaginationList extends React.Component<MyProps, MyState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      perPage: 1,
+      perPage: 10,
       orderBy: '',
       page: 1
     };
@@ -160,7 +160,6 @@ class PaginationList extends React.Component<MyProps, MyState> {
 
     return (
       <div className={classes.paginationWrapper}>
-
         <ul className='pagination-container'>
 
           <li className='pagination-block previousBtn' onClick={this.previousBtnClick}>
@@ -180,8 +179,6 @@ class PaginationList extends React.Component<MyProps, MyState> {
           </li>
         </ul>
       </div>
-
-
     )
   }
 

@@ -79,7 +79,7 @@ class RecommendProduct extends React.Component<MyProps, MyState> {
     const { classes, product } = this.props;
     
     return (
-      <a href={`/products/${product.id}`}>
+      <a href={`/products/${product.id}`} target="_blank">
         <Card className={classes.card}>
           {/* <CardHeader
             title={

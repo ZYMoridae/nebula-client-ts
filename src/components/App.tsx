@@ -153,7 +153,7 @@ class App extends React.Component {
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route exact path="/products" component={Products} /> */}
-                <Route exact path="/products/:id" component={ProductInfo} />
+                  <Route exact path="/products/:id" component={ProductInfo} />
                   <PrivateRoute exact path="/cart" component={CartInfo} />
                   <PrivateRoute exact path="/payment/:orderId" component={PaymentComponent} />
                   <PrivateRoute exact path="/payment/:orderId/success" component={PaymentSuccessComponent} />

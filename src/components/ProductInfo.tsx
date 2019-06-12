@@ -49,7 +49,8 @@ const styles = (theme: Theme) => createStyles({
   },
   priceCaption: {
     color: '#B12704',
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
+    fontSize: 23
   },
   leftIcon: {
     marginRight: theme.spacing(1),
@@ -308,7 +309,7 @@ class ProductInfo extends React.Component<MyProps, MyState> {
           </Grid>
           <Grid item xs={12} sm={6}>
             <div className={classes.metaContainer}>
-              <Typography variant="h4" gutterBottom className={classes.productName}>
+              <Typography variant="h5" gutterBottom className={classes.productName}>
                 {_.capitalize(info.name)}
               </Typography>
 
@@ -406,23 +407,17 @@ class ProductInfo extends React.Component<MyProps, MyState> {
 
 
         <Grid container >
-          <Grid item xs={1} sm={2}>
+          <Grid item xs={1} sm={2} lg={3}>
             {/* <ProductCategorySideBarContainer></ProductCategorySideBarContainer> */}
           </Grid>
 
-          <Grid item xs={10} sm={8} className={classes.container}>
+          <Grid item xs={10} sm={8} lg={6} className={classes.container}>
             {info && productInfoBlock}
           </Grid>
-          <Grid item xs={1} sm={2}>
+          <Grid item xs={1} sm={2} lg={3}>
 
           </Grid>
         </Grid>
-
-
-
-
-
-
       </div>
     )
   }

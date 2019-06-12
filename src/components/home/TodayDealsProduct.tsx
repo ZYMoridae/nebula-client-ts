@@ -82,7 +82,7 @@ class TodayDealsProduct extends React.Component<MyProps, MyState> {
     const { classes, product } = this.props;
     
     return (
-      <a className={classes.productItemLink} href={`/products/${product.id}`}>
+      <a className={classes.productItemLink} href={`/products/${product.id}`} target="_blank">
         <Card className={classes.card}>
           {/* <CardHeader
             title={
