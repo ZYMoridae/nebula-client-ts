@@ -3,6 +3,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { Theme, createStyles } from "@material-ui/core";
 import PaginationList from "../utils/PaiginationList";
 
+import PaginationComponent from "@josephzhou/ms-pagination";
+// import '@josephzhou/ms-pagination/src/PaginationComponent.css';
+
 import OrderInterface from "../../interfaces/OrderInterface";
 
 import Table from '@material-ui/core/Table';
@@ -146,7 +149,7 @@ class Orders extends React.Component<MyProps, MyState> {
         {/* {info.map((item, index) => <div key={index}>
           {item.id}
         </div>)} */}
-        <PaginationList count={totalPages} onPageChanged={fetchUserOrders} initialPage={page} />
+        <PaginationComponent count={totalPages} onPageChanged={fetchUserOrders} initialPage={page} />
 
       </div>
     )
