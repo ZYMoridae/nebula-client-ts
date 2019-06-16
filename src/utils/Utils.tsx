@@ -5,7 +5,8 @@ import { Z_MEM_ERROR } from 'zlib';
 const addToken = (options: any) => {
   let token = sessionStorage.getItem('token');
   let tokenOption = {};
-  if (token !== undefined) {
+
+  if (token !== undefined && token !== null) {
     tokenOption = {
       headers: {
         Authorization: `Bearer ${token}`
@@ -46,15 +47,15 @@ const extractPaginationParams = (page: number, perPage: number, orderBy: string)
     userPerPage = params.get("perPage"),
     userOrderBy = params.get("orderBy");
 
-  if (userPage != undefined) {
-    _page = parseInt(userPage);
+  if (userPage != '') {
+    _page = isNaN(parseInt(userPage, 10)) ? _page : parseInt(userPage);
   }
 
-  if (userPerPage != undefined) {
-    _perPage = parseInt(userPerPage);
+  if (userPerPage != '') {
+    _perPage = isNaN(parseInt(userPerPage, 10)) ? _perPage : parseInt(userPerPage);
   }
 
-  if (userOrderBy != undefined) {
+  if (userOrderBy != '') {
     _orderBy = userOrderBy;
   }
 
