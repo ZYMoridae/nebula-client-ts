@@ -17,6 +17,7 @@ import PaymentContainer from '../containers/PaymentContainer';
 import PaymentSuccessContainer from '../containers/PaymentSuccessContainer';
 import PreferenceIndex from '../components/ms-preference/PreferenceIndex';
 import OrdersContainer from '../containers/ms-preference/OrdersContainer';
+import RegisterContainer from '../containers/RegisterContainer';
 
 import Footer from './Footer';
 
@@ -25,7 +26,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Routes from '../utils/Routes';
 import Fade from '@material-ui/core/Fade';
 
-import Utils from  '../utils/Utils';
+import Utils from '../utils/Utils';
 
 const nebulaTheme = createMuiTheme({
   // typography: {
@@ -134,19 +135,40 @@ const PreferenceComponent = () => {
 const PreferenceOrderContainer = () => {
   let paginationParams: any = Utils.extractPaginationParams(1, 10, '');
   return (
-   <OrdersContainer page={paginationParams.page} perPage={paginationParams.perPage} orderBy={paginationParams.orderBy} ></OrdersContainer>
+    <OrdersContainer page={paginationParams.page} perPage={paginationParams.perPage} orderBy={paginationParams.orderBy} ></OrdersContainer>
+  )
+}
+
+const UserRegister = () => {
+  return (
+    <RegisterContainer />
   )
 }
 
 
 class App extends React.Component {
+
+  isShowHeaderAndFooter() {
+    let isShow = true;
+
+    if (location.pathname == Routes.USER.LOGIN) {
+      isShow = isShow && false;
+    }
+
+    if (location.pathname == '/user/new') {
+      isShow = isShow && false;
+    }
+
+    return isShow;
+  }
+
   render() {
 
     return (
       <Router>
         <MuiThemeProvider theme={nebulaTheme}>
           <div>
-            {location.pathname !== Routes.USER.LOGIN && <HeaderBarContainer></HeaderBarContainer>}
+            {this.isShowHeaderAndFooter() && <HeaderBarContainer></HeaderBarContainer>}
 
             <Fade in={true} timeout={1200}>
               <div>
@@ -161,12 +183,13 @@ class App extends React.Component {
                   <PrivateRoute exact path="/preference/orders" component={PreferenceOrderContainer} />
 
                   <Route path="/user/login" component={Login} />
+                  <Route path="/user/new" component={UserRegister} />
                   <Redirect to="/" />
                 </Switch>
               </div>
             </Fade>
 
-            {location.pathname !== Routes.USER.LOGIN && <Footer></Footer>}
+            {this.isShowHeaderAndFooter() && <Footer></Footer>}
           </div>
         </MuiThemeProvider>
       </Router >

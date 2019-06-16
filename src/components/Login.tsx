@@ -221,7 +221,7 @@ class Login extends React.Component<MyProps, MyState> {
               <Grid>
                 <div className={classes.newUserButton}>
                   <Typography variant="caption" gutterBottom>
-                    No account? <a href='/'>Create one!</a>
+                    No account? <a href='/user/new'>Create one!</a>
                   </Typography>
                 </div>
               </Grid>

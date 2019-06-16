@@ -8,7 +8,8 @@ let initState: any = {
   featuredProducts: [],
   info: [],
   fetchProductsError: null,
-  fetchHomeBannerError: null
+  fetchHomeBannerError: null,
+  totalPages: 0
 }
 
 const homeReducer = (state = initState, action: any) => {
