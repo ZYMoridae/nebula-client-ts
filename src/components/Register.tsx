@@ -34,8 +34,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 const styles = (theme: Theme) => createStyles({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
   },
   textField: {
     marginRight: theme.spacing(1),
@@ -56,20 +56,15 @@ const styles = (theme: Theme) => createStyles({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-  loginContainer: {
+  registerContainer: {
     padding: theme.spacing(3),
-    // marginTop: isMobile ? '20vh' : '20vh',
-    // display: 'flex',
-    // flexWrap: 'wrap',
-    width: 550,
-    maxWidth: 550
-    // marginLeft: isMobile ? theme.spacing(2) : '-40vw',
-    // marginRight: theme.spacing(2)
+    backgroundColor: 'white',
+    borderRadius: '5px'
   },
   submitButton: {
-    marginTop: theme.spacing(2),
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    paddingTop: theme.spacing(1.5),
+    paddingBottom: theme.spacing(1.5)
   },
   newUserButton: {
     marginTop: theme.spacing(2)
@@ -110,7 +105,8 @@ const styles = (theme: Theme) => createStyles({
   },
   formControl: {
     width: '100%',
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    padding: theme.spacing(1)
   }
 });
 
@@ -125,7 +121,8 @@ type MyState = {
   lastname: string,
   address1: string,
   address2: string,
-  telephone: string
+  telephone: string,
+  error: any
 };
 
 
@@ -136,6 +133,9 @@ type MyProps = {
   info: any,
   createUser: (data: any) => void
 };
+
+const fieldsNames = ['username', 'password', 'gender', 'gender', 'email', 'password2', 'firstname', 'lastname', 'address1', 'address2'];
+
 
 class Register extends React.Component<MyProps, MyState> {
   private InputLabelRef: React.ReactInstance;
@@ -153,9 +153,42 @@ class Register extends React.Component<MyProps, MyState> {
       lastname: '',
       address1: '',
       address2: '',
-      telephone: ''
+      telephone: '',
+      error: {
+        username: false,
+        password: false,
+        email: false,
+        password2: false,
+        firstname: false,
+        lastname: false,
+        address1: false,
+        address2: false,
+        telephone: false,
+      }
     };
   }
+
+  setValidationError = (fieldName: string) => {
+    let newState = this.state.error;
+    newState[fieldName] = true;
+    this.setState({
+      error: newState
+    });
+  };
+
+  // TODO: Validation
+  validateFieldValue = () => {
+    let isValid = true;
+
+    if(this.state.username == '') {
+      isValid = isValid && false;
+      this.setValidationError('username');
+    }
+
+    
+
+
+  };
 
 
   componentDidMount() {
@@ -230,192 +263,194 @@ class Register extends React.Component<MyProps, MyState> {
 
         <form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
 
-          <Grid container alignItems="center" justify="center" direction="row">
-            <Paper className={classes.loginContainer}>
-              <Grid item xs={12}>
-                <Typography variant="h5" gutterBottom className={classes.signInCaption}>
-                  <AccountCircleIcon fontSize="large" className={classes.accountIcon} />
-                  New User
+          <Grid container>
+
+            <Grid item xs={12} md={2}></Grid>
+            <Grid item xs={12} md={8}>
+              <Grid container className={classes.registerContainer} spacing={2}>
+                <Grid item xs={12} md={12}>
+                  <Typography variant="h5" gutterBottom className={classes.signInCaption}>
+                    <AccountCircleIcon fontSize="large" className={classes.accountIcon} />
+                    New User
                   </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-name"
-                  label="Name"
-                  name="username"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                </Grid>
+                <Grid item xs={12} md={12}>
+                  <TextField
+                    id="outlined-name"
+                    label="Name"
+                    name="username"
+                    className={classes.textField}
+                    variant="outlined"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-email"
-                  label="Email"
-                  name="email"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  type="email"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                <Grid item xs={12} md={12}>
+                  <TextField
+                    id="outlined-email"
+                    label="Email"
+                    name="email"
+                    className={classes.textField}
+                    variant="outlined"
+                    type="email"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-password"
-                  label="Password"
-                  name="password"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  type="password"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                <Grid item xs={12} md={12}>
+                  <TextField
+                    id="outlined-password"
+                    label="Password"
+                    name="password"
+                    className={classes.textField}
+                    variant="outlined"
+                    type="password"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
 
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-password2"
-                  label="Confirm Password"
-                  name="password2"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  type="password"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                <Grid item xs={12} md={12}>
+                  <TextField
+                    id="outlined-password2"
+                    label="Confirm Password"
+                    name="password2"
+                    className={classes.textField}
+                    variant="outlined"
+                    type="password"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-firstname"
-                  label="First Name"
-                  name="firstname"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    id="outlined-firstname"
+                    label="First Name"
+                    name="firstname"
+                    className={classes.textField}
+                    variant="outlined"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-lastname"
-                  label="Last Name"
-                  name="lastname"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    id="outlined-lastname"
+                    label="Last Name"
+                    name="lastname"
+                    className={classes.textField}
+                    variant="outlined"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
-              <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel
-                  ref={(ref: any) => {
-                    this.InputLabelRef = ref;
-                  }}
-                  htmlFor="outlined-gender"
-                >
-                  Gender
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel
+                    ref={(ref: any) => {
+                      this.InputLabelRef = ref;
+                    }}
+                    htmlFor="outlined-gender"
+                  >
+                    Gender
                   </InputLabel>
 
-                <Select
-                  value={this.state.gender}
-                  onChange={(e) => { this.onChange(e) }}
-                  required
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      name="gender"
-                      id="outlined-gender"
-                    />
-                  }
-                >
-                  {
-                    genderArray.map((item, index) =>
-                      <MenuItem key={index} value={item}>{item}</MenuItem>
-                    )
-                  }
-                </Select>
-              </FormControl>
+                  <Select
+                    value={this.state.gender}
+                    onChange={(e) => { this.onChange(e) }}
+                    required
+                    input={
+                      <OutlinedInput
+                        labelWidth={this.state.labelWidth}
+                        name="gender"
+                        id="outlined-gender"
+                      />
+                    }
+                  >
+                    {
+                      genderArray.map((item, index) =>
+                        <MenuItem key={index} value={item}>{item}</MenuItem>
+                      )
+                    }
+                  </Select>
+                </FormControl>
 
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-telephone"
-                  label="Telehpone"
-                  name="telephone"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-telephone"
+                    label="Telehpone"
+                    name="telephone"
+                    className={classes.textField}
+                    variant="outlined"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-address1"
-                  label="Address 1"
-                  name="address1"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  type="address1"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-address1"
+                    label="Address 1"
+                    name="address1"
+                    className={classes.textField}
+                    variant="outlined"
+                    type="address1"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
 
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-address2"
-                  label="Address 2"
-                  name="address2"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  type="address2"
-                  fullWidth={true}
-                  required
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-address2"
+                    label="Address 2"
+                    name="address2"
+                    className={classes.textField}
+                    variant="outlined"
+                    type="address2"
+                    fullWidth={true}
+                    required
+                    onChange={(e) => { this.onChange(e) }}
+                  />
+                </Grid>
 
 
 
-              <Grid item xs={12}>
-                <Button variant="contained" color="primary" size="large" fullWidth={true} className={classes.submitButton} type="submit">
-                  Submit
+                <Grid item xs={12}>
+                  <Button variant="contained" color="primary" size="large" fullWidth={true} className={classes.submitButton} type="submit">
+                    Submit
                 </Button>
+                </Grid>
               </Grid>
-              {/* <Grid>
+
+            </Grid>
+            <Grid item xs={12} md={2}></Grid>
+
+
+            {/* <Paper className={classes.loginContainer}> */}
+
+            {/* <Grid>
                 <div className={classes.newUserButton}>
                   <Typography variant="caption" gutterBottom>
                     No account? <a href='/'>Create one!</a>
                   </Typography>
                 </div>
               </Grid> */}
-            </Paper>
+            {/* </Paper> */}
           </Grid>
 
         </form>
