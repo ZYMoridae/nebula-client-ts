@@ -178,16 +178,55 @@ class Register extends React.Component<MyProps, MyState> {
 
   // TODO: Validation
   validateFieldValue = () => {
-    let isValid = true;
+    let isValid: boolean = true;
 
     if(this.state.username == '') {
       isValid = isValid && false;
       this.setValidationError('username');
     }
 
+    if(this.state.email == '') {
+      isValid = isValid && false;
+      this.setValidationError('email');
+    }
     
+    if(this.state.firstname == '') {
+      isValid = isValid && false;
+      this.setValidationError('firstname');
+    }
 
+    if(this.state.lastname == '') {
+      isValid = isValid && false;
+      this.setValidationError('lastname');
+    }
 
+    if(this.state.lastname == '') {
+      isValid = isValid && false;
+      this.setValidationError('lastname');
+    }
+
+    if(this.state.lastname == '') {
+      isValid = isValid && false;
+      this.setValidationError('lastname');
+    }
+
+    if(this.state.password == '') {
+      isValid = isValid && false;
+      this.setValidationError('password');
+    }
+
+    if(this.state.password2 == '') {
+      isValid = isValid && false;
+      this.setValidationError('password2');
+    }
+
+    if(this.state.password !== this.state.password2) {
+      isValid = isValid && false;
+      this.setValidationError('password');
+      this.setValidationError('password');
+    }
+
+    return isValid;
   };
 
 
@@ -203,18 +242,20 @@ class Register extends React.Component<MyProps, MyState> {
   // TODO: Add validation
   handleSubmit = (event: any) => {
     event.preventDefault();
-    this.props.createUser({
-      password: this.state.password,
-      role_id: "2",
-      telephone: this.state.telephone,
-      address1: this.state.address1,
-      address2: this.state.address2,
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      gender: this.state.gender.toLowerCase(),
-      email: this.state.email,
-      username: this.state.username
-    });
+    if(this.validateFieldValue()) {
+      this.props.createUser({
+        password: this.state.password,
+        role_id: "2",
+        telephone: this.state.telephone,
+        address1: this.state.address1,
+        address2: this.state.address2,
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        gender: this.state.gender.toLowerCase(),
+        email: this.state.email,
+        username: this.state.username
+      });
+    }
   }
 
   onChange = (event: any) => {
