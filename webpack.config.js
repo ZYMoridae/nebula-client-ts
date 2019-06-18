@@ -5,7 +5,7 @@ module.exports = {
   entry: "./index.tsx",
   output: {
     filename: "bundle.js",
-    path: path.resolve('dist'),
+    path: path.resolve('nebula_client'),
     publicPath: '/'
   },
 
@@ -21,8 +21,8 @@ module.exports = {
     https: false,
     historyApiFallback: true,
     proxy: {
-      // '/api': 'http://ec2-13-54-77-173.ap-southeast-2.compute.amazonaws.com:8080',
-      '/api': 'http://localhost:8080'
+      '/api': 'http://ec2-13-54-77-173.ap-southeast-2.compute.amazonaws.com:8080',
+      // '/api': 'http://localhost:8080'
     }
   },
   resolve: {

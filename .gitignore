@@ -60,6 +60,8 @@ typings/
 # next.js build output
 .next
 
-dist/
+nebula_client/
+
+nebula_client.zip
 
 *.lock
