@@ -180,51 +180,53 @@ class Register extends React.Component<MyProps, MyState> {
   validateFieldValue = () => {
     let isValid: boolean = true;
 
-    if(this.state.username == '') {
+    if (this.state.username == '') {
       isValid = isValid && false;
       this.setValidationError('username');
     }
 
-    if(this.state.email == '') {
+    if (this.state.email == '') {
       isValid = isValid && false;
       this.setValidationError('email');
     }
-    
-    if(this.state.firstname == '') {
+
+    if (this.state.firstname == '') {
       isValid = isValid && false;
       this.setValidationError('firstname');
     }
 
-    if(this.state.lastname == '') {
+    if (this.state.lastname == '') {
       isValid = isValid && false;
       this.setValidationError('lastname');
     }
 
-    if(this.state.lastname == '') {
+    if (this.state.lastname == '') {
       isValid = isValid && false;
       this.setValidationError('lastname');
     }
 
-    if(this.state.lastname == '') {
+    if (this.state.lastname == '') {
       isValid = isValid && false;
       this.setValidationError('lastname');
     }
 
-    if(this.state.password == '') {
+    if (this.state.password == '') {
       isValid = isValid && false;
       this.setValidationError('password');
     }
 
-    if(this.state.password2 == '') {
+    if (this.state.password2 == '') {
       isValid = isValid && false;
       this.setValidationError('password2');
     }
 
-    if(this.state.password !== this.state.password2) {
+    if (this.state.password !== this.state.password2) {
       isValid = isValid && false;
       this.setValidationError('password');
-      this.setValidationError('password');
+      this.setValidationError('password2');
     }
+
+    console.log(this.state);
 
     return isValid;
   };
@@ -242,7 +244,7 @@ class Register extends React.Component<MyProps, MyState> {
   // TODO: Add validation
   handleSubmit = (event: any) => {
     event.preventDefault();
-    if(this.validateFieldValue()) {
+    if (this.validateFieldValue()) {
       this.props.createUser({
         password: this.state.password,
         role_id: "2",
@@ -262,6 +264,8 @@ class Register extends React.Component<MyProps, MyState> {
     const { target: { name, value } } = event;
     // Ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/26635
     this.setState({ [name]: value } as Pick<MyState, keyof MyState>);
+
+    console.log(name, value, this.state);
   }
 
   render() {
