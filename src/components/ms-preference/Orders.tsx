@@ -76,6 +76,10 @@ class Orders extends React.Component<MyProps, MyState> {
     // fetchUserOrders(page, perPage, orderBy);
   }
 
+  onPageChanged = (page: number, perPage: number, orderBy: string) => {
+    this.props.fetchUserOrders(page, perPage, orderBy);
+  }
+
 
   render() {
     const { totalPages, page, perPage, orderBy, info, fetchUserOrders, classes, isFetchingUserOrders } = this.props;
@@ -149,7 +153,7 @@ class Orders extends React.Component<MyProps, MyState> {
         {/* {info.map((item, index) => <div key={index}>
           {item.id}
         </div>)} */}
-        <PaginationComponent count={totalPages} onPageChanged={fetchUserOrders} initialPage={page} />
+        <PaginationComponent count={totalPages} onPageChanged={this.onPageChanged} initialPage={page} perPage={perPage}/>
 
       </div>
     )
