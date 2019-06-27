@@ -226,8 +226,6 @@ class Register extends React.Component<MyProps, MyState> {
       this.setValidationError('password2');
     }
 
-    console.log(this.state);
-
     return isValid;
   };
 
@@ -264,8 +262,6 @@ class Register extends React.Component<MyProps, MyState> {
     const { target: { name, value } } = event;
     // Ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/26635
     this.setState({ [name]: value } as Pick<MyState, keyof MyState>);
-
-    console.log(name, value, this.state);
   }
 
   render() {

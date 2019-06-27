@@ -286,7 +286,7 @@ class ShoppingCart extends React.Component<MyProps, MyState> {
       });
 
       // TODO: Checkout action
-      localStorage.setItem('_pfc', JSON.stringify(productForCheckout));
+      sessionStorage.setItem('_pfc', JSON.stringify(productForCheckout));
 
       // TODO: Product validation
       if (productForCheckout.length == 0) {

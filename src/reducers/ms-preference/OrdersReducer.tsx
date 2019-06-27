@@ -27,7 +27,7 @@ const ordersReducer = (state = initState, action: any) => {
         ...state,
         isFetchedUserOrders: action.isFetchedUserOrders,
         isFetchingUserOrders: action.isFetchingUserOrders,
-        info: action.info.content,
+        info: action.info.content ? action.info.content : [],
         totalPages: action.info.page.totalPages
       }
     default:

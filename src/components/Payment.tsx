@@ -197,7 +197,7 @@ class Payment extends React.Component<MyProps, MyState> {
     const steps = getSteps();
     const { activeStep } = this.state;
 
-    let cartItems = JSON.parse(localStorage.getItem('_pfc'));
+    let cartItems = JSON.parse(sessionStorage.getItem('_pfc'));
     // const totalSteps = () => getSteps().length;
 
     const isStepOptional = (step: number) => { return false };

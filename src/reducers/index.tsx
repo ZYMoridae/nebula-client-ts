@@ -9,6 +9,7 @@ import PaymentSuccessReducer from './PaymentSuccessReducer';
 import HomeReducer from './HomeReducer';
 import OrdersReducer from './ms-preference/OrdersReducer';
 import UserReducer from './UserReducer';
+import TokenReducer from './TokenReducer';
 
 const appReducer = combineReducers({
   LoginReducer,
@@ -20,7 +21,8 @@ const appReducer = combineReducers({
   PaymentSuccessReducer,
   HomeReducer,
   OrdersReducer,
-  UserReducer
+  UserReducer,
+  TokenReducer
 })
 
 export default appReducer;

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Z_MEM_ERROR } from 'zlib';
-
+import Routes from './Routes';
 
 const addToken = (options: any) => {
   let token = sessionStorage.getItem('token');
@@ -66,11 +66,18 @@ const extractPaginationParams = (page: number, perPage: number, orderBy: string)
   }
 }
 
+const logout = () => {
+  sessionStorage.removeItem('user');
+  sessionStorage.removeItem('token');
+  location.href = Routes.USER.LOGIN;
+}
+
 const Utils = {
   addToken: addToken,
   isUserLogin: isUserLogin,
   getRandomProductImageUrl: getRandomProductImageUrl,
-  extractPaginationParams: extractPaginationParams
+  extractPaginationParams: extractPaginationParams,
+  logout: logout
 }
 
 export default Utils;

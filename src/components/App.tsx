@@ -27,6 +27,7 @@ import Routes from '../utils/Routes';
 import Fade from '@material-ui/core/Fade';
 
 import Utils from '../utils/Utils';
+import BackgroundProcessContainer from '../containers/BackgroundProcessContainer';
 
 const nebulaTheme = createMuiTheme({
   // typography: {
@@ -163,11 +164,11 @@ class App extends React.Component {
   }
 
   render() {
-
     return (
       <Router>
         <MuiThemeProvider theme={nebulaTheme}>
           <div>
+            {Utils.isUserLogin() && <BackgroundProcessContainer />}
             {this.isShowHeaderAndFooter() && <HeaderBarContainer></HeaderBarContainer>}
 
             <Fade in={true} timeout={1200}>
