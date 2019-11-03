@@ -36,7 +36,7 @@ const nebulaTheme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#ff5000',
+      main: '#2b8eff',
       // footerDark: '#401500',
       // footerDark: '#1d1d1d'
       // dark: will be calculated from palette.primary.main,

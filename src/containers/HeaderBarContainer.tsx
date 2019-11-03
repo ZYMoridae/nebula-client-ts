@@ -1,160 +1,167 @@
 import * as React from "react";
 // import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import Badge from "@material-ui/core/Badge";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import { withStyles } from "@material-ui/core/styles";
+import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MailIcon from "@material-ui/icons/Mail";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import NebulaIcon from '../components/NebulaIcon';
-import Routes from '../utils/Routes';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import NebulaIcon from "../components/NebulaIcon";
+import Routes from "../utils/Routes";
 
-import ProductSearchComponent from '../components/ProductSearchComponent';
+import ProductSearchComponent from "../components/ProductSearchComponent";
 
 import { Theme, createStyles } from "@material-ui/core";
 
+import CatIcon from "../components/icons/Cat";
 
-import CatIcon from '../components/icons/Cat';
+import { withTranslation, WithTranslation } from "react-i18next";
 
-const styles = (theme: Theme) => createStyles({
-  root: {
-    width: '100%',
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%"
     },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+    grow: {
+      flexGrow: 1
     },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
+    menuButton: {
+      marginLeft: -12,
+      marginRight: 20
     },
-  },
-  searchIcon: {
-    width: theme.spacing(9),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-    width: '100%',
-    height: '100%'
-  },
-  inputInput: {
-    paddingTop: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    paddingLeft: theme.spacing(10),
-    height: '100%',
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: theme.spacing(40),
+    title: {
+      display: "none",
+      [theme.breakpoints.up("sm")]: {
+        display: "block"
+      }
     },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
+    search: {
+      position: "relative",
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: fade(theme.palette.common.white, 0.15),
+      "&:hover": {
+        backgroundColor: fade(theme.palette.common.white, 0.25)
+      },
+      marginRight: theme.spacing(2),
+      marginLeft: 0,
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(3),
+        width: "auto"
+      }
     },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
+    searchIcon: {
+      width: theme.spacing(9),
+      height: "100%",
+      position: "absolute",
+      pointerEvents: "none",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
     },
-  },
-  homeButton: {
-    textDecoration: 'none',
-    color: 'white',
-    marginLeft: theme.spacing(1.5)
-  },
-  myAppBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  loginButton: {
-    color: 'white'
-  },
-  notificationBadge: {
-    '& > span': {
-      backgroundColor: '#9a3300'
+    inputRoot: {
+      color: "inherit",
+      width: "100%",
+      height: "100%"
+    },
+    inputInput: {
+      paddingTop: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+      paddingLeft: theme.spacing(10),
+      height: "100%",
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("md")]: {
+        width: theme.spacing(40)
+      }
+    },
+    sectionDesktop: {
+      display: "none",
+      [theme.breakpoints.up("md")]: {
+        display: "flex"
+      }
+    },
+    sectionMobile: {
+      display: "flex",
+      [theme.breakpoints.up("md")]: {
+        display: "none"
+      }
+    },
+    homeButton: {
+      textDecoration: "none",
+      color: "white",
+      marginLeft: theme.spacing(1.5)
+    },
+    myAppBar: {
+      zIndex: theme.zIndex.drawer + 1
+    },
+    loginButton: {
+      color: "white"
+    },
+    notificationBadge: {
+      "& > span": {
+        backgroundColor: "#9a3300"
+      }
     }
-  }
-});
-
+  });
 
 const renderLoginButton = (props: any) => {
-  const { classes } = props;
+  const { classes, t } = props;
 
-  let block: any = '';
+  let block: any = "";
 
   if (location.pathname !== Routes.USER.LOGIN) {
-    block = <div className={classes.sectionDesktop}>
-      <Typography variant="button" color="inherit" noWrap>
-        <a href={Routes.USER.LOGIN} className={classes.homeButton}>
-          Login
-      </a>
-      </Typography>
-    </div>;
+    block = (
+      <div className={classes.sectionDesktop}>
+        <Typography variant="button" color="inherit" noWrap>
+          <a href={Routes.USER.LOGIN} className={classes.homeButton}>
+            {t("login_btn")}
+          </a>
+        </Typography>
+      </div>
+    );
   }
 
   return block;
-}
+};
 
 type MyState = {
-  anchorEl: any,
-  mobileMoreAnchorEl: any,
-  isUserLogin: boolean
+  anchorEl: any;
+  mobileMoreAnchorEl: any;
+  isUserLogin: boolean;
 };
-
 
 type MyProps = {
-  classes: any
+  classes: any;
 };
 
-
-class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
+class PrimarySearchAppBar extends React.Component<
+  MyProps & WithTranslation,
+  MyState
+> {
   componentWillMount() {
     // TODO: user login check wrongly when network disconnected
     this.setState({
       anchorEl: null,
       mobileMoreAnchorEl: null,
-      isUserLogin: sessionStorage.getItem('user') != null && sessionStorage.getItem('user') != 'undefined' && sessionStorage.getItem('user') != 'null'
+      isUserLogin:
+        sessionStorage.getItem("user") != null &&
+        sessionStorage.getItem("user") != "undefined" &&
+        sessionStorage.getItem("user") != "null"
     });
   }
 
@@ -176,58 +183,61 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
   };
 
   handleLogout = () => {
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('token');
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
     location.href = Routes.USER.LOGIN;
-  }
+  };
 
   handleMenuItemClick = (targetName: string) => {
     switch (targetName) {
-      case 'myAccount': {
-        location.href = '/preference';
+      case "myAccount": {
+        location.href = "/preference";
         break;
       }
       default:
         break;
     }
-  }
-
+  };
 
   render() {
     const { anchorEl, mobileMoreAnchorEl, isUserLogin } = this.state;
-    const { classes } = this.props;
+    const { classes, t, i18n } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
         {/* <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem> */}
-        <MenuItem onClick={() => { this.handleMenuItemClick('myAccount') }}>
+        <MenuItem
+          onClick={() => {
+            this.handleMenuItemClick("myAccount");
+          }}
+        >
           <IconButton color="inherit">
-            <AccountCircle color="primary"/>
+            <AccountCircle color="primary" />
           </IconButton>
-          <span style={{ paddingRight: '12px' }}>My account</span>
+          <span style={{ paddingRight: "12px" }}>My account</span>
         </MenuItem>
         <MenuItem onClick={this.handleLogout}>
           <IconButton color="inherit">
-            <ExitToAppIcon color="primary"/>
+            <ExitToAppIcon color="primary" />
           </IconButton>
-          <span style={{ paddingRight: '12px' }}>Log out</span>
-          </MenuItem>
+          <span style={{ paddingRight: "12px" }}>Log out</span>
+        </MenuItem>
       </Menu>
     );
 
     const renderMobileMenu = (
       <Menu
         anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         open={isMobileMenuOpen}
         onClose={this.handleMenuClose}
       >
@@ -259,13 +269,12 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
           </IconButton>
           <p>Log Out</p>
         </MenuItem>
-
       </Menu>
     );
 
     const cartIconButtonClickHandler = (event: any) => {
-      window.location.href = '/cart';
-    }
+      window.location.href = "/cart";
+    };
 
     return (
       <div className={classes.root}>
@@ -274,13 +283,18 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
             {/* {isUserLogin ? <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />
             </IconButton> : ''} */}
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            <Typography
+              className={classes.title}
+              variant="h6"
+              color="inherit"
+              noWrap
+            >
               <Toolbar>
                 {/* <NebulaIcon /> */}
-                <CatIcon color='white' />
+                <CatIcon color="white" />
                 <Typography variant="h6" color="inherit" noWrap>
                   <a href="/" className={classes.homeButton}>
-                    Max Studio
+                    {t("max_studio")}
                   </a>
                 </Typography>
               </Toolbar>
@@ -298,7 +312,7 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
               />
             </div> */}
             <div className={classes.grow} />
-            {isUserLogin ?
+            {isUserLogin ? (
               <div className={classes.sectionDesktop}>
                 <ProductSearchComponent />
                 {/* <div className={classes.search}>
@@ -313,30 +327,50 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
                 }}
               />
             </div> */}
-                <IconButton color="inherit" onClick={cartIconButtonClickHandler}>
+                <IconButton
+                  color="inherit"
+                  onClick={cartIconButtonClickHandler}
+                >
                   <ShoppingCartIcon />
                 </IconButton>
                 <IconButton color="inherit">
-                  <Badge badgeContent={1} color="primary" className={classes.notificationBadge}>
+                  <Badge
+                    badgeContent={1}
+                    color="primary"
+                    className={classes.notificationBadge}
+                  >
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
                 <IconButton
-                  aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                  aria-owns={isMenuOpen ? "material-appbar" : undefined}
                   aria-haspopup="true"
-                  onClick={(e) => { this.handleProfileMenuOpen(e) }}
+                  onClick={e => {
+                    this.handleProfileMenuOpen(e);
+                  }}
                   color="inherit"
                 >
                   <AccountCircle />
                 </IconButton>
-              </div> : renderLoginButton(this.props)}
-            {isUserLogin ?
+              </div>
+            ) : (
+              renderLoginButton(this.props)
+            )}
+            {isUserLogin ? (
               <div className={classes.sectionMobile}>
-                <IconButton aria-haspopup="true" onClick={(e) => { this.handleMobileMenuOpen(e) }} color="inherit">
+                <IconButton
+                  aria-haspopup="true"
+                  onClick={e => {
+                    this.handleMobileMenuOpen(e);
+                  }}
+                  color="inherit"
+                >
                   <MoreIcon />
                 </IconButton>
-              </div> : ''
-            }
+              </div>
+            ) : (
+              ""
+            )}
           </Toolbar>
         </AppBar>
         {renderMenu}
@@ -350,4 +384,4 @@ class PrimarySearchAppBar extends React.Component<MyProps, MyState> {
 //   classes: PropTypes.object.isRequired,
 // };
 
-export default withStyles(styles)(PrimarySearchAppBar);
+export default withTranslation()(withStyles(styles)(PrimarySearchAppBar));

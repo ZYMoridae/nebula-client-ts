@@ -64,7 +64,7 @@ export const fetchProductsInfo = (page: number, perPage: number, orderBy: string
       url: `/api/products?page=${page - 1}&size=${perPage}&sort=${orderBy}&keyword`,
       option: Utils.addToken(options),
       successCallback: (response: any) => {
-        dispatch(receieveProducts(response.data.content, response.data.page.totalPages));
+        dispatch(receieveProducts(response.data._embedded.productList, response.data.page.totalPages));
       },
       failureCallback: (error: any) => {
         dispatch(fetchingProductsError(error));

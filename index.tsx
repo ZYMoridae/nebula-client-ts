@@ -6,6 +6,8 @@ import App from './src/components/App';
 
 import configureStore from './src/store/configureStore';
 
+import './i18n';
+
 const store = configureStore({});
 
 ReactDOM.render(
