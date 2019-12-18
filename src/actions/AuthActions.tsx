@@ -101,7 +101,7 @@ export const fetchTokenAliveInfo = () => {
     };
     options = Utils.addToken(options);
     Zjax.request({
-      url: `/api/token/${sessionStorage.getItem('token')}`,
+      url: `/api/token/${sessionStorage.getItem('token')}/alive`,
       option: Utils.addToken(options),
       successCallback: (response: any) => {
         dispatch(receieveTokenAlive(response.data));

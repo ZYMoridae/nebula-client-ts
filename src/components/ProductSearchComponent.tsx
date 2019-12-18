@@ -1,161 +1,76 @@
-import Autosuggest from 'react-autosuggest';
-import './SearchComponentTheme.css';
-import * as React from "react";
+import React, { Component } from "react";
+import _ from "lodash";
+import { Select, Spin } from "antd";
+import debounce from "lodash/debounce";
 
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'C#',
-    year: 2000
-  },
-  {
-    name: 'C++',
-    year: 1983
-  },
-  {
-    name: 'Clojure',
-    year: 2007
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  },
-  {
-    name: 'Go',
-    year: 2009
-  },
-  {
-    name: 'Haskell',
-    year: 1990
-  },
-  {
-    name: 'Java',
-    year: 1995
-  },
-  {
-    name: 'Javascript',
-    year: 1995
-  },
-  {
-    name: 'Perl',
-    year: 1987
-  },
-  {
-    name: 'PHP',
-    year: 1995
-  },
-  {
-    name: 'Python',
-    year: 1991
-  },
-  {
-    name: 'Ruby',
-    year: 1995
-  },
-  {
-    name: 'Scala',
-    year: 2003
-  }
-];
+const { Option } = Select;
 
-// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
-function escapeRegexCharacters(str: any) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function getSuggestions(value: any) {
-  const escapedValue = escapeRegexCharacters(value.trim());
-
-  if (escapedValue === '') {
-    return [];
-  }
-
-  const regex = new RegExp('^' + escapedValue, 'i');
-
-  return languages.filter(language => regex.test(language.name));
-}
-
-function getSuggestionValue(suggestion: any) {
-  return suggestion.name;
-}
-
-function renderSuggestion(suggestion: any) {
-  return (
-    <span>{suggestion.name}</span>
-  );
-}
-
-
-type MyState = {
-  value: string,
-  suggestions: any
-};
-
-
-type MyProps = {
-};
-
-class ProductSearchComponent extends React.Component<MyProps, MyState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      value: '',
-      suggestions: []
-    };
+class ProductSearchComponent extends React.Component {
+  state: any = {
+    data: [],
+    value: [],
+    fetching: false
   };
 
+  fetchProduct = debounce((value: any) => {
+    if (value === "") {
+      this.setState({ data: [], fetching: false });
+    } else {
+      this.setState({ data: [], fetching: true });
+      let token = sessionStorage.getItem("token");
+      fetch(
+        `/api/products?page=0&size=5&sort=&keyword=${value.toLowerCase()}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json"
+          }
+        }
+      )
+        .then(response => response.json())
+        .then(body => {
+          const data = _.isNil(body._embedded)
+            ? []
+            : body._embedded.productList.map((item: any) => ({
+                text: `${item.name}`,
+                value: item.id
+              }));
+          this.setState({ data, fetching: false });
+        });
+    }
+  }, 800);
+
+  handleChange = (value: any) => {
+    // console.log(value);
+    window.location.href = `/products/${value.key}`;
+    this.setState({
+      value,
+      data: [],
+      fetching: false
+    });
+  };
 
   render() {
-    const { value, suggestions } = this.state;
-
-    const onChange = (event: any, { newValue, method }: { newValue: any, method: any }) => {
-      this.setState({
-        value: newValue
-      });
-    };
-
-    const onSuggestionsFetchRequested = ({ }) => {
-      fetch(`/api/products?page=0&size=5&sort=&keyword=${value.toLowerCase()}`)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          let suggestions = [];
-          if (Array.isArray(data._embedded.productList)) {
-            suggestions = data._embedded.productList;
-          }
-
-          this.setState({ suggestions: suggestions })
-        });
-    };
-
-    const onSuggestionsClearRequested = () => {
-      this.setState({
-        suggestions: []
-      });
-    };
-
-    const onSuggestionSelected = (event: any, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }: { suggestion: any, suggestionValue: any, suggestionIndex: any, sectionIndex: any, method: any }) => {
-      location.href = `/products/${suggestion.id}`;
-    };
-
-    const inputProps = {
-      placeholder: "Search products",
-      value,
-      onChange: onChange
-    };
-
+    const { fetching, data, value } = this.state;
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        onSuggestionSelected={onSuggestionSelected}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps} />
+      <Select
+        showSearch
+        filterOption={(input: any, option: any) =>
+          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+        }
+        allowClear={true}
+        style={{ width: "300px" }}
+        labelInValue
+        placeholder="Select product"
+        onSearch={this.fetchProduct}
+        onChange={this.handleChange}
+        notFoundContent={fetching ? <Spin size="small" /> : null}
+      >
+        {data.map((d: any) => (
+          <Option key={d.value}>{d.text}</Option>
+        ))}
+      </Select>
     );
   }
 }

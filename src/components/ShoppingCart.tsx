@@ -28,6 +28,8 @@ import ContentNotFound from "./utils/ContentNotFound";
 
 import { Theme, createStyles } from "@material-ui/core";
 
+import { Alert } from "antd";
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -197,9 +199,12 @@ const renderEmptyCartCaption = (props: any) => {
 
   if (isFetchedShoppingCart) {
     block = (
-      <ContentNotFound
-        warningText={"Your cart is empty. Please add some items!"}
-      />
+      <div>
+        <Alert message="Please checkout your order first before your make a new order!" type="info" showIcon />
+        <ContentNotFound
+          warningText={"Your cart is empty. Please add some items!"}
+        />
+      </div>
     );
   }
 
