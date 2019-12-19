@@ -1,114 +1,113 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepButton from "@material-ui/core/StepButton";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
-import PaymentOrder from './payment/PaymentOrder';
-import AddressForm from './payment/AddressForm';
-import PaymentMethod from './payment/PaymentMethod';
-import { isMobile } from 'react-device-detect';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import PaymentOrder from "./payment/PaymentOrder";
+import AddressForm from "./payment/AddressForm";
+import PaymentMethod from "./payment/PaymentMethod";
+import { isMobile } from "react-device-detect";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { Theme, createStyles } from "@material-ui/core";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
-
-const styles = (theme: Theme) => createStyles({
-  root: {
-    // width: '90%',
-    marginTop: theme.spacing(5)
-  },
-  button: {
-    marginRight: theme.spacing(1),
-  },
-  backButton: {
-    marginRight: theme.spacing(1),
-  },
-  completed: {
-    display: 'inline-block',
-  },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  stepControllerContainer: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(5),
-    textAlign: 'center'
-  },
-  // The bellow styles will apply to Payment Order page
-  paymentOrderContainer: {
-    padding: theme.spacing(3),
-    marginTop: theme.spacing(4)
-  },
-  textField: {
-
-  },
-  gridItem: {
-    paddingTop: '0px !important',
-    paddingBottom: '0px !important'
-  },
-  gridContainer: {
-    marginBottom: theme.spacing(8),
-    marginTop: theme.spacing(1),
-    paddingLeft: theme.spacing(8),
-    paddingRight: theme.spacing(8)
-  },
-  paymentMethodContainer: {
-    marginBottom: theme.spacing(4),
-    marginTop: theme.spacing(4)
-  },
-  paymentMethodInputContainer: {
-    paddingRight: isMobile ? '0' : theme.spacing(8),
-    marginTop: isMobile ? theme.spacing(2) : '0'
-  },
-  ccBlockMobile: {
-    padding: '0 !important'
-  },
-  progress: {
-    color: 'white',
-    marginRight: theme.spacing(1)
-  }
-});
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      // width: '90%',
+      marginTop: theme.spacing(5)
+    },
+    button: {
+      marginRight: theme.spacing(1)
+    },
+    backButton: {
+      marginRight: theme.spacing(1)
+    },
+    completed: {
+      display: "inline-block"
+    },
+    instructions: {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1)
+    },
+    stepControllerContainer: {
+      marginTop: theme.spacing(3),
+      marginBottom: theme.spacing(5),
+      textAlign: "center"
+    },
+    // The bellow styles will apply to Payment Order page
+    paymentOrderContainer: {
+      padding: theme.spacing(3),
+      marginTop: theme.spacing(4)
+    },
+    textField: {},
+    gridItem: {
+      paddingTop: "0px !important",
+      paddingBottom: "0px !important"
+    },
+    gridContainer: {
+      marginBottom: theme.spacing(8),
+      marginTop: theme.spacing(1),
+      paddingLeft: theme.spacing(8),
+      paddingRight: theme.spacing(8)
+    },
+    paymentMethodContainer: {
+      marginBottom: theme.spacing(4),
+      marginTop: theme.spacing(4)
+    },
+    paymentMethodInputContainer: {
+      paddingRight: isMobile ? "0" : theme.spacing(8),
+      marginTop: isMobile ? theme.spacing(2) : "0"
+    },
+    ccBlockMobile: {
+      padding: "0 !important"
+    },
+    progress: {
+      color: "white",
+      marginRight: theme.spacing(1)
+    }
+  });
 
 function getSteps() {
-  return ['Confirm your order', 'Your shipping address', 'Finalise your order'];
+  return ["Confirm your order", "Your shipping address", "Finalise your order"];
 }
 
 function getStepContent(step: number) {
   switch (step) {
     case 0:
-      return 'Step 1: Select campaign settings...';
+      return "Step 1: Select campaign settings...";
     case 1:
-      return 'Step 2: What is an ad group anyways?';
+      return "Step 2: What is an ad group anyways?";
     case 2:
-      return 'Step 3: This is the bit I really care about!';
+      return "Step 3: This is the bit I really care about!";
     default:
-      return 'Unknown step';
+      return "Unknown step";
   }
 }
 
 type MyState = {
-  activeStep: number,
-  completed: any,
-  skipped: any
+  activeStep: number;
+  completed: any;
+  skipped: any;
 };
 
 type MyProps = {
-  dispatch: any,
-  fetchActivateOrder: any,
-  isPaymentProcessing: boolean,
-  classes: any,
-  shippingInfoFormData: any,
-  orderId: number,
-  createShippingInfo: any,
-  creditCardInfo: any,
-  redirectToPaymentPage: boolean,
-  redirectOrderId: number
+  dispatch: any;
+  fetchActivateOrder: any;
+  isPaymentProcessing: boolean;
+  classes: any;
+  shippingInfoFormData: any;
+  orderId: number;
+  createShippingInfo: any;
+  creditCardInfo: any;
+  redirectToPaymentPage: boolean;
+  redirectOrderId: number;
+  activateOrder: any;
 };
 
 class Payment extends React.Component<MyProps, MyState> {
@@ -159,7 +158,7 @@ class Payment extends React.Component<MyProps, MyState> {
         {activeStep == 1 && <AddressForm {...props} classes={classes} />}
         {activeStep == 2 && <PaymentMethod {...props} classes={classes} />}
       </div>
-    )
+    );
   }
 
   componentWillMount() {
@@ -168,14 +167,22 @@ class Payment extends React.Component<MyProps, MyState> {
     fetchActivateOrder(orderId);
   }
 
-  renderFinishButton(handleNext: any, classes: any, activeStep: number, steps: any, isPaymentProcessing: boolean) {
-    let buttonContent: any = 'Next';
+  renderFinishButton(
+    handleNext: any,
+    classes: any,
+    activeStep: number,
+    steps: any,
+    isPaymentProcessing: boolean
+  ) {
+    let buttonContent: any = "Next";
 
     if (isPaymentProcessing) {
-      buttonContent = <CircularProgress className={classes.progress} size={24} />;
+      buttonContent = (
+        <CircularProgress className={classes.progress} size={24} />
+      );
     } else {
       if (activeStep === steps.length - 1) {
-        buttonContent = 'Finish';
+        buttonContent = "Finish";
       }
     }
 
@@ -188,19 +195,29 @@ class Payment extends React.Component<MyProps, MyState> {
       >
         {buttonContent}
       </Button>
-    )
+    );
   }
 
-
   render() {
-    const { classes, shippingInfoFormData, orderId, createShippingInfo, creditCardInfo, isPaymentProcessing, redirectToPaymentPage } = this.props;
+    const {
+      activateOrder,
+      classes,
+      shippingInfoFormData,
+      orderId,
+      createShippingInfo,
+      creditCardInfo,
+      isPaymentProcessing,
+      redirectToPaymentPage
+    } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
 
-    let cartItems = JSON.parse(sessionStorage.getItem('_pfc'));
+    let cartItems = JSON.parse(sessionStorage.getItem("_pfc"));
     // const totalSteps = () => getSteps().length;
 
-    const isStepOptional = (step: number) => { return false };
+    const isStepOptional = (step: number) => {
+      return false;
+    };
 
     const handleSkip = () => {
       const { activeStep } = this.state;
@@ -215,28 +232,32 @@ class Payment extends React.Component<MyProps, MyState> {
         skipped.add(activeStep);
         return {
           activeStep: state.activeStep + 1,
-          skipped,
+          skipped
         };
       });
     };
 
     const updateShippingInfo = () => {
       // Validate shipping info
-      if (!shippingInfoFormData.firstname
-        || !shippingInfoFormData.lastname
-        || !shippingInfoFormData.email
-        || !shippingInfoFormData.telephone
-        || !shippingInfoFormData.postCode
-        || !shippingInfoFormData.address1
-        || !shippingInfoFormData.address2) {
+      if (
+        !shippingInfoFormData.firstname ||
+        !shippingInfoFormData.lastname ||
+        !shippingInfoFormData.email ||
+        !shippingInfoFormData.telephone ||
+        !shippingInfoFormData.postCode ||
+        !shippingInfoFormData.address1 ||
+        !shippingInfoFormData.address2
+      ) {
         return;
       }
 
       // Validate credit card info
-      if (!creditCardInfo.cardnumber
-        || !creditCardInfo.cardname
-        || !creditCardInfo.expiry
-        || !creditCardInfo.cvc) {
+      if (
+        !creditCardInfo.cardnumber ||
+        !creditCardInfo.cardname ||
+        !creditCardInfo.expiry ||
+        !creditCardInfo.cvc
+      ) {
         return;
       }
 
@@ -247,13 +268,17 @@ class Payment extends React.Component<MyProps, MyState> {
       paymentPayload.expiry = creditCardInfo.expiry;
       paymentPayload.cvv = creditCardInfo.cvc;
 
-
-      createShippingInfo(orderId, shippingInfoFormData, {
-        paymentType: 'CCC',
-        creditCard: paymentPayload
-      });
-    }
-
+      console.log(this.props);
+      createShippingInfo(
+        orderId,
+        shippingInfoFormData,
+        {
+          paymentType: "CCC",
+          creditCard: paymentPayload
+        },
+        undefined
+      );
+    };
 
     const handleNext = () => {
       let activeStep;
@@ -263,7 +288,7 @@ class Payment extends React.Component<MyProps, MyState> {
       } else {
         activeStep = this.state.activeStep + 1;
         this.setState({
-          activeStep,
+          activeStep
         });
       }
 
@@ -275,18 +300,17 @@ class Payment extends React.Component<MyProps, MyState> {
       // } else {
 
       // }
-
     };
 
     const handleBack = () => {
       this.setState(state => ({
-        activeStep: state.activeStep - 1,
+        activeStep: state.activeStep - 1
       }));
     };
 
     const handleStep = (step: any) => () => {
       this.setState({
-        activeStep: step,
+        activeStep: step
       });
     };
 
@@ -295,7 +319,7 @@ class Payment extends React.Component<MyProps, MyState> {
       const completed = new Set(this.state.completed);
       completed.add(this.state.activeStep);
       this.setState({
-        completed,
+        completed
       });
 
       /**
@@ -312,54 +336,61 @@ class Payment extends React.Component<MyProps, MyState> {
       this.setState({
         activeStep: 0,
         completed: new Set(),
-        skipped: new Set(),
+        skipped: new Set()
       });
     };
 
     return (
       <div>
-        {redirectToPaymentPage ? <Redirect to={`/payment/${orderId}/success`} /> : <div className={classes.root}>
-          <Stepper alternativeLabel nonLinear activeStep={activeStep}>
-            {steps.map((label, index) => {
-              const props: any = {};
-              const buttonProps: any = {};
-              if (isStepOptional(index)) {
-                buttonProps.optional = <Typography variant="caption">Optional</Typography>;
-              }
-              if (this.isStepSkipped(index)) {
-                props.completed = false;
-              }
-              return (
-                <Step key={label} {...props}>
-                  <StepButton
-                    onClick={handleStep(index)}
-                    completed={this.isStepComplete(index)}
-                    {...buttonProps}
-                  >
-                    {label}
-                  </StepButton>
-                </Step>
-              );
-            })}
-          </Stepper>
+        {redirectToPaymentPage ? (
+          <Redirect to={`/payment/${orderId}/success`} />
+        ) : (
+          <div className={classes.root}>
+            <Stepper alternativeLabel nonLinear activeStep={activeStep}>
+              {steps.map((label, index) => {
+                const props: any = {};
+                const buttonProps: any = {};
+                if (isStepOptional(index)) {
+                  buttonProps.optional = (
+                    <Typography variant="caption">Optional</Typography>
+                  );
+                }
+                if (this.isStepSkipped(index)) {
+                  props.completed = false;
+                }
+                return (
+                  <Step key={label} {...props}>
+                    <StepButton
+                      onClick={handleStep(index)}
+                      completed={this.isStepComplete(index)}
+                      {...buttonProps}
+                    >
+                      {label}
+                    </StepButton>
+                  </Step>
+                );
+              })}
+            </Stepper>
 
-          <Grid container spacing={0}>
-            <Grid item xs={1} md={2}>
+            <Grid container spacing={0}>
+              <Grid item xs={1} md={2}></Grid>
+              <Grid item xs={10} md={8}>
+                {/* Rendering sub-components */}
+                {this.renderSubComponent(
+                  this.props,
+                  this.state.activeStep,
+                  classes
+                )}
 
-            </Grid>
-            <Grid item xs={10} md={8}>
-              {/* Rendering sub-components */}
-              {this.renderSubComponent(this.props, this.state.activeStep, classes)}
-
-              <div className={classes.stepControllerContainer}>
-                {this.allStepsCompleted() ? (
-                  <div>
-                    <Typography className={classes.instructions}>
-                      All steps completed - you&apos;re finished
-            </Typography>
-                    <Button onClick={handleReset}>Reset</Button>
-                  </div>
-                ) : (
+                <div className={classes.stepControllerContainer}>
+                  {this.allStepsCompleted() ? (
+                    <div>
+                      <Typography className={classes.instructions}>
+                        All steps completed - you&apos;re finished
+                      </Typography>
+                      <Button onClick={handleReset}>Reset</Button>
+                    </div>
+                  ) : (
                     <div>
                       {/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
                       <div>
@@ -369,8 +400,14 @@ class Payment extends React.Component<MyProps, MyState> {
                           className={classes.button}
                         >
                           Back
-              </Button>
-                        {this.renderFinishButton(handleNext, classes, activeStep, steps, isPaymentProcessing)}
+                        </Button>
+                        {this.renderFinishButton(
+                          handleNext,
+                          classes,
+                          activeStep,
+                          steps,
+                          isPaymentProcessing
+                        )}
 
                         {isStepOptional(activeStep) &&
                           !this.state.completed.has(this.state.activeStep) && (
@@ -381,7 +418,7 @@ class Payment extends React.Component<MyProps, MyState> {
                               className={classes.button}
                             >
                               Skip
-                  </Button>
+                            </Button>
                           )}
                         {/* {activeStep !== steps.length &&
                       (this.state.completed.has(this.state.activeStep) ? (
@@ -396,20 +433,13 @@ class Payment extends React.Component<MyProps, MyState> {
                       </div>
                     </div>
                   )}
-              </div>
+                </div>
+              </Grid>
+              <Grid item xs={1} md={2}></Grid>
             </Grid>
-            <Grid item xs={1} md={2}>
-
-            </Grid>
-          </Grid>
-
-        </div>}
-
+          </div>
+        )}
       </div>
-
-
-
-
     );
   }
 }

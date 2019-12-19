@@ -1,243 +1,193 @@
 import * as React from "react";
-import {
-  fetchAuthInfo
-} from '../actions';
+import { fetchAuthInfo } from "../actions";
 // import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import {
-  Redirect
-} from 'react-router-dom'
-import Snackbar from '@material-ui/core/Snackbar';
-import MySnackbarContent from './MySnackbarContent';
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
+// import MenuItem from '@material-ui/core/MenuItem';
+// import TextField from '@material-ui/core/TextField';
+// import Paper from '@material-ui/core/Paper';
+// import Grid from '@material-ui/core/Grid';
+// import Button from '@material-ui/core/Button';
+// import Typography from '@material-ui/core/Typography';
+import { Redirect } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
+import MySnackbarContent from "./MySnackbarContent";
 
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-import HeaderBarContainer from '../containers/HeaderBarContainer';
+import HeaderBarContainer from "../containers/HeaderBarContainer";
 
-import Footer from './Footer';
-import { isMobile } from 'react-device-detect';
+// import Footer from "./Footer";
+import { isMobile } from "react-device-detect";
 
 import { Theme, createStyles } from "@material-ui/core";
 
-const styles = (theme: Theme) => createStyles({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    // marginLeft: theme.spacing(1),
-    // marginRight: theme.spacing(1),
-    // width: 200
-  },
-  dense: {
-    marginTop: 16,
-  },
-  menu: {
-    width: 200,
-  },
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  loginContainer: {
-    padding: theme.spacing(3),
-    marginTop: isMobile ? '20vh' : '25vh',
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: 350,
-    marginLeft: isMobile ? theme.spacing(2) : '-40vw',
-    marginRight: theme.spacing(2)
-  },
-  loginButton: {
-    marginTop: theme.spacing(2)
-  },
-  newUserButton: {
-    marginTop: theme.spacing(2)
-  },
-  accountIcon: {
-    verticalAlign: 'middle',
-    marginRight: theme.spacing(1),
-    color: theme.palette.primary.main
-  },
-  signInCaption: {
-    color: theme.palette.primary.main
-  },
-  containerBg: {
-    // backgroundColor: '#ffe5d9',
-    // backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 64 64\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M8 16c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm33.414-6l5.95-5.95L45.95.636 40 6.586 34.05.636 32.636 2.05 38.586 8l-5.95 5.95 1.414 1.414L40 9.414l5.95 5.95 1.414-1.414L41.414 8zM40 48c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zM9.414 40l5.95-5.95-1.414-1.414L8 38.586l-5.95-5.95L.636 34.05 6.586 40l-5.95 5.95 1.414 1.414L8 41.414l5.95 5.95 1.414-1.414L9.414 40z\' fill=\'%23ff5500\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")',
-    // background: 'url(https://thewallpaper.co//wp-content/uploads/2016/02/cat-piano-hd-cat-wallpapers-kittens-widescreen-pussycats-high-resolution-pet-photos-baby-cat-desktop-images-cat-wallpapers-for-mac-windows-wallpapers-of-cats-1805x1015.jpg) no-repeat',
-    // backgroundSize: 'cover',
-    // backgroundPositionY: isMobile ? '-50px' : 'center',
-    // backgroundPositionX: 'center',
-    height: '100%',
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    width: '100%'
-  },
-  footerContainer: {
-    position: 'absolute',
-    left: '0',
-    bottom: '0',
-    width: '100%'
-  },
-  backgroundImage: {
-    position: 'absolute',
-    top: isMobile ? '-8vh' : '0',
-    left: '0',
-    zIndex: -999,
-    height: '100vh',
-    width: '100vw',
-    objectFit: 'cover'
-  }
-});
+// Ant design
+import { Layout, Form, Icon, Input, Button, Checkbox, Typography } from "antd";
+import { FormComponentProps } from "antd/lib/form/Form";
+import { Row, Col } from "antd";
 
-type MyState = {
-  username: string,
-  password: string
-};
+const { Title } = Typography;
 
+const { Footer } = Layout;
 
-type MyProps = {
-  dispatch: any,
-  isFetchedAuth: boolean,
-  classes: any,
-  info: any,
-  hideLoginError: any,
-  isShowLoginError: boolean
-};
+interface LoginProps extends FormComponentProps {
+  dispatch: any;
+  isFetchedAuth: boolean;
+  classes: any;
+  info: any;
+  hideLoginError: any;
+  isShowLoginError: boolean;
+  isFetchingAuth: boolean;
+}
 
-class Login extends React.Component<MyProps, MyState> {
-  componentDidMount() {
-    // const {info} = this.props;
-    this.state = {
-      username: '',
-      password: ''
-    }
-  }
-
-  handleSubmit = (event: any) => {
+class Login extends React.Component<LoginProps> {
+  handleSubmit = (e: any) => {
     event.preventDefault();
-    this.props.dispatch(fetchAuthInfo({
-      headers: {
-        Authorization: `Basic ${btoa(`${this.state.username}:${this.state.password}`)}`
-      }
-    }));
-  }
 
-  onChange = (event: any) => {
-    const { target: { name, value } } = event;
-    // Ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/26635
-    this.setState({ [name]: value } as Pick<MyState, keyof MyState>);
-  }
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.dispatch(
+          fetchAuthInfo({
+            headers: {
+              Authorization: `Basic ${btoa(
+                `${values.username}:${values.password}`
+              )}`
+            }
+          })
+        );
+        console.log("Received values of form: ", values);
+      }
+    });
+  };
 
   render() {
-    const { isFetchedAuth, classes, info, hideLoginError, isShowLoginError } = this.props;
+    const {
+      isFetchedAuth,
+      classes,
+      info,
+      hideLoginError,
+      isShowLoginError,
+      isFetchingAuth
+    } = this.props;
 
-    if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != 'undefined') {
-      location.href = '/';
+    if (
+      sessionStorage.getItem("token") != null &&
+      sessionStorage.getItem("token") != "undefined"
+    ) {
+      location.href = "/";
     }
 
     if (isFetchedAuth && this.props.info.token != undefined) {
-      sessionStorage.setItem('token', this.props.info.token);
-      location.href = '/';
+      sessionStorage.setItem("token", this.props.info.token);
+      location.href = "/";
     }
 
+    const { getFieldDecorator } = this.props.form;
+
     return (
+      <div>
+        {/* <img className={classes.backgroundImage} src="https://cdn.hipwallpaper.com/i/61/90/e6dpSJ.jpg" /> */}
 
-      <div className={classes.containerBg}>
-
-        <img className={classes.backgroundImage} src="https://thewallpaper.co//wp-content/uploads/2016/02/cat-piano-hd-cat-wallpapers-kittens-widescreen-pussycats-high-resolution-pet-photos-baby-cat-desktop-images-cat-wallpapers-for-mac-windows-wallpapers-of-cats-1805x1015.jpg" />
-
-        <HeaderBarContainer />
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          open={isShowLoginError}
-          autoHideDuration={1500}
-          onClose={hideLoginError}
-        >
-          <MySnackbarContent
-            onClose={hideLoginError}
-            variant="error"
-            message="Login Failed!"
-          />
-        </Snackbar>
-
-
-        <form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
-
-          <Grid container alignItems="center" justify="center" direction="row">
-            <Paper className={classes.loginContainer}>
-              <Grid item xs={12}>
-                <Typography variant="h5" gutterBottom className={classes.signInCaption}>
-                  <AccountCircleIcon fontSize="large" className={classes.accountIcon} />
-                  Sign In
-                  </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-name"
-                  label="Name"
-                  name="username"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  fullWidth={true}
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="outlined-password"
-                  label="Password"
-                  name="password"
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  type="password"
-                  fullWidth={true}
-                  onChange={(e) => { this.onChange(e) }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button variant="contained" color="primary" size="large" fullWidth={true} className={classes.loginButton} type="submit">
-                  Login
-                  </Button>
-              </Grid>
-              <Grid>
-                <div className={classes.newUserButton}>
-                  <Typography variant="caption" gutterBottom>
-                    No account? <a href='/user/new'>Create one!</a>
-                  </Typography>
-                </div>
-              </Grid>
-            </Paper>
-          </Grid>
-
-        </form>
-
-
-        <div className={classes.footerContainer}>
-          <Footer />
+        <div style={{ position: "absolute", top: "0", width: "100%" }}>
+          <HeaderBarContainer />
         </div>
+
+        <Row
+          id="form-container"
+          type="flex"
+          justify="center"
+          align="middle"
+          style={{ minHeight: "100vh" }}
+        >
+          <Col span={7}>
+            <Form onSubmit={this.handleSubmit} className="login-form">
+              {/* <Title className="login-title" level={4}>
+                Plato Admin
+              </Title> */}
+              <Form.Item>
+                {getFieldDecorator("username", {
+                  rules: [
+                    { required: true, message: "Please input your username!" }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    placeholder="Username"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator("password", {
+                  rules: [
+                    { required: true, message: "Please input your Password!" }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="password"
+                    placeholder="Password"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                  loading={isFetchingAuth}
+                >
+                  Log in
+                </Button>
+              </Form.Item>
+
+              <Form.Item>
+                {getFieldDecorator("remember", {
+                  valuePropName: "checked",
+                  initialValue: true
+                })(<Checkbox>Remember me</Checkbox>)}
+                <a className="login-form-forgot" href="">
+                  Forgot password
+                </a>
+
+                {/* Or <a href="">register now!</a> */}
+                {/* <Footer style={{ textAlign: "center" }}>
+                  Plato Tech ©{new Date().getFullYear()}
+                </Footer> */}
+              </Form.Item>
+            </Form>
+          </Col>
+          <Col
+            span={24}
+            style={{
+              position: "absolute",
+              bottom: "0"
+            }}
+          >
+            <Footer
+              style={{
+                textAlign: "center",
+                backgroundColor: "#232F3E",
+                color: "white"
+              }}
+            >
+              iEuclid Tech ©{new Date().getFullYear()}
+            </Footer>
+          </Col>
+        </Row>
+
+        {/* <div>
+          <Footer />
+        </div> */}
       </div>
-    )
+    );
   }
 }
 
-
-export default withStyles(styles)(Login);
+const WrappedLoginForm = Form.create({ name: "normal_login" })(Login);
+export default WrappedLoginForm;

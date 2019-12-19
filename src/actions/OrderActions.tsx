@@ -1,10 +1,10 @@
-import Zjax from '../utils/zjax';
-import Utils from '../utils/Utils';
-import ActionType from './ActionType';
-import { redirectToSuccessPaymentPage } from './PaymentActions';
+import Zjax from "../utils/zjax";
+import Utils from "../utils/Utils";
+import ActionType from "./ActionType";
+import { redirectToSuccessPaymentPage } from "./PaymentActions";
 
-import PaginationInterface from '../interfaces/PaginationInterface';
-import OrderInterface from '../interfaces/OrderInterface';
+import PaginationInterface from "../interfaces/PaginationInterface";
+import OrderInterface from "../interfaces/OrderInterface";
 
 // -------- Shopping Cart Actions ----------
 export const receieveOrder = (results: any) => {
@@ -13,31 +13,31 @@ export const receieveOrder = (results: any) => {
     isCreatingOrder: false,
     isCreatedOrder: true,
     info: results
-  }
-}
+  };
+};
 
 export const creatingOrder = () => {
   return {
     type: ActionType.CREATING_ORDERS_PENDING,
     isCreatingOrder: true,
     isCreatedOrder: false
-  }
-}
+  };
+};
 
 export const creatingOrderError = (err: any) => {
   return {
     type: ActionType.CREATING_ORDERS_REJECTED,
     isCreatingOrder: false,
     isCreatedOrder: true
-  }
-}
+  };
+};
 
 export const createOrder = (data: any) => {
-  return function (dispatch: any) {
+  return function(dispatch: any) {
     dispatch(creatingOrder());
 
     let options = {
-      method: 'post',
+      method: "post",
       data: data
     };
 
@@ -52,8 +52,8 @@ export const createOrder = (data: any) => {
         dispatch(creatingOrderError(error));
       }
     });
-  }
-}
+  };
+};
 
 // Get activate order
 
@@ -65,16 +65,16 @@ export const receieveActivateOrder = (results: any) => {
     isFetchingActivateOrder: false,
     isFetchedActivateOrder: true,
     info: results
-  }
-}
+  };
+};
 
 export const fetchingActivateOrder = () => {
   return {
     type: ActionType.FETCHING_ACTIVATE_ORDER_PENDING,
     isFetchingActivateOrder: true,
     isFetchedActivateOrder: false
-  }
-}
+  };
+};
 
 export const fetchingActivateOrderError = (error: any) => {
   return {
@@ -82,15 +82,15 @@ export const fetchingActivateOrderError = (error: any) => {
     isFetchingActivateOrder: false,
     isFetchedActivateOrder: true,
     error: error
-  }
-}
+  };
+};
 
 export const fetchActivateOrder = (orderId: number) => {
-  return function (dispatch: any) {
+  return function(dispatch: any) {
     dispatch(fetchingActivateOrder());
 
     let options = {
-      method: 'get'
+      method: "get"
     };
 
     Zjax.request({
@@ -98,7 +98,7 @@ export const fetchActivateOrder = (orderId: number) => {
       option: Utils.addToken(options),
       successCallback: (response: any) => {
         // TODO: Change back end api when return the payment status (make it as a boolean value)
-        if (response.data.orderStatus.name == 'paid') {
+        if (response.data.orderStatus.name == "paid") {
           dispatch(redirectToSuccessPaymentPage(response.data.id));
         } else {
           dispatch(receieveActivateOrder(response.data));
@@ -108,13 +108,12 @@ export const fetchActivateOrder = (orderId: number) => {
         dispatch(fetchingActivateOrderError(error));
       }
     });
-  }
-}
+  };
+};
 
 export const redirectToPaymentPage = (orderId: number) => {
   location.href = `/payment/${orderId}`;
-}
-
+};
 
 // ------ Fetch order by id ------
 
@@ -124,16 +123,16 @@ export const fetchedOrder = (results: any) => {
     isFetchingOrder: false,
     isFetchedOrder: true,
     info: results
-  }
-}
+  };
+};
 
 export const fetchingOrder = () => {
   return {
     type: ActionType.FETCHING_ORDER_PENDING,
     isFetchingOrder: true,
     isFetchedOrder: false
-  }
-}
+  };
+};
 
 export const fetchingOrderError = (error: any) => {
   return {
@@ -141,15 +140,15 @@ export const fetchingOrderError = (error: any) => {
     isFetchingOrder: false,
     isFetchedOrder: true,
     error: error
-  }
-}
+  };
+};
 
 export const fetchOrder = (orderId: number) => {
-  return function (dispatch: any) {
+  return function(dispatch: any) {
     dispatch(fetchingOrder());
 
     let options = {
-      method: 'get'
+      method: "get"
     };
 
     Zjax.request({
@@ -162,27 +161,33 @@ export const fetchOrder = (orderId: number) => {
         dispatch(fetchingOrderError(error));
       }
     });
-  }
-}
+  };
+};
 
 // ------ Get orders by user id ------
 
-export const fetchedUserOrders = (results: any) => {
+export const fetchedUserOrders = (
+  results: any,
+  totalPages: number,
+  totalElements: number
+) => {
   return {
     type: ActionType.ORDER.RECEIEVE_USER_ORDERS,
     isFetchingUserOrders: false,
     isFetchedUserOrders: true,
-    info: results
-  }
-}
+    info: results,
+    totalPages: totalPages,
+    totalElements: totalElements
+  };
+};
 
 export const fetchingUserOrders = () => {
   return {
     type: ActionType.ORDER.FETCHING_USER_ORDERS_PENDING,
     isFetchingUserOrders: true,
     isFetchedUserOrders: false
-  }
-}
+  };
+};
 
 export const fetchingUserOrdersError = (error: any) => {
   return {
@@ -190,31 +195,42 @@ export const fetchingUserOrdersError = (error: any) => {
     isFetchingUserOrders: false,
     isFetchedUserOrders: true,
     error: error
-  }
-}
+  };
+};
 
-export const fetchUserOrders = (page: number, perPage: number, orderBy: string) => {
-  return function (dispatch: any) {
+export const fetchUserOrders = (
+  page: number,
+  perPage: number,
+  orderBy: string
+) => {
+  return function(dispatch: any) {
     dispatch(fetchingUserOrders());
 
     let options = {
-      method: 'get'
+      method: "get"
     };
 
     Zjax.request({
-      url: `/api/orders?page=${page - 1}&size=${perPage}&sort=${orderBy}&keyword`,
+      url: `/api/orders?page=${page -
+        1}&size=${perPage}&sort=${orderBy}&keyword`,
       option: Utils.addToken(options),
       successCallback: (response: any) => {
-        const { data }: { data: OrdersPagination } = response;
-        dispatch(fetchedUserOrders(data));
+        // const { data }: { data: OrdersPagination } = response;
+        dispatch(
+          fetchedUserOrders(
+            response.data._embedded.orderList,
+            response.data.page.totalPages,
+            response.data.page.totalElements
+          )
+        );
       },
       failureCallback: (error: any) => {
         dispatch(fetchingUserOrdersError(error));
       }
     });
-  }
-}
+  };
+};
 
 interface OrdersPagination extends PaginationInterface {
-  content: Array<OrderInterface>
+  content: Array<OrderInterface>;
 }

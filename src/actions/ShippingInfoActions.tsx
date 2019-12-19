@@ -2,6 +2,8 @@ import Zjax from '../utils/zjax';
 import Utils from '../utils/Utils';
 import ActionType from './ActionType';
 import { doPayment } from './PaymentActions';
+import { notification, Icon } from "antd";
+import * as React from "react";
 
 // -------- Shipping Info Actions ----------
 export const receieveShippingInfo = (results: any) => {
@@ -37,7 +39,7 @@ export const creatingShippingInfoError = (error: any) => {
  * @param data 
  * @param creditCardInfo 
  */
-export const createShippingInfo = (orderId: number, data: any, creditCardInfo: any) => {
+export const createShippingInfo = (orderId: number, data: any, creditCardInfo: any, paymentToken: string) => {
   
   return function (dispatch: any) {
     dispatch(creatingShippingInfo());
@@ -52,10 +54,15 @@ export const createShippingInfo = (orderId: number, data: any, creditCardInfo: a
       option: Utils.addToken(options),
       successCallback: (response: any) => {
         dispatch(receieveShippingInfo(response.data));
-        dispatch(doPayment(orderId, creditCardInfo));
+        dispatch(doPayment(orderId, creditCardInfo, paymentToken));
         // dispatch(redirectToPaymentPage(response.data.id));
       },
       failureCallback: (error: any) => {
+        notification.open({
+          message: "Payment Failed",
+          description: "Please try again later!",
+          icon: <Icon type="exclamation-circle" style={{ color: "#ff4d4f" }} />
+        });
         dispatch(creatingShippingInfoError(error));
       }
     });

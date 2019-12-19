@@ -54,23 +54,26 @@ class ProductSearchComponent extends React.Component {
   render() {
     const { fetching, data, value } = this.state;
     return (
-      <Select
-        showSearch
-        filterOption={(input: any, option: any) =>
-          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        allowClear={true}
-        style={{ width: "300px" }}
-        labelInValue
-        placeholder="Select product"
-        onSearch={this.fetchProduct}
-        onChange={this.handleChange}
-        notFoundContent={fetching ? <Spin size="small" /> : null}
-      >
-        {data.map((d: any) => (
-          <Option key={d.value}>{d.text}</Option>
-        ))}
-      </Select>
+      <div style={{marginTop: "8px"}}>
+        <Select
+          showSearch
+          filterOption={(input: any, option: any) =>
+            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
+            0
+          }
+          allowClear={true}
+          style={{ width: "300px"}}
+          labelInValue
+          placeholder="Select product"
+          onSearch={this.fetchProduct}
+          onChange={this.handleChange}
+          notFoundContent={fetching ? <Spin size="small" /> : null}
+        >
+          {data.map((d: any) => (
+            <Option key={d.value}>{d.text}</Option>
+          ))}
+        </Select>
+      </div>
     );
   }
 }

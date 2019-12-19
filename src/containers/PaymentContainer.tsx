@@ -37,8 +37,8 @@ const mapDispatchToProps = (dispatch: any) => {
     fetchActivateOrder: (orderId: number) => {
       dispatch(fetchActivateOrder(orderId));
     },
-    createShippingInfo: (orderId: number, shippingInfo: any, creditCardInfo: any) => {
-      dispatch(createShippingInfo(orderId, shippingInfo, creditCardInfo));
+    createShippingInfo: (orderId: number, shippingInfo: any, creditCardInfo: any, paymentToken: string) => {
+      dispatch(createShippingInfo(orderId, shippingInfo, creditCardInfo, paymentToken));
     },
     shippingInfoFormInputChanged: (shippingInfoFormData: any) => {
       dispatch(shippingInfoFormInputChanged(shippingInfoFormData));

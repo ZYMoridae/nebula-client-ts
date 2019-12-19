@@ -104,7 +104,8 @@ const styles = (theme: Theme) =>
     homeButton: {
       textDecoration: "none",
       color: "white",
-      marginLeft: theme.spacing(1.5)
+      marginLeft: theme.spacing(1.5),
+      fontFamily: "Megrim, cursive"
     },
     myAppBar: {
       zIndex: theme.zIndex.drawer + 1

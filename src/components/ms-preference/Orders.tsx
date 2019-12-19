@@ -1,164 +1,164 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Theme, createStyles } from "@material-ui/core";
-import PaginationList from "../utils/PaiginationList";
+import * as React from "react";
 
-import PaginationComponent from "@josephzhou/ms-pagination";
-// import '@josephzhou/ms-pagination/src/PaginationComponent.css';
+import Footer from "../Footer";
+import { Layout, Table, Divider, Tag, Breadcrumb, Button, Icon } from "antd";
 
-import OrderInterface from "../../interfaces/OrderInterface";
+import { Row, Col } from "antd";
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
+const { Header, Content, Sider } = Layout;
 
-const styles = (theme: Theme) => createStyles({
-  table: {
-    // marginTop: theme.spacing(4)
+const columns = [
+  {
+    title: "Id",
+    dataIndex: "id",
+    key: "id",
+    render: (text: any, record: any) => (
+      <a href={`/products/categories/${record.id}`}>{text}</a>
+    )
   },
-  root: {
-    marginTop: theme.spacing(4)
-  },
-  isLoading: {
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    zIndex: 9999
-  },
-  progressContainer: {
-    width: '100%',
-    textAlign: 'center'
-  },
-  progress: {
+  {
+    title: "Amount",
+    key: "amount",
+    render: (text: any, record: any) => {
+      let totalAmount = 0;
 
+      if (Array.isArray(record.orderItems)) {
+        record.orderItems.forEach((orderItem: any) => {
+          totalAmount += orderItem.amount;
+        });
+      }
+
+      return <span>${totalAmount}</span>;
+    }
+  },
+  {
+    title: "Created At",
+    dataIndex: "createdAt",
+    key: "createdAt"
   }
-});
+];
 
-type MyState = {
-
+type IndexState = {
+  offset: number;
+  pagination: any;
 };
 
-
-type MyProps = {
-  classes: any,
-  theme: any,
-  fetchUserOrders: any,
-  isFetchingUserOrders: boolean,
-  totalPages: number,
-  page: number,
-  perPage: number,
-  orderBy: string,
-  info: Array<any>
+type IndexProps = {
+  totalElements: number;
+  page: number;
+  perPage: number;
+  orderBy?: string;
+  fetchUserOrders: any;
+  info: any;
+  totalPages: number;
+  isFetchingUserOrders: any;
 };
 
-
-const renderChildren = (item: OrderInterface) => {
-  return (
-    <div>
-      {item.id}
-    </div>
-  )
-}
-
-class Orders extends React.Component<MyProps, MyState> {
+class Index extends React.Component<IndexProps, IndexState> {
+  constructor(props: any) {
+    super(props);
+    this.state = { offset: 0, pagination: {} };
+  }
 
   componentDidMount() {
-    const { fetchUserOrders, page, perPage, orderBy } = this.props;
-    // fetchUserOrders(page, perPage, orderBy);
+    const { page, perPage } = this.props;
+    let currentOffset = (page - 1) * perPage;
+    this.handleClick(currentOffset);
   }
 
-  onPageChanged = (page: number, perPage: number, orderBy: string) => {
-    this.props.fetchUserOrders(page, perPage, orderBy);
+  updateUrlParmas(page: number, perPage: number, orderBy: string) {
+    if (history.pushState) {
+      let url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?page=${page}&perPage=${perPage}&orderBy=${orderBy}`;
+      window.history.pushState(
+        {
+          path: url
+        },
+        "",
+        url
+      );
+    }
   }
 
+  /**
+   * Handle pagination click
+   *
+   * @param {*} offset
+   */
+  handleClick(offset: number) {
+    const { perPage, orderBy, fetchUserOrders } = this.props;
+    let page = offset / this.props.perPage + 1;
+    this.setState({ offset });
+    this.updateUrlParmas(page, perPage, orderBy);
+    fetchUserOrders(page, perPage, "id");
+  }
+
+  handleTableChange = (pagination: any, filters: any, sorter: any) => {
+    const { fetchUserOrders } = this.props;
+    const pager = { ...this.state.pagination };
+    pager.current = pagination.current;
+    this.setState({
+      pagination: pager
+    });
+    fetchUserOrders(pagination.current, pagination.pageSize, "id");
+  };
 
   render() {
-    const { totalPages, page, perPage, orderBy, info, fetchUserOrders, classes, isFetchingUserOrders } = this.props;
+    const {
+      info,
+      perPage,
+      totalPages,
+      isFetchingUserOrders,
+      totalElements
+    } = this.props;
 
     return (
-      <div className={classes.root}>
+      <Layout style={{ padding: "0 24px 24px" }}>
+        <Breadcrumb style={{ margin: "16px 0" }}>
+          <Breadcrumb.Item>
+            <a href="/preference">Preferences</a>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>Orders</Breadcrumb.Item>
+        </Breadcrumb>
+        <Content
+          style={{
+            background: "#fff",
+            padding: 24,
+            margin: 0,
+            minHeight: 280
+          }}
+        >
+          {/* <Row gutter={8} style={{ marginBottom: "8px" }}>
+            <Col style={{ float: "right" }}>
+              <Button
+                type="primary"
+                onClick={() => {
+                  window.location.href = "/products/categories/new";
+                }}
+              >
+                <Icon type="plus" />
+                Add
+              </Button>
+            </Col>
+          </Row> */}
 
-
-
-        <Grid container spacing={0}>
-          <Grid item xs={1} md={2} xl={2}>
-
-          </Grid>
-          <Grid item xs={10} md={8} xl={8}>
-
-            <Typography variant="h6" gutterBottom>
-              My Orders
-            </Typography>
-            
-            {isFetchingUserOrders && <div className={classes.progressContainer}>
-              <CircularProgress></CircularProgress>
-            </div>}
-            <div>
-
-              {!isFetchingUserOrders && <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      Booking Ref
-                  </TableCell>
-                    <TableCell align="right">Created At</TableCell>
-                    <TableCell align="right">Status</TableCell>
-                  </TableRow>
-                </TableHead>
-
-
-                <TableBody>
-                  {info.map((row: any, index: number) => (
-                    <TableRow key={row.id}>
-                      <TableCell component="th" scope="row">
-                        {row.id}
-                      </TableCell>
-                      <TableCell align="right">
-                        {row.createdAt}
-                      </TableCell>
-                      <TableCell align="right">
-                        {row.orderStatus.name}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-
-                </TableBody>
-
-              </Table>}
-
-
-
-            </div>
-
-
-
-
-          </Grid>
-          <Grid item xs={1} md={2} xl={2}>
-
-          </Grid>
-
-        </Grid>
-
-
-        {/* {info.map((item, index) => <div key={index}>
-          {item.id}
-        </div>)} */}
-        <PaginationComponent count={totalPages} onPageChanged={this.onPageChanged} initialPage={page} perPage={perPage}/>
-
-      </div>
-    )
+          <Table
+            columns={columns}
+            dataSource={info}
+            rowKey={record => record.id}
+            pagination={{
+              defaultPageSize: 10,
+              showSizeChanger: true,
+              pageSizeOptions: ["10", "20", "30"],
+              total: totalElements
+            }}
+            onChange={this.handleTableChange}
+            loading={isFetchingUserOrders}
+          />
+        </Content>
+        {/* <Footer></Footer> */}
+      </Layout>
+    );
   }
-
 }
 
-export default withStyles(styles, { withTheme: true })(Orders);
+export default Index;
