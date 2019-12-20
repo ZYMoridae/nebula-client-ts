@@ -276,7 +276,7 @@ class Payment extends React.Component<MyProps, MyState> {
           paymentType: "CCC",
           creditCard: paymentPayload
         },
-        undefined
+        activateOrder.paymentToken
       );
     };
 
