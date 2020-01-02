@@ -10,6 +10,8 @@ import HomeReducer from './HomeReducer';
 import OrdersReducer from './ms-preference/OrdersReducer';
 import UserReducer from './UserReducer';
 import TokenReducer from './TokenReducer';
+import UserPreferencesReducer from './ms-preference/UserPreferencesReducer';
+import ClassBookingsReducer from './ms-preference/ClassBookingsReducer';
 
 const appReducer = combineReducers({
   LoginReducer,
@@ -22,7 +24,9 @@ const appReducer = combineReducers({
   HomeReducer,
   OrdersReducer,
   UserReducer,
-  TokenReducer
+  TokenReducer,
+  UserPreferencesReducer,
+  ClassBookingsReducer
 })
 
 export default appReducer;

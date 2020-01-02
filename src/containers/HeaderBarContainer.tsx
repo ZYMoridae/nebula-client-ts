@@ -105,7 +105,10 @@ const styles = (theme: Theme) =>
       textDecoration: "none",
       color: "white",
       marginLeft: theme.spacing(1.5),
-      fontFamily: "Megrim, cursive"
+      fontFamily: "Megrim, cursive",
+      "&:hover": {
+        color: fade("#000000", 1)
+      }
     },
     myAppBar: {
       zIndex: theme.zIndex.drawer + 1

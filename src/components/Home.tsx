@@ -29,6 +29,8 @@ import "rc-banner-anim/assets/index.css";
 import "./Home.css";
 const BgElement = Element.BgElement;
 
+import { Card, Col, Row } from "antd";
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -100,7 +102,14 @@ const RenderLoadingPlaceholder = () => {
 };
 
 const BlockComponent = (props: any) => {
-  const { classes, isFetchedProducts, items, title, error } = props;
+  const {
+    classes,
+    isFetchedProducts,
+    items,
+    title,
+    error,
+    isFetchingProduct
+  } = props;
   const TagName = props.tag;
   const contentLoadersArray = _.range(4);
   const renewClicked = () => {};
@@ -133,8 +142,19 @@ const BlockComponent = (props: any) => {
         </div>
       </div>
 
-      <Grid container spacing={4} className={classes.fetchedProductsContainer}>
-        {error == null && isFetchedProducts && Array.isArray(items)
+      <Row gutter={[16, 8]}>
+        {items.map((product: any, index: any) => (
+          <Col span={8} key={index}>
+            <TagName product={product} isFetching={isFetchingProduct} />
+          </Col>
+        ))}
+      </Row>
+
+      {/* <Grid container spacing={4} className={classes.fetchedProductsContainer}>
+        {error == null && isFetchedProducts 
+        
+        
+        && Array.isArray(items)
           ? items.map((product, index) => (
               <Grid item xs={12} sm={6} lg={3} key={index}>
                 <TagName product={product} />
@@ -145,7 +165,7 @@ const BlockComponent = (props: any) => {
                 {RenderLoadingPlaceholder()}
               </Grid>
             ))}
-      </Grid>
+      </Grid> */}
     </div>
   );
 };
@@ -168,7 +188,7 @@ class Home extends React.Component<MyProps, MyState> {
   componentDidMount() {
     const { fetchHomeBannerInfo, fetchFeaturedProducts } = this.props;
     fetchHomeBannerInfo();
-    fetchFeaturedProducts(1, 4);
+    fetchFeaturedProducts(1, 6);
   }
 
   render() {
