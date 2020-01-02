@@ -74,15 +74,23 @@ test('test action ORDER.RECEIEVE_USER_ORDERS', () => {
         totalPages: 10
       },
       content: ['test']
-    }
+    },
+    totalElements: 10,
+    totalPages: 10
   };
 
   let expectedResult: any = {
     isFetchedUserOrders: true,
     isFetchingUserOrders: false,
     totalPages: 10,
-    info: ['test'],
-    error: null
+    info: {
+      page: {
+        totalPages: 10
+      },
+      content: ['test']
+    },
+    error: null,
+    totalElements: 10
   } 
 
   let result = OrdersReducer(initState, orderAction);
