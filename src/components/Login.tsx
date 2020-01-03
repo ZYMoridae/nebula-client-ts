@@ -27,6 +27,8 @@ import { Layout, Form, Icon, Input, Button, Checkbox, Typography } from "antd";
 import { FormComponentProps } from "antd/lib/form/Form";
 import { Row, Col } from "antd";
 
+import './Login.css';
+
 const { Title } = Typography;
 
 const { Footer } = Layout;
@@ -87,7 +89,7 @@ class Login extends React.Component<LoginProps> {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <div>
+      <div className="login-container">
         {/* <img className={classes.backgroundImage} src="https://cdn.hipwallpaper.com/i/61/90/e6dpSJ.jpg" /> */}
 
         <div style={{ position: "absolute", top: "0", width: "100%" }}>
@@ -102,10 +104,10 @@ class Login extends React.Component<LoginProps> {
           style={{ minHeight: "100vh" }}
         >
           <Col span={7}>
-            <Form onSubmit={this.handleSubmit} className="login-form">
-              {/* <Title className="login-title" level={4}>
-                Plato Admin
-              </Title> */}
+            <Form onSubmit={this.handleSubmit} className="login-form-container">
+              <Title className="login-title" level={4}>
+                Login
+              </Title>
               <Form.Item>
                 {getFieldDecorator("username", {
                   rules: [
@@ -146,7 +148,12 @@ class Login extends React.Component<LoginProps> {
                 </Button>
               </Form.Item>
 
-              <Form.Item>
+              <Form.Item style={{ marginBottom: "0px" }}>
+                Don't have an account?
+                <a href="/user/register"> Sign Up</a>
+              </Form.Item>
+
+              <Form.Item style={{ marginBottom: "0px" }}>
                 {getFieldDecorator("remember", {
                   valuePropName: "checked",
                   initialValue: true

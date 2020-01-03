@@ -276,7 +276,7 @@ class Home extends React.Component<MyProps, MyState> {
                   </div>
                 )}
               </Slider>  */}
-            {fetchHomeBannerError == null ? (
+            {/* {fetchHomeBannerError == null ? (
               ""
             ) : (
               <ContentLoader
@@ -288,7 +288,7 @@ class Home extends React.Component<MyProps, MyState> {
               >
                 <rect x="0" y="10" width="400" height="160" rx="5" />
               </ContentLoader>
-            )}
+            )} */}
 
             <BlockComponent
               classes={classes}

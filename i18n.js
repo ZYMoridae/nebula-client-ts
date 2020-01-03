@@ -11,7 +11,7 @@ const resources = {
       "todays_deal": "Today's Deal",
       "featured_products": "Featured Products",
       "login_btn": "Login",
-      "max_studio": "Max Studio"
+      "max_studio": "iEuclid"
     }
   },
   cn: {
@@ -21,7 +21,7 @@ const resources = {
       "todays_deal": "今日特卖",
       "featured_products": "精选好物",
       "login_btn": "登录",
-      "max_studio": "Max Studio"
+      "max_studio": "iEuclid"
     }
   }
 };

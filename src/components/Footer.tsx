@@ -105,7 +105,7 @@ class Footer extends React.Component<MyProps, MyState> {
 						<CatIcon color="white" style={{marginTop: '16px', marginBottom: '16px'}}></CatIcon>
 					</div>
 					<Typography variant="caption" gutterBottom align="center" className={classes.footerText}>
-						© 2019, Max Studio
+						© {new Date().getFullYear()}, iEuclid Tech
 					</Typography>
 				</div>
 			</div>

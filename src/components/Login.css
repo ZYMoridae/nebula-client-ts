@@ -1,0 +1,14 @@
+.login-container {
+  background-color: #007bff;
+  background-image: url("https://www.transparenttextures.com/patterns/connected.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+.login-form-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px 40px !important;
+  -webkit-box-shadow: 0px 0px 22px -8px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 22px -8px rgba(0,0,0,1);
+  box-shadow: 0px 0px 22px -8px rgba(0,0,0,1);
+}

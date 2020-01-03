@@ -23,6 +23,9 @@ import PaymentOptionManagementContainer from "../containers/ms-preference/Paymen
 import ClassBookingsContainer from "../containers/ms-preference/ClassBookingsContainer";
 import IncomeAnalysisContainer from "../containers/ms-preference/IncomeAnalysisContainer";
 
+
+import IndexContainer from "../containers/IndexContainer";
+
 import Footer from "./Footer";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -168,6 +171,7 @@ const IncomeAnalysis = () => {
   return <IncomeAnalysisContainer />;
 };
 
+
 class App extends React.Component {
   isShowHeaderAndFooter() {
     let isShow = true;
@@ -177,6 +181,10 @@ class App extends React.Component {
     }
 
     if (location.pathname == "/user/new") {
+      isShow = isShow && false;
+    }
+
+    if (location.pathname == "/user/register") {
       isShow = isShow && false;
     }
 
@@ -196,7 +204,8 @@ class App extends React.Component {
             <Fade in={true} timeout={1200}>
               <div>
                 <Switch>
-                  <Route exact path="/" component={Home} />
+                  <Route exact path="/" component={IndexContainer} />
+                  <Route exact path="/store" component={Home} />
                   <Route exact path="/products" component={Products} /> */}
                   <Route exact path="/products/:id" component={ProductInfo} />
                   <PrivateRoute exact path="/cart" component={CartInfo} />
@@ -236,7 +245,7 @@ class App extends React.Component {
                     component={IncomeAnalysis}
                   />
                   <Route path="/user/login" component={Login} />
-                  <Route path="/user/new" component={UserRegister} />
+                  <Route path="/user/register" component={UserRegister} />
                   <Redirect to="/" />
                 </Switch>
               </div>

@@ -1,0 +1,74 @@
+/* For demo */
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 300px;
+  /* line-height: 300px; */
+  background-color: #4ca3ff;
+  background-image: url("https://www.transparenttextures.com/patterns/foggy-birds.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+  color: #fff;
+}
+
+#banner {
+  background-color: rgba(0, 0, 0, 0.45);
+  width: 100%;
+  height: 100%;
+  display: block !important;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+#banner .h4 {
+  font-size: 32px;
+  color: white;
+  text-align: left;
+}
+
+#banner .caption {
+  text-align: left;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 8px;
+  display: -webkit-inline-box;
+  float: left;
+}
+
+.intro-block {
+  text-align: center;
+}
+
+.banner-quote{
+  height: 250px;
+}
+
+.banner-quote-elem{
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.banner-quote-elem .banner-quote-title{
+  font-size: 32px;
+  top: 40%;
+}
+.banner-quote-elem .banner-quote-text{
+  top: 10%;
+}
+.banner-anim-elem .bg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .banner-quote{
+    height: 300px;
+  }
+}

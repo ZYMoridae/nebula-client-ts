@@ -1,0 +1,36 @@
+#register-container .ant-form-item {
+  margin-bottom: 0px !important;
+}
+
+.form-container {
+  background-color: white;
+  border-radius: 5px;
+  padding: 30px 50px !important;
+  margin-top: 80px !important;
+  margin-bottom: 80px !important;
+  -webkit-box-shadow: 0px 0px 22px -8px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 22px -8px rgba(0,0,0,1);
+  box-shadow: 0px 0px 22px -8px rgba(0,0,0,1);
+}
+
+#register-container {
+  background-color: #efefef;
+  height: 100vh;
+}
+
+.description-container {
+  margin-top: 110px !important;
+}
+
+.description-container > .title {
+  font-family: "Righteous", cursive;
+  margin-left: 40px;
+}
+
+.footer {
+  text-align: center;
+  background-color: #232F3E;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  color: white;
+}
