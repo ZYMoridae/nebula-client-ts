@@ -1,0 +1,21 @@
+.teacher-card {
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  padding: 32px;
+  margin: 16px;
+  transition: 0.5s all;
+}
+
+.teacher-card:hover {
+  -webkit-box-shadow: 0px 7px 10px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 7px 10px -7px rgba(0,0,0,0.75);
+  box-shadow: 0px 7px 10px -7px rgba(0,0,0,0.75);
+}
+
+.teacher-card .description {
+  margin-top: 16px;
+}
+
+.teacher-card .meta.first {
+  margin-top: 16px !important;
+}

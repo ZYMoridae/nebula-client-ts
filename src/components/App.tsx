@@ -23,6 +23,7 @@ import PaymentOptionManagementContainer from "../containers/ms-preference/Paymen
 import ClassBookingsContainer from "../containers/ms-preference/ClassBookingsContainer";
 import IncomeAnalysisContainer from "../containers/ms-preference/IncomeAnalysisContainer";
 
+import TeacherIndexContainer from "../containers/teacher/TeacherIndexContainer";
 
 import IndexContainer from "../containers/IndexContainer";
 
@@ -171,6 +172,18 @@ const IncomeAnalysis = () => {
   return <IncomeAnalysisContainer />;
 };
 
+const TeacherIndex = () => {
+  return (
+    <div>
+      <TeacherIndexContainer
+        {...Utils.getPaginationParameter({
+          orderBy: "username"
+        })}
+      ></TeacherIndexContainer>
+    </div>
+  );
+};
+
 
 class App extends React.Component {
   isShowHeaderAndFooter() {
@@ -243,6 +256,12 @@ class App extends React.Component {
                     exact
                     path="/preference/teacher/income-analysis"
                     component={IncomeAnalysis}
+                  />
+
+                  <PrivateRoute
+                    exact
+                    path="/teachers"
+                    component={TeacherIndex}
                   />
                   <Route path="/user/login" component={Login} />
                   <Route path="/user/register" component={UserRegister} />

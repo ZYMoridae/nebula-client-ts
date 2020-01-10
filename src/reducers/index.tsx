@@ -14,6 +14,7 @@ import UserPreferencesReducer from "./ms-preference/UserPreferencesReducer";
 import ClassBookingsReducer from "./ms-preference/ClassBookingsReducer";
 import ClazzReducer from "./ClazzReducer";
 import IndexReducer from "./IndexReducer";
+import TeacherReducer from "./TeacherReducer";
 
 const appReducer = combineReducers({
   LoginReducer,
@@ -30,7 +31,8 @@ const appReducer = combineReducers({
   UserPreferencesReducer,
   ClassBookingsReducer,
   ClazzReducer,
-  IndexReducer
+  IndexReducer,
+  TeacherReducer
 });
 
 export default appReducer;

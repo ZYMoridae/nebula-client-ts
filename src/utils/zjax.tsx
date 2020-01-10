@@ -10,6 +10,16 @@ function callbackHandler(target: any, callback: any) {
 }
 
 class Zjax {
+  static HTTP = {
+    METHOD: {
+      GET: "GET",
+      PUT: "PUT",
+      PATCH: "PATCH",
+      POST: "POST",
+      DELETE: "DELETE"
+    }
+  };
+
 	static request({ url, option, successCallback, failureCallback }: any) {
 		if (!url || !option) {
 			return

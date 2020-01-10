@@ -107,6 +107,14 @@ const ActionType = {
       PENDING: 'TOKEN.HEART.REJECTED',
       REJECTED: 'TOKEN.HEART.REJECTED'
     }
+  },
+
+  TEACHER: {
+    GET_ALL: {
+      ERROR: "TEACHER_GET_ALL_ERROR",
+      PENDING: "TEACHER_GET_ALL_PENDING",
+      FULFILLED: "TEACHER_GET_ALL_FULFILLED"
+    }
   }
 
 }

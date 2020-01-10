@@ -10,3 +10,4 @@ export * from './ShippingInfoActions';
 export * from './ShoppingCartItemActions';
 export * from './UserPreferenceActions';
 export * from './UserActions';
+export * from './TeacherActions';
