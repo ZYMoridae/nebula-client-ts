@@ -2,6 +2,8 @@ import * as React from "react";
 
 // Ant Design
 import Footer from "../Footer";
+import _ from "lodash";
+
 import {
   Layout,
   Table,
@@ -202,13 +204,14 @@ class Index extends React.Component<IndexProps, IndexState> {
             loading={fetchAllTeacherPending}
           /> */}
 
-          {fetchAllTeacherPending ? (
-            <Skeleton active />
-          ) : teachers.length > 0 ? (
-            <div>
-              <Row>
-                <Col span={6}></Col>
-                <Col span={12}>
+          <Row>
+            <Col span={6}></Col>
+            <Col span={12}>
+              <Text>Results show all teachers near your area</Text>
+              {fetchAllTeacherPending ? (
+                <Skeleton active />
+              ) : teachers.length > 0 ? (
+                <div>
                   {teachers.map((teacher, index) => (
                     <div className="teacher-card" key={index}>
                       <Row>
@@ -218,7 +221,10 @@ class Index extends React.Component<IndexProps, IndexState> {
                         <Col span={18}>
                           <Row>
                             <Col span={24}>
-                              <Title level={3}>{teacher.username}</Title>
+                              <Title level={3}>
+                                {_.capitalize(teacher.firstname)}{" "}
+                                {_.capitalize(teacher.lastname)}
+                              </Title>
                             </Col>
                             <Col span={24}>
                               <Text strong>
@@ -236,35 +242,62 @@ class Index extends React.Component<IndexProps, IndexState> {
                         </Col>
 
                         <Col span={24} className="description">
-                          Description placeholder
+                          {teacher.teacherMeta.intro}
                         </Col>
 
-                        <Col span={24} className="meta first">
-                          <Badge color="blue" />
-                          Speaks English, Spanish
-                        </Col>
+                        <Col span={24}>
+                          <Row>
+                            <Col span={16} style={{ height: "100px" }}>
+                              <Row>
+                                <Col span={24} className="meta first">
+                                  <Badge color="blue" />
+                                  {teacher.teacherMeta.speakingLanguage}
+                                </Col>
 
-                        <Col span={24} className="meta">
-                          <Badge color="blue" />
-                          Teaches Beginner, Intermediate, Advanced
-                        </Col>
+                                <Col span={24} className="meta">
+                                  <Badge color="blue" />
+                                  {teacher.teacherMeta.certificates}
+                                </Col>
 
-                        <Col span={24} className="meta">
-                          <Badge color="blue" />
-                          Teaches students 14 and up
+                                <Col span={24} className="meta">
+                                  <Badge color="blue" />
+                                  Teaches students {teacher.teacherMeta.studentMinRequirements} and up
+                                </Col>
+                              </Row>
+                            </Col>
+
+                            <Col span={8} style={{ height: "100px" }}>
+                              <Row>
+                                <Col
+                                  span={24}
+                                  className="meta first"
+                                  style={{ marginTop: "32px" }}
+                                >
+                                  <Button type="primary" shape="round">
+                                    See Full Profile
+                                    <Icon type="right" />
+                                  </Button>
+                                </Col>
+                              </Row>
+                            </Col>
+                          </Row>
                         </Col>
                       </Row>
                     </div>
                   ))}
-                </Col>
-                <Col span={6}></Col>
-              </Row>
-            </div>
-          ) : (
-            <Empty />
-          )}
+                </div>
+              ) : (
+                <Empty />
+              )}
+            </Col>
+            <Col span={6}></Col>
+          </Row>
 
-          <Row justify="center" type="flex" style={{ textAlign: "center", margin: "32px"}}>
+          <Row
+            justify="center"
+            type="flex"
+            style={{ textAlign: "center", margin: "32px" }}
+          >
             <Col span={24}>
               <Pagination
                 defaultPageSize={10}
