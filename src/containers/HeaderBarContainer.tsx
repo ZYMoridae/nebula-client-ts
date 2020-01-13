@@ -30,6 +30,8 @@ import CatIcon from "../components/icons/Cat";
 
 import { withTranslation, WithTranslation } from "react-i18next";
 
+import Utils from "../utils/Utils";
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -105,9 +107,10 @@ const styles = (theme: Theme) =>
       textDecoration: "none",
       color: "white",
       marginLeft: theme.spacing(1.5),
-      fontFamily: "Megrim, cursive",
+      // fontFamily: "Megrim, cursive",
+      transition: "all .5s",
       "&:hover": {
-        color: fade("#000000", 1)
+        color: fade("#ffffff", 0.7)
       }
     },
     myAppBar: {
@@ -162,10 +165,7 @@ class PrimarySearchAppBar extends React.Component<
     this.setState({
       anchorEl: null,
       mobileMoreAnchorEl: null,
-      isUserLogin:
-        sessionStorage.getItem("user") != null &&
-        sessionStorage.getItem("user") != "undefined" &&
-        sessionStorage.getItem("user") != "null"
+      isUserLogin: Utils.isUserLogin()
     });
   }
 

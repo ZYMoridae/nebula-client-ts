@@ -18,9 +18,9 @@ const addToken = (options: any) => {
 
 const isUserLogin = () => {
   return (
-    sessionStorage.getItem("token") != undefined &&
-    sessionStorage.getItem("token") != "null" &&
-    sessionStorage.getItem("token") != "undefined"
+      !_.isNil(sessionStorage.getItem("token")) &&
+      sessionStorage.getItem("token") != "null" &&
+      sessionStorage.getItem("token") != "undefined"
   );
 };
 

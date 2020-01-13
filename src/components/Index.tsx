@@ -10,10 +10,51 @@ import "./Index.css";
 import BannerAnim, { Element } from "rc-banner-anim";
 import TweenOne from "rc-tween-one";
 import "rc-banner-anim/assets/index.css";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 const { Title } = Typography;
 const BgElement = Element.BgElement;
+
+function NextArrow(props: any) {
+  const { currentSlide, slideCount, className, onClick } = props;
+
+  return (
+    <div onClick={onClick}>
+      <button className={"slick-arrow slick-next"}>
+        <Icon type="right-circle" style={{fontSize: '16px', color: "grey"}}/>
+      </button>
+    </div>
+  );
+}
+
+function PrevArrow(props: any) {
+  const { currentSlide, slideCount, className, onClick } = props;
+
+  return (
+    <div onClick={onClick}>
+      <button className={"slick-arrow slick-prev"}>
+        <Icon type="left-circle" style={{fontSize: '16px', color: "grey"}}/>
+      </button>
+    </div>
+  );
+}
+
 class Index extends React.Component {
   render() {
+    const settings = {
+      className: "center",
+      centerMode: false,
+      infinite: true,
+      // centerPadding: "60px",
+      slidesToShow: 5,
+      speed: 500
+      // prevArrow: <PrevArrow />,
+      // nextArrow: <NextArrow />
+    };
+
     return (
       <div>
         <Row>
@@ -101,6 +142,75 @@ class Index extends React.Component {
             </Col>
 
             <Col pull={4} push={4} span={16}>
+              <Row style={{ marginTop: "32px", marginBottom: "32px" }}>
+                <Col span={24}>
+                  <Title level={4}>
+                    Music Lessons | Discover your creative side.
+                  </Title>
+                  <div className="class-section">
+                    <Slider {...settings}>
+                      <div className="class-card">
+                        <Row>
+                          <Col span={24}>
+                            <img src="https://prod-takelessons.netdna-ssl.com/images/public/landing/service-tile/piano.jpg.webp"></img>
+                          </Col>
+                          <Col span={24}>Piano 4.91(36,314)</Col>
+                          <Col span={24}>from $15.00/lesson</Col>
+                        </Row>
+                      </div>
+                      <div className="class-card">
+                        <Row>
+                          <Col span={24}>
+                            <img src="https://prod-takelessons.netdna-ssl.com/images/public/landing/service-tile/singing.jpg.webp"></img>
+                          </Col>
+                          <Col span={24}>Singing 4.92(30,302)</Col>
+                          <Col span={24}>from $15.00/lesson</Col>
+                        </Row>
+                      </div>
+                      <div className="class-card">
+                        <Row>
+                          <Col span={24}>
+                            <img src="https://prod-takelessons.netdna-ssl.com/images/public/landing/service-tile/guitar.jpg.webp"></img>
+                          </Col>
+                          <Col span={24}>Guitar 4.92(26,323)</Col>
+                          <Col span={24}>from $15.00/lesson</Col>
+                        </Row>
+                      </div>
+                      <div className="class-card">
+                        <Row>
+                          <Col span={24}>
+                            <img src="https://prod-takelessons.netdna-ssl.com/images/public/landing/service-tile/violin.jpg.webp"></img>
+                          </Col>
+                          <Col span={24}>Piano 4.92(8,249)</Col>
+                          <Col span={24}>from $15.00/lesson</Col>
+                        </Row>
+                      </div>
+                      <div className="class-card">
+                        <Row>
+                          <Col span={24}>
+                            <img src="https://prod-takelessons.netdna-ssl.com/images/public/landing/service-tile/drums.jpg.webp"></img>
+                          </Col>
+                          <Col span={24}>Drum 4.91(6,444)</Col>
+                          <Col span={24}>from $15.00/lesson</Col>
+                        </Row>
+                      </div>
+                      <div className="class-card">
+                        <Row>
+                          <Col span={24}>
+                            <img src="https://prod-takelessons.netdna-ssl.com/images/public/landing/service-tile/cello.jpg.webp"></img>
+                          </Col>
+                          <Col span={24}>Cello 4.92(4659)</Col>
+                          <Col span={24}>from $15.00/lesson</Col>
+                        </Row>
+                      </div>
+                    </Slider>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+
+            {/* Start of the new section */}
+            <Col pull={4} push={4} span={16}>
               <Row
                 type="flex"
                 align="middle"
@@ -114,7 +224,10 @@ class Index extends React.Component {
               <Row gutter={[64, 32]} align="middle" className="intro-block">
                 <Col md={12} sm={24}>
                   <div>
-                    <img src="https://prod-takelessons.netdna-ssl.com/images/public/landing/icon/local.png" style={{height: '80px'}}/>
+                    <img
+                      src="https://prod-takelessons.netdna-ssl.com/images/public/landing/icon/local.png"
+                      style={{ height: "80px" }}
+                    />
                   </div>
                   <div>
                     <Title level={4}>Local Lessons</Title>
@@ -128,7 +241,10 @@ class Index extends React.Component {
                 </Col>
                 <Col md={12} sm={24}>
                   <div>
-                    <img src="https://prod-takelessons.netdna-ssl.com/images/public/landing/icon/online.png" style={{height: '80px'}}/>
+                    <img
+                      src="https://prod-takelessons.netdna-ssl.com/images/public/landing/icon/online.png"
+                      style={{ height: "80px" }}
+                    />
                   </div>
                   <div>
                     <Title level={4}>Online Lessons</Title>
@@ -280,7 +396,13 @@ class Index extends React.Component {
                 style={{ marginTop: "32px", marginBottom: "16px" }}
               >
                 <Col span={24} style={{ textAlign: "center" }}>
-                  <Button type="primary" shape="round">
+                  <Button
+                    type="primary"
+                    shape="round"
+                    onClick={() => {
+                      location.href = "/teachers";
+                    }}
+                  >
                     View Teachers In Your Area <Icon type="right" />
                   </Button>
                 </Col>

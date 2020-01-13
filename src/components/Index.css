@@ -41,24 +41,24 @@
   text-align: center;
 }
 
-.banner-quote{
+.banner-quote {
   height: 250px;
 }
 
-.banner-quote-elem{
+.banner-quote-elem {
   text-align: center;
   color: #fff;
   position: relative;
   overflow: hidden;
 }
-.banner-quote-elem .banner-quote-title{
+.banner-quote-elem .banner-quote-title {
   font-size: 32px;
   top: 40%;
 }
-.banner-quote-elem .banner-quote-text{
+.banner-quote-elem .banner-quote-text {
   top: 10%;
 }
-.banner-anim-elem .bg{
+.banner-anim-elem .bg {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -67,8 +67,36 @@
   overflow: hidden;
 }
 
+.class-card {
+  margin-left: 32px;
+  margin-right: 32px;
+  float: left;
+}
+
+.class-section .slick-prev {
+  left: -50px;
+  z-index: 9999;
+  top: 40%;
+}
+
+.class-section .slick-prev::before {
+  font-size: 36px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.class-section .slick-next {
+  right: -30px;
+  z-index: 9999;
+  top: 40%;
+}
+
+.class-section .slick-next::before {
+  font-size: 36px;
+  color: rgba(0, 0, 0, 7);
+}
+
 @media screen and (max-width: 600px) {
-  .banner-quote{
+  .banner-quote {
     height: 300px;
   }
 }
