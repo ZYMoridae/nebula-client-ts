@@ -133,7 +133,6 @@ const PaymentComponent = ({ match }: { match: any }) => {
 };
 
 const TeacherInfo = ({ match }: { match: any }) => {
-  console.log(match.params.id);
   return (
     <div>
       <TeacherInfoContainer id={match.params.id}></TeacherInfoContainer>
@@ -193,8 +192,6 @@ const TeacherIndex = () => {
     </div>
   );
 };
-
-
 
 class App extends React.Component {
   isShowHeaderAndFooter() {

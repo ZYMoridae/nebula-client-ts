@@ -19,9 +19,9 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-const TeacherInfoContainer = connect(
+const teacherInfoContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TeacherInfo);
 
-export default TeacherInfoContainer;
+export default teacherInfoContainer;

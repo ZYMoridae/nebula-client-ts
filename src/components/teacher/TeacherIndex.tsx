@@ -15,12 +15,14 @@ import {
   Empty,
   Avatar,
   Badge,
-  Typography
+  Typography,
+  Divider
 } from "antd";
 
 import { Row, Col } from "antd";
 
 import "./TeacherIndex.css";
+// import { Divider } from "material-ui";
 
 const { Content } = Layout;
 
@@ -162,51 +164,34 @@ class Index extends React.Component<IndexProps, IndexState> {
     };
 
     return (
-      <Layout style={{ padding: "0 24px 24px" }}>
-        <Breadcrumb style={{ margin: "16px 0" }}>
-          <Breadcrumb.Item>Teacher</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-        </Breadcrumb>
+      <Layout style={{ padding: "24px 24px" }}>
         <Content
           style={{
-            background: "#fff",
+            // background: "#fff",
             padding: 24,
             margin: 0,
             minHeight: 280
           }}
         >
-          {/* <Row gutter={8} style={{ marginBottom: "8px" }}>
-            <Col style={{ float: "right" }}>
-              <Button
-                type="primary"
-                onClick={() => {
-                  window.location.href = "/teachers/new";
-                }}
-              >
-                <Icon type="plus" />
-                Add
-              </Button>
-            </Col>
-          </Row> */}
-
-          {/* <Table
-            rowSelection={rowSelection}
-            columns={columns}
-            dataSource={teachers}
-            rowKey={record => record.id}
-            pagination={{
-              defaultPageSize: 10,
-              showSizeChanger: true,
-              pageSizeOptions: ["10", "20", "30"],
-              total: totalElements
-            }}
-            onChange={this.handleTableChange}
-            loading={fetchAllTeacherPending}
-          /> */}
-
           <Row>
-            <Col span={6}></Col>
-            <Col span={12}>
+            <Col xs={1} sm={3} md={4} lg={5} xl={5}></Col>
+            <Col
+              xs={22}
+              sm={18}
+              md={16}
+              lg={14}
+              xl={14}
+              style={{
+                background: "#fff",
+                padding: "24px 48px",
+                borderRadius: "5px"
+              }}
+            >
+              <Breadcrumb separator=">" style={{ margin: "16px 0" }}>
+                <Breadcrumb.Item>Teacher</Breadcrumb.Item>
+                <Breadcrumb.Item>List</Breadcrumb.Item>
+              </Breadcrumb>
+              <Divider />
               <Text>Results show all teachers near your area</Text>
               {fetchAllTeacherPending ? (
                 <Skeleton active />
@@ -261,7 +246,11 @@ class Index extends React.Component<IndexProps, IndexState> {
 
                                 <Col span={24} className="meta">
                                   <Badge color="blue" />
-                                  Teaches students {teacher.teacherMeta.studentMinRequirements} and up
+                                  Teaches students{" "}
+                                  {
+                                    teacher.teacherMeta.studentMinRequirements
+                                  }{" "}
+                                  and up
                                 </Col>
                               </Row>
                             </Col>
@@ -273,7 +262,13 @@ class Index extends React.Component<IndexProps, IndexState> {
                                   className="meta first"
                                   style={{ marginTop: "32px" }}
                                 >
-                                  <Button type="primary" shape="round" onClick={()=>{location.href=`/teachers/${teacher.id}`}}>
+                                  <Button
+                                    type="primary"
+                                    shape="round"
+                                    onClick={() => {
+                                      location.href = `/teachers/${teacher.id}`;
+                                    }}
+                                  >
                                     See Full Profile
                                     <Icon type="right" />
                                   </Button>
@@ -285,29 +280,28 @@ class Index extends React.Component<IndexProps, IndexState> {
                       </Row>
                     </div>
                   ))}
+                  <Row
+                    justify="center"
+                    type="flex"
+                    style={{ textAlign: "center", margin: "32px" }}
+                  >
+                    <Col span={24}>
+                      <Pagination
+                        defaultPageSize={10}
+                        showSizeChanger={true}
+                        current={this.state.pagination.page}
+                        onChange={this.onChange}
+                        total={totalElements}
+                        pageSizeOptions={["10", "20", "30"]}
+                      />
+                    </Col>
+                  </Row>
                 </div>
               ) : (
                 <Empty />
               )}
             </Col>
-            <Col span={6}></Col>
-          </Row>
-
-          <Row
-            justify="center"
-            type="flex"
-            style={{ textAlign: "center", margin: "32px" }}
-          >
-            <Col span={24}>
-              <Pagination
-                defaultPageSize={10}
-                showSizeChanger={true}
-                current={this.state.pagination.page}
-                onChange={this.onChange}
-                total={totalElements}
-                pageSizeOptions={["10", "20", "30"]}
-              />
-            </Col>
+            <Col xs={1} sm={3} md={4} lg={5} xl={5}></Col>
           </Row>
         </Content>
         {/* <Footer></Footer> */}

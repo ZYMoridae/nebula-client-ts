@@ -82,8 +82,8 @@ export const fetchAllTeacher = (
 export const fetchTeacherInfoFulfilled = (result: any) => {
   return {
     type: ActionType.TEACHER.GET.FULFILLED,
-    fetchTeacherInfoPending: false,
-    fetchTeacherInfoFulfilled: true,
+    fetchTeacherPending: false,
+    fetchTeacherFulfilled: true,
     teacher: result
   };
 };
@@ -91,16 +91,16 @@ export const fetchTeacherInfoFulfilled = (result: any) => {
 export const fetchTeacherInfoPending = () => {
   return {
     type: ActionType.TEACHER.GET.PENDING,
-    fetchTeacherInfoPending: true,
-    fetchTeacherInfoFulfilled: false
+    fetchTeacherPending: true,
+    fetchTeacherFulfilled: false
   };
 };
 
 export const fetchTeacherInfoError = (error: any) => {
   return {
     type: ActionType.TEACHER.GET.ERROR,
-    fetchTeacherInfoPending: false,
-    fetchTeacherInfoFulfilled: true,
+    fetchTeacherPending: false,
+    fetchTeacherFulfilled: true,
     error: error
   };
 };
