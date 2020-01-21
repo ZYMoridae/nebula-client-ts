@@ -7,7 +7,10 @@ let initState: any = {
   fetchAllTeacherFulfilled: false,
   totalPages: 1,
   totalElements: 0,
-  teachers: []
+  teachers: [],
+  teacher: null,
+  fetchTeacherPending: false,
+  fetchTeacherFulfilled: false
 };
 
 const TeacherReducer = (state = initState, action: any) => {
@@ -29,6 +32,23 @@ const TeacherReducer = (state = initState, action: any) => {
         teachers: action.teachers,
         totalPages: action.totalPages,
         totalElements: action.totalElements
+      });
+    // GET user action
+    case ActionType.TEACHER.GET.PENDING:
+      return Object.assign({}, state, {
+        fetchTeacherFulfilled: action.fetchTeacherFulfilled,
+        fetchTeacherPending: action.fetchTeacherPending
+      });
+    case ActionType.TEACHER.GET.ERROR:
+      return Object.assign({}, state, {
+        fetchTeacherFulfilled: action.fetchTeacherFulfilled,
+        fetchTeacherPending: action.fetchTeacherPending
+      });
+    case ActionType.TEACHER.GET.FULFILLED:
+      return Object.assign({}, state, {
+        fetchTeacherFulfilled: action.fetchTeacherFulfilled,
+        fetchTeacherPending: action.fetchTeacherPending,
+        teacher: action.teacher
       });
     default:
       return state;

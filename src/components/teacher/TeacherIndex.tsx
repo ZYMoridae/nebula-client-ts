@@ -273,7 +273,7 @@ class Index extends React.Component<IndexProps, IndexState> {
                                   className="meta first"
                                   style={{ marginTop: "32px" }}
                                 >
-                                  <Button type="primary" shape="round">
+                                  <Button type="primary" shape="round" onClick={()=>{location.href=`/teachers/${teacher.id}`}}>
                                     See Full Profile
                                     <Icon type="right" />
                                   </Button>

@@ -2,7 +2,11 @@ import Zjax from "../utils/zjax";
 import Utils from "../utils/Utils";
 import ActionType from "./ActionType";
 
-export const fetchAllTeacherFulfilled = (results: any, totalPages: number, totalElements: number) => {
+export const fetchAllTeacherFulfilled = (
+  results: any,
+  totalPages: number,
+  totalElements: number
+) => {
   return {
     type: ActionType.TEACHER.GET_ALL.FULFILLED,
     fetchAllTeacherPending: false,
@@ -60,11 +64,63 @@ export const fetchAllTeacher = (
         });
 
         dispatch(
-          fetchAllTeacherFulfilled(userList, response.data.page.totalPages, response.data.page.totalElements)
+          fetchAllTeacherFulfilled(
+            userList,
+            response.data.page.totalPages,
+            response.data.page.totalElements
+          )
         );
       },
       failureCallback: (error: any) => {
         dispatch(fetchAllTeacherError(error));
+      }
+    });
+  };
+};
+
+// GET teacher info
+export const fetchTeacherInfoFulfilled = (result: any) => {
+  return {
+    type: ActionType.TEACHER.GET.FULFILLED,
+    fetchTeacherInfoPending: false,
+    fetchTeacherInfoFulfilled: true,
+    teacher: result
+  };
+};
+
+export const fetchTeacherInfoPending = () => {
+  return {
+    type: ActionType.TEACHER.GET.PENDING,
+    fetchTeacherInfoPending: true,
+    fetchTeacherInfoFulfilled: false
+  };
+};
+
+export const fetchTeacherInfoError = (error: any) => {
+  return {
+    type: ActionType.TEACHER.GET.ERROR,
+    fetchTeacherInfoPending: false,
+    fetchTeacherInfoFulfilled: true,
+    error: error
+  };
+};
+
+export const fetchTeacherInfo = (teacherId: number) => {
+  return function(dispatch: any) {
+    dispatch(fetchTeacherInfoPending());
+
+    let options = {
+      method: Zjax.HTTP.METHOD.GET
+    };
+
+    Zjax.request({
+      url: `/api/teachers/${teacherId}`,
+      option: Utils.addToken(options),
+      successCallback: (response: any) => {
+        dispatch(fetchTeacherInfoFulfilled(response.data));
+      },
+      failureCallback: (error: any) => {
+        dispatch(fetchTeacherInfoError(error));
       }
     });
   };

@@ -24,6 +24,7 @@ import ClassBookingsContainer from "../containers/ms-preference/ClassBookingsCon
 import IncomeAnalysisContainer from "../containers/ms-preference/IncomeAnalysisContainer";
 
 import TeacherIndexContainer from "../containers/teacher/TeacherIndexContainer";
+import TeacherInfoContainer from "../containers/teacher/TeacherInfoContainer";
 
 import IndexContainer from "../containers/IndexContainer";
 
@@ -131,6 +132,15 @@ const PaymentComponent = ({ match }: { match: any }) => {
   );
 };
 
+const TeacherInfo = ({ match }: { match: any }) => {
+  console.log(match.params.id);
+  return (
+    <div>
+      <TeacherInfoContainer id={match.params.id}></TeacherInfoContainer>
+    </div>
+  );
+};
+
 const PaymentSuccessComponent = ({ match }: { match: any }) => {
   return (
     <div>
@@ -185,6 +195,7 @@ const TeacherIndex = () => {
 };
 
 
+
 class App extends React.Component {
   isShowHeaderAndFooter() {
     let isShow = true;
@@ -219,7 +230,7 @@ class App extends React.Component {
                 <Switch>
                   <Route exact path="/" component={IndexContainer} />
                   <Route exact path="/store" component={Home} />
-                  <Route exact path="/products" component={Products} /> */}
+                  <Route exact path="/products" component={Products} />
                   <Route exact path="/products/:id" component={ProductInfo} />
                   <PrivateRoute exact path="/cart" component={CartInfo} />
                   <PrivateRoute
@@ -257,12 +268,17 @@ class App extends React.Component {
                     path="/preference/teacher/income-analysis"
                     component={IncomeAnalysis}
                   />
-
+                  <PrivateRoute
+                    exact
+                    path="/teachers/:id"
+                    component={TeacherInfo}
+                  />
                   <PrivateRoute
                     exact
                     path="/teachers"
                     component={TeacherIndex}
                   />
+
                   <Route path="/user/login" component={Login} />
                   <Route path="/user/register" component={UserRegister} />
                   <Redirect to="/" />
