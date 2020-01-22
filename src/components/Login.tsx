@@ -29,6 +29,8 @@ import { Row, Col } from "antd";
 
 import './Login.css';
 
+import Cookies from 'js-cookie'
+
 const { Title } = Typography;
 
 const { Footer } = Layout;
@@ -75,14 +77,14 @@ class Login extends React.Component<LoginProps> {
     } = this.props;
 
     if (
-      sessionStorage.getItem("token") != null &&
-      sessionStorage.getItem("token") != "undefined"
+      Cookies.get("token") != null &&
+      Cookies.get("token") != "undefined"
     ) {
       location.href = "/";
     }
 
     if (isFetchedAuth && this.props.info.token != undefined) {
-      sessionStorage.setItem("token", this.props.info.token);
+      Cookies.set("token", this.props.info.token);
       location.href = "/";
     }
 

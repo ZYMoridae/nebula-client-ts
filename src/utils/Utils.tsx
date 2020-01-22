@@ -1,9 +1,10 @@
 import _ from "lodash";
 import { Z_MEM_ERROR } from "zlib";
 import Routes from "./Routes";
+import Cookies from "js-cookie";
 
 const addToken = (options: any) => {
-  let token = sessionStorage.getItem("token");
+  let token = Cookies.get("token");
   let tokenOption = {};
 
   if (token !== undefined && token !== null) {
@@ -18,9 +19,9 @@ const addToken = (options: any) => {
 
 const isUserLogin = () => {
   return (
-      !_.isNil(sessionStorage.getItem("token")) &&
-      sessionStorage.getItem("token") != "null" &&
-      sessionStorage.getItem("token") != "undefined"
+    !_.isNil(Cookies.get("token")) &&
+    Cookies.get("token") != "null" &&
+    Cookies.get("token") != "undefined"
   );
 };
 
@@ -74,18 +75,16 @@ const extractPaginationParams = (
   };
 };
 
-const logout = () => {
-  sessionStorage.removeItem("user");
-  sessionStorage.removeItem("token");
-  location.href = Routes.USER.LOGIN;
-};
-
 const Utils = {
   addToken: addToken,
   isUserLogin: isUserLogin,
   getRandomProductImageUrl: getRandomProductImageUrl,
   extractPaginationParams: extractPaginationParams,
-  logout: logout,
+  logout: () => {
+    Cookies.remove("user");
+    Cookies.remove("token");
+    location.href = Routes.USER.LOGIN;
+  },
   getPaginationParameter: ({ orderBy = "name" }) => {
     let params = new URLSearchParams(window.location.search);
     let page = 1,
@@ -112,6 +111,12 @@ const Utils = {
       perPage: perPage,
       orderBy: _orderBy
     };
+  },
+  getCurrentUser: () => {
+    return JSON.parse(Cookies.get("user"));
+  },
+  getRoles: (token: string) => {
+    // GET current user roles
   }
 };
 

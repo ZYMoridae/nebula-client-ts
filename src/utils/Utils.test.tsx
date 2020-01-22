@@ -1,54 +1,56 @@
-import Utils from './Utils';
-
+import Utils from "./Utils";
+import Cookies from "js-cookie";
 
 beforeEach(() => {
-  window.history.pushState({}, 'Test Title', '/test.html?page=1&perPage=10&orderBy=test');
+  window.history.pushState(
+    {},
+    "Test Title",
+    "/test.html?page=1&perPage=10&orderBy=test"
+  );
 });
 
-
-test('addToken test', () => {
+test("addToken test", () => {
   let expectedOptions = {
     headers: {
-      Authorization: 'Bearer 123'
+      Authorization: "Bearer 123"
     }
   };
-
 
   let options = Utils.addToken({});
 
   expect(options).toStrictEqual({});
 
-  sessionStorage.setItem('token', "123");
+  Cookies.set("token", "123");
 
   options = Utils.addToken({});
 
   expect(options).toStrictEqual(expectedOptions);
-
-
-
 });
 
-test('extractPaginationParams test', () => {
+test("extractPaginationParams test", () => {
   let expectedResult = {
     page: 1,
     perPage: 10,
-    orderBy: 'test'
+    orderBy: "test"
   };
 
-  let result = Utils.extractPaginationParams(undefined, undefined, '');
+  let result = Utils.extractPaginationParams(undefined, undefined, "");
 
   expect(result).toStrictEqual(expectedResult);
-
 
   result = Utils.extractPaginationParams(4, 5, undefined);
 
   expect(result).toStrictEqual({
     page: 1,
     perPage: 10,
-    orderBy: 'test'
+    orderBy: "test"
   });
 
-  window.history.pushState({}, 'Test Title', '/test.html?page=&perPage=&orderBy=');
+  window.history.pushState(
+    {},
+    "Test Title",
+    "/test.html?page=&perPage=&orderBy="
+  );
 
   result = Utils.extractPaginationParams(4, 5, undefined);
 
@@ -58,7 +60,11 @@ test('extractPaginationParams test', () => {
     orderBy: ""
   });
 
-  window.history.pushState({}, 'Test Title', '/test.html?page=test&perPage=test&orderBy=');
+  window.history.pushState(
+    {},
+    "Test Title",
+    "/test.html?page=test&perPage=test&orderBy="
+  );
 
   result = Utils.extractPaginationParams(4, 5, undefined);
 
@@ -69,28 +75,22 @@ test('extractPaginationParams test', () => {
   });
 });
 
-
-test('isUserLogin test', () => {
-
-  sessionStorage.setItem('token', '12345');
+test("isUserLogin test", () => {
+  Cookies.set("token", "12345");
 
   let isLogin = Utils.isUserLogin();
 
   expect(isLogin).toBe(true);
 
-  sessionStorage.setItem('token', 'undefined');
+  Cookies.set("token", "undefined");
 
   isLogin = Utils.isUserLogin();
 
   expect(isLogin).toBe(false);
 });
 
-
-test('getRandomProductImageUrl', () => {
-
+test("getRandomProductImageUrl", () => {
   let result = Utils.getRandomProductImageUrl();
 
   expect(typeof result).toBe("string");
 });
-
-

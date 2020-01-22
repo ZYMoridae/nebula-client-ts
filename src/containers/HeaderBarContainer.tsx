@@ -32,6 +32,8 @@ import { withTranslation, WithTranslation } from "react-i18next";
 
 import Utils from "../utils/Utils";
 
+import Cookies from "js-cookie";
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -187,8 +189,8 @@ class PrimarySearchAppBar extends React.Component<
   };
 
   handleLogout = () => {
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("token");
+    Cookies.remove("user");
+    Cookies.remove("token");
     location.href = Routes.USER.LOGIN;
   };
 

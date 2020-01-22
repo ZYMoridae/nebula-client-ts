@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Select, Spin } from "antd";
 import debounce from "lodash/debounce";
+import Cookies from "js-cookie";
 
 const { Option } = Select;
 
@@ -17,7 +18,7 @@ class ProductSearchComponent extends React.Component {
       this.setState({ data: [], fetching: false });
     } else {
       this.setState({ data: [], fetching: true });
-      let token = sessionStorage.getItem("token");
+      let token = Cookies.get("token");
       fetch(
         `/api/products?page=0&size=5&sort=&keyword=${value.toLowerCase()}`,
         {
@@ -54,7 +55,7 @@ class ProductSearchComponent extends React.Component {
   render() {
     const { fetching, data, value } = this.state;
     return (
-      <div style={{marginTop: "8px"}}>
+      <div style={{ marginTop: "8px" }}>
         <Select
           showSearch
           filterOption={(input: any, option: any) =>
@@ -62,7 +63,7 @@ class ProductSearchComponent extends React.Component {
             0
           }
           allowClear={true}
-          style={{ width: "300px"}}
+          style={{ width: "300px" }}
           labelInValue
           placeholder="Select product"
           onSearch={this.fetchProduct}

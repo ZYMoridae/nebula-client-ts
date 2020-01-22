@@ -16,6 +16,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { Theme, createStyles } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 
+import Cookies from "js-cookie";
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -212,7 +214,7 @@ class Payment extends React.Component<MyProps, MyState> {
     const steps = getSteps();
     const { activeStep } = this.state;
 
-    let cartItems = JSON.parse(sessionStorage.getItem("_pfc"));
+    let cartItems = JSON.parse(Cookies.get("_pfc"));
     // const totalSteps = () => getSteps().length;
 
     const isStepOptional = (step: number) => {

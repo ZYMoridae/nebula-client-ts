@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as _ from 'lodash';
 import Routes from './Routes';
+import Cookies from 'js-cookie';
 
 function callbackHandler(target: any, callback: any) {
 	if (callback && typeof callback === 'function') {
@@ -44,11 +45,11 @@ class Zjax {
 				switch (error.response.status) {
 					case 401:
 					case 504:
-						sessionStorage.removeItem('token');
+						Cookies.remove('token');
 						break;
 					case 403:
 						{
-							sessionStorage.removeItem('token');
+							Cookies.remove('token');
 							location.href = Routes.USER.LOGIN;
 							break;
 						}

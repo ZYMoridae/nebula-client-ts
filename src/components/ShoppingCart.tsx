@@ -30,6 +30,8 @@ import { Theme, createStyles } from "@material-ui/core";
 
 import { Alert } from "antd";
 
+import Cookies from 'js-cookie';
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -320,7 +322,7 @@ class ShoppingCart extends React.Component<MyProps, MyState> {
       });
 
       // TODO: Checkout action
-      sessionStorage.setItem("_pfc", JSON.stringify(productForCheckout));
+      Cookies.set("_pfc", JSON.stringify(productForCheckout));
 
       // TODO: Product validation
       if (productForCheckout.length == 0) {

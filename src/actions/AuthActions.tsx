@@ -3,6 +3,7 @@ import ActionType from './ActionType';
 import Utils from '../utils/Utils';
 import { notification, Icon } from "antd";
 import * as React from "react";
+import Cookies from 'js-cookie';
 
 // ------ Auth Actions ------
 export const receieveAuth = (json: any) => {
@@ -57,8 +58,8 @@ export const fetchAuthInfo = (data: any) => {
       },
       successCallback: (response: any) => {
         // Set auth token
-        sessionStorage.setItem('user', response.data);
-        sessionStorage.setItem('token', response.data.token);
+        Cookies.set('user', response.data);
+        Cookies.set('token', response.data.token);
         dispatch(receieveAuth(response.data));
       },
       failureCallback: (error: any) => {
@@ -108,7 +109,7 @@ export const fetchTokenAliveInfo = () => {
     };
     options = Utils.addToken(options);
     Zjax.request({
-      url: `/api/token/${sessionStorage.getItem('token')}/alive`,
+      url: `/api/token/${Cookies.get('token')}/alive`,
       option: Utils.addToken(options),
       successCallback: (response: any) => {
         dispatch(receieveTokenAlive(response.data));

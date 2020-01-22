@@ -2,10 +2,10 @@ export default interface UserInterface {
   id: number,
   username: string,
   email: string,
-  role: RoleInterface
+  telephone: string,
+  role: Array<RoleInterface>,
   createdAt? : string,
   updatedAt? : string,
-  telephone: string,
   address1: string,
   address2: string,
   firstname: string,

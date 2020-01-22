@@ -48,10 +48,10 @@ const TeacherMetaBlock = (props: any) => {
       ) : (
         <div className="teacher-info">
           <Row>
-            <Col span={6}>
+            <Col xs={12} sm={10} md={10} lg={10} xl={6}>
               <Avatar size={100} icon="user" />
             </Col>
-            <Col span={18}>
+            <Col xs={12} sm={14} md={14} lg={14} xl={18}>
               <Title level={3}>
                 {_.capitalize(teacher.firstname)}{" "}
                 {_.capitalize(teacher.lastname)}
