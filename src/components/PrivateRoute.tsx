@@ -20,7 +20,7 @@ async function checkToken(roles: any) {
 
   // Do the authorization based on API
   // FIXME: D
-  if (!_.isNil(token)) {
+  if (!_.isNil(token) && !_.isNil(roles)) {
     let options = {
       method: "GET"
     };
@@ -28,7 +28,7 @@ async function checkToken(roles: any) {
     const response = await fetch("/api/users/me", options);
     const userInfo = await response.json();
 
-	// Check Role
+    // Check Role
     if (Array.isArray(userInfo.roles) && Array.isArray(roles)) {
       let difference = _.difference(roles, userInfo.roles);
       if (difference.length > 0) {
@@ -53,7 +53,10 @@ const PrivateRoute = ({
   roles?: any;
   rest?: any;
 }) => {
-  checkToken(roles);
+  let isValidSuccess = checkToken(roles);
+  if (!isValidSuccess) {
+    location.href = "/";
+  }
   return (
     <Route
       {...rest}

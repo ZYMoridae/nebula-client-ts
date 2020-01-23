@@ -44,7 +44,7 @@ class ProductSearchComponent extends React.Component {
 
   handleChange = (value: any) => {
     // console.log(value);
-    window.location.href = `/products/${value.key}`;
+    window.location.href = `/shopping/products/${value.key}`;
     this.setState({
       value,
       data: [],

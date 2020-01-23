@@ -127,19 +127,6 @@ class Index extends React.Component<IndexProps, IndexState> {
             minHeight: 280
           }}
         >
-          {/* <Row gutter={8} style={{ marginBottom: "8px" }}>
-            <Col style={{ float: "right" }}>
-              <Button
-                type="primary"
-                onClick={() => {
-                  window.location.href = "/products/categories/new";
-                }}
-              >
-                <Icon type="plus" />
-                Add
-              </Button>
-            </Col>
-          </Row> */}
 
           <Table
             columns={columns}

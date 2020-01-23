@@ -112,7 +112,7 @@ export const fetchActivateOrder = (orderId: number) => {
 };
 
 export const redirectToPaymentPage = (orderId: number) => {
-  location.href = `/payment/${orderId}`;
+  location.href = `/shopping/payment/${orderId}`;
 };
 
 // ------ Fetch order by id ------

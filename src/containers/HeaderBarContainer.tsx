@@ -197,7 +197,7 @@ class PrimarySearchAppBar extends React.Component<
   handleMenuItemClick = (targetName: string) => {
     switch (targetName) {
       case "myAccount": {
-        location.href = "/preference";
+        location.href = "/user/preference";
         break;
       }
       default:
@@ -279,7 +279,7 @@ class PrimarySearchAppBar extends React.Component<
     );
 
     const cartIconButtonClickHandler = (event: any) => {
-      window.location.href = "/cart";
+      window.location.href = "/shopping/cart";
     };
 
     return (
@@ -320,7 +320,10 @@ class PrimarySearchAppBar extends React.Component<
             <div className={classes.grow} />
             {isUserLogin ? (
               <div className={classes.sectionDesktop}>
-                <ProductSearchComponent />
+                {window.location.href.startsWith("/shopping/") && (
+                  <ProductSearchComponent />
+                )}
+
                 {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />

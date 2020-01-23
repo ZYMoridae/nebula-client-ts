@@ -71,7 +71,6 @@ export const doPayment = (
  * @param orderId
  */
 export const redirectToSuccessPaymentPage = (orderId: number) => {
-  // location.href = `/payment/${orderId}/success`;
   return {
     type: ActionType.REDIRECT_TO_PAYMENT_SUCCESS,
     redirectOrderId: orderId,

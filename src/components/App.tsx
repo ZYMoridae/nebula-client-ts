@@ -226,43 +226,43 @@ class App extends React.Component {
               <div>
                 <Switch>
                   <Route exact path="/" component={IndexContainer} />
-                  <Route exact path="/store" component={Home} />
-                  <Route exact path="/products" component={Products} />
-                  <Route exact path="/products/:id" component={ProductInfo} />
-                  <PrivateRoute exact path="/cart" component={CartInfo} />
+                  <Route exact path="/shopping" component={Home} />
+                  <Route exact path="/shopping/products" component={Products} />
+                  <Route exact path="/shopping/products/:id" component={ProductInfo} />
+                  <PrivateRoute exact path="/shopping/cart" component={CartInfo} />
                   <PrivateRoute
                     exact
-                    path="/payment/:orderId"
+                    path="/shopping/payment/:orderId"
                     component={PaymentComponent}
                   />
                   <PrivateRoute
                     exact
-                    path="/payment/:orderId/success"
+                    path="/shopping/payment/:orderId/success"
                     component={PaymentSuccessComponent}
                   />
                   <PrivateRoute
                     exact
-                    path="/preference"
+                    path="/user/preference"
                     component={PreferenceComponent}
                   />
                   <PrivateRoute
                     exact
-                    path="/preference/orders"
+                    path="/user/preference/orders"
                     component={PreferenceOrderContainer}
                   />
                   <PrivateRoute
                     exact
-                    path="/preference/payment-options"
+                    path="/user/preference/payment-options"
                     component={PaymentOptionManagement}
                   />
                   <PrivateRoute
                     exact
-                    path="/preference/class-bookings"
+                    path="/user/preference/class-bookings"
                     component={ClassBookings}
                   />
                   <PrivateRoute
                     exact
-                    path="/preference/teacher/income-analysis"
+                    path="/user/preference/teacher/income-analysis"
                     component={IncomeAnalysis}
                   />
                   <PrivateRoute

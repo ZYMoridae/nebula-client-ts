@@ -126,7 +126,7 @@ const PreferenceList = [
       component: ReceiptIcon
     },
     onClickHandler: () => {
-      location.href = "/preference/orders";
+      location.href = "/user/preference/orders";
     }
   },
   {
@@ -136,7 +136,7 @@ const PreferenceList = [
       component: PaymentIcon
     },
     onClickHandler: () => {
-      location.href = "/preference/payment-options";
+      location.href = "/user/preference/payment-options";
     }
   },
   {
@@ -163,7 +163,7 @@ const PreferenceList = [
       color: "#2F8819"
     },
     onClickHandler: () => {
-      location.href = "/preference/class-bookings";
+      location.href = "/user/preference/class-bookings";
     }
   },
   {
@@ -174,7 +174,7 @@ const PreferenceList = [
       color: "#2F8819"
     },
     onClickHandler: () => {
-      location.href = "/preference/teacher/income-analysis";
+      location.href = "/user/preference/teacher/income-analysis";
     }
   }
 ];
